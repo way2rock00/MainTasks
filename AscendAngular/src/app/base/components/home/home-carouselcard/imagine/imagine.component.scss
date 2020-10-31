@@ -1,0 +1,53 @@
+svg {
+  padding-top: 5rem;
+}
+#apply_off:hover {
+  display: none;
+}
+#apply_off:hover + #apply_on {
+  display: block;
+}
+#apply_on:hover {
+  display: block;
+  cursor: pointer;
+}
+#adapt_off:hover {
+  display: none;
+}
+#adapt_off:hover + #adapt_on {
+  display: block;
+}
+#adapt_on:hover {
+  display: block;
+  cursor: pointer;
+}
+#launch_off:hover {
+  display: none;
+}
+#launch_off:hover + #launch_on {
+  display: block;
+}
+#launch_on:hover {
+  display: block;
+  cursor: pointer;
+}
+#refine_off:hover {
+  display: none;
+}
+#refine_off:hover + #refine_on {
+  display: block;
+}
+#refine_on:hover {
+  display: block;
+  cursor: pointer;
+}
+#define_off:hover {
+  display: none;
+}
+#define_off:hover + #define_on {
+  display: block;
+}
+#define_on:hover {
+  display: block;
+  cursor: pointer;
+}

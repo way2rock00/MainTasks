@@ -1,0 +1,40 @@
+.entityDetWrapper {
+  font-stretch: normal;
+  font-style: normal;
+  letter-spacing: normal;
+  color: #000000;
+  // padding-bottom: 10px;
+  width: 85%;
+  .entityName {
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 1.63;
+  }
+  .entityDesc {
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 1.5;
+    max-height: 7vh;
+    overflow-y: auto;
+  }
+}
+
+.tab-body {
+  margin-top: 20px;
+}
+
+.heading {
+  padding-top: 8px;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.entityDesc::-webkit-scrollbar-track {
+  border-radius: 12.5px;
+  background-color: lightgray;
+}
+
+.entityDesc::-webkit-scrollbar-thumb {
+  background-color: rgba(99, 102, 106);
+  border-radius: 3px;
+}

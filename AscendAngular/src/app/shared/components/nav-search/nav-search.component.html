@@ -1,0 +1,20 @@
+
+<div id="overlay" (click)="off()"></div>
+
+<form autocomplete="off">
+  <div class="search-div">
+    <!-- <i [ngStyle]="{'background-color': colorSwitch=='true'?'grey':'#0097a9'}" class="search-btn"><img
+        src="../../../assets/Icon_Search.svg" width="20px" />
+    </i> -->
+    <input [matAutocomplete]="auto" (click)="changeColor()" type="text" name="search" placeholder="Search"
+      [formControl]="myControl" 
+      [attr.disabled] = "(router?.url == '/project/workspace' || (!sharedService?.filterSelected))? 'disabled' : null" 
+      #searcInputh>
+  </div>
+  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="continueSearch($event)">
+    <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+      <span [innerHTML]="(option.entityName + ' - ' + option.contentName) | highlightText: toHighlight : myControl.value"></span>
+      <span></span>
+    </mat-option>
+  </mat-autocomplete>
+</form>

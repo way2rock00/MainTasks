@@ -1,0 +1,104 @@
+@import "../../../../../assets/styles/app.scss";
+.text-block {
+  color: $primary-font-color;
+  font-size: 2.18rem;
+  letter-spacing: 0;
+  padding-top: 2rem;
+  padding-left: 2.5rem;
+}
+.mat-card {
+  box-shadow: none;
+}
+.desc-block {
+  color: $primary-font-color;
+  font-size: 1.3125rem;
+  letter-spacing: 0;
+  padding-top: 1rem;
+  padding-left: 2.5rem;
+}
+.center {
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.arrow {
+  stroke: $primary-font-color;
+  stroke-width: 2;
+  marker-end: url(#markerArrow);
+}
+.bottom-left {
+  position: absolute;
+  bottom: 8px;
+  left: 16px;
+}
+
+.title-center {
+  position: absolute;
+  left: 50%;
+}
+
+#Stroke-27:hover {
+  stroke: $primary-font-error;
+}
+
+#arch-img:hover {
+  opacity: 0.2;
+}
+.project-info-card {
+  width: 100%;
+  height: 20%;
+  table {
+    padding-top: $space-md;
+  }
+}
+
+.name-style {
+  margin-left: 50%;
+  width: 100%;
+  letter-spacing: 0;
+}
+
+.img-style {
+  padding: 10%;
+  width: 200px;
+  height: 100px;
+}
+
+.header-font {
+  font-size: 1.125rem;
+}
+
+.description-font {
+  font-size: $text-md;
+}
+.explore {
+  background: $palette-white-100;
+  padding-bottom: 1rem;
+}
+
+.project {
+  padding-top: 1rem;
+  background: $palette-white-100;
+  padding-bottom: 1rem;
+  .container {
+    display: flex;
+    justify-content: space-between;
+    width: 60%;
+    .sub-container {
+      padding: 3%;
+      padding-top: 4%;
+      .project-name-style {
+        @extend .name-style;
+        flex: 1;
+        padding: 10px;
+      }
+      .client-name-style {
+        @extend .name-style;
+        flex: 1;
+        padding: 10px;
+      }
+    }
+  }
+}

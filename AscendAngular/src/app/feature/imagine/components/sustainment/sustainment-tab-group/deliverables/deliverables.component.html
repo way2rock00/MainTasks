@@ -1,0 +1,37 @@
+<app-filter-bar (parentEmitter)="eventEmit($event)" [filters]="filters" filterBarHead="Adv filters"
+    [filterBarHeadColor]="bgColor" *ngIf="sustainmentTabDataService?.agileManager?.length>0 || sustainmentTabDataService?.deliverablesContentsJson[0]"></app-filter-bar>
+<div class="feature" *ngIf="sustainmentTabDataService.deliverablesContentsJson[0]?.tabContent?.length > 0">
+    <div class="tab-body">
+        <mat-accordion multi="true">
+            <mat-expansion-panel *ngFor="let j of sustainmentTabDataService.deliverablesContentsJson[0].tabContent" disabled="true">
+                <mat-expansion-panel-header class="center"
+                    [ngStyle]="{'color':j.L1enabledflag=='N' && view == 'PROJECT'?'grey':'black', 'background-color':j.L1enabledflag=='N' && view == 'PROJECT'?'whitesmoke':'white'}">
+                    <div class="header-1">
+                        {{ j.L1value }}
+                    </div>
+                    <div class="document-button">
+                        <button *ngIf="j.L1doclink" (click)="preview(j.L1doclink)" mat-flat-button class="tab-button">
+                            <img class="file-btn" src="../../../assets/File_DOC_POS.svg" />
+                        </button>
+                    </div>
+
+                    <div *ngIf="view == 'PROJECT'" class="add-cart-button">
+
+                        <button *ngIf="j.L1enabledflag == 'Y'" (click)="toggle(j, 'N')" mat-flat-button
+                            class="tab-button">
+                            <img src="../../../assets/Cross_POS.svg" />
+                            <strong> Remove</strong>
+                        </button>
+
+                        <button *ngIf="j.L1enabledflag == 'N'" (click)="toggle(j, 'Y')" mat-flat-button
+                            class="tab-button">
+                            <img src="../../../assets/Plus_POS.svg" />
+                            <strong> Add</strong>
+                        </button>
+                    </div>
+
+                </mat-expansion-panel-header>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+</div>

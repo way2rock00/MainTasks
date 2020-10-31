@@ -1,0 +1,132 @@
+@import "src/assets/styles/_colors.scss";
+
+.font-common {
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+}
+
+.top-margin {
+  margin-top: 10%;
+}
+
+.title {
+  width: 264px; //212px;
+  height: 79px; //63px;
+  object-fit: contain;
+  margin-left: 2.1%;
+}
+
+.tool {
+  width: 80%;
+  height: 80%;
+  border-radius: 8px;
+  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.18);
+  background-color: #ffffff;
+  text-align: center;
+  padding: 0px 10px;
+  cursor: pointer;
+}
+.tool-icon {
+  margin-top: -10%;
+  height: 33.5%;
+}
+
+.tool-title {
+  @extend .font-common, .top-margin;
+  font-size: 17px;
+  font-weight: bold;
+  // line-height: 1.94;
+  letter-spacing: -0.11px;
+  // height: 40px;
+}
+
+.tool-description {
+  @extend .font-common;
+  position: absolute;
+  width: 80%;
+  bottom: 120px;
+  font-size: 12px;
+  letter-spacing: -0.08px;
+  color: #797474;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.more {
+  @extend .font-common;
+  position: absolute;
+  bottom: 100px;
+  margin-left: -40px;
+  font-size: 12px;
+  letter-spacing: -0.08px;
+  color: #005587;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.tool-button {
+  position: absolute;
+  width: 80%;
+  bottom: 60px;
+
+  button {
+    @extend .font-common;
+    font-size: 12px;
+    font-weight: bold;
+    width: 38%;
+    height: 19.5%;
+    border-radius: 0px;
+    margin-left: 1%;
+    margin-right: 1%;
+  }
+  button.enabled {
+    line-height: 2.33;
+    color: #ffffff;
+    background-color: #2797a9;
+  }
+  button.disabled {
+    color: gray;
+    line-height: 2.33;
+    background-color: rgba(0, 0, 0, 0.12);
+  }
+}
+.search-box {
+  float: right;
+  width: 24.9%;
+  padding: 13px;
+  padding-left: 4.3%;
+  border-radius: 28px;
+  border: solid 1px rgba(151, 151, 151, 0.29);
+  margin-right: 5%;
+  font-size: 16px;
+  font-weight: 300;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  background-color: transparent;
+  background: url(../../../../../assets/Icon_Search_black.svg) no-repeat scroll
+    2% center;
+}
+
+.search-box:focus {
+  outline: none !important;
+}
+
+.amplifier-desc {
+  @extend .font-common;
+  font-size: 16px;
+  line-height: 1.75;
+  letter-spacing: -0.08px;
+  color: #797474;
+  width: 71%;
+  margin: 2%;
+}
+
+.content {
+  max-height: 71%;
+  overflow: auto;
+}

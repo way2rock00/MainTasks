@@ -1,0 +1,129 @@
+<form #clientForm="ngForm" (submit)="onNext(clientForm)" class="project-add-edit-form-wrapper">
+
+    <div>
+        <mat-label><span class="required-asterisk">*</span> Client name </mat-label>
+        <mat-form-field class="" appearance="outline" floatLabel="never">
+            <input matInput [(ngModel)]="formData.clientName" [disabled]="isEditable" name="clientName"
+                #clientName='ngModel' required>
+            <mat-error *ngIf="clientForm.submitted && clientName?.errors?.required">
+                Client name is required.
+            </mat-error>
+        </mat-form-field>
+    </div>
+
+    <div>
+        <mat-label><span class="required-asterisk">*</span> Business details </mat-label>
+        <mat-form-field class="" appearance="outline" floatLabel="never">
+            <input matInput [(ngModel)]="formData.businessDetails" name="businessDetails" #businessDetails="ngModel"
+                required>
+            <mat-error *ngIf="clientForm.submitted && businessDetails?.errors?.required">
+                Business details is required.
+            </mat-error>
+        </mat-form-field>
+    </div>
+
+    <!-- <div>
+        <mat-label><span class="required-asterisk">*</span> Revenue (in Dollars) </mat-label>
+        <mat-form-field class="" appearance="outline" floatLabel="never" required>
+            <input matInput required type="number" [(ngModel)]="formData.revenue" #revenue="ngModel" name="revenue">
+            <span matPrefix>$&nbsp;</span>
+            <mat-error *ngIf="clientForm.submitted && revenue?.errors?.required">
+                Revenue (in Dollars) is required.
+            </mat-error>
+        </mat-form-field>
+    </div> -->
+
+    <div>
+        <mat-label><span class="required-asterisk">*</span> Revenue (in Dollars) </mat-label>
+        <mat-form-field appearance="outline" floatLabel="never">
+            <mat-select required name="revenue" [(ngModel)]="formData.revenue" #revenue='ngModel'>
+                <mat-option *ngFor="let revenue of formOptions?.companyRevenue" [value]="revenue">{{revenue}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="clientForm.submitted && revenue?.errors?.required">
+                Revenue (in Dollars) is required.
+            </mat-error>
+        </mat-form-field>
+    </div>
+
+    <div class="multi-select-div client-checkbox-font" [ngClass]="{
+        'multi-select-error-div': (clientForm.submitted && (!formData.industry?.length||!formData.sector?.length)||
+        clientForm.submitted && formData.industry?.length && formData.sector?.length && !(industrySectorCombination())
+        )
+      }">
+        <div class="multi-select-div-column">
+            <mat-label><span class="required-asterisk">*</span> Industry</mat-label>
+            <div *ngFor="let industryList of formOptions?.industrySector">
+                <mat-checkbox class="example-margin" required [checked]="getIndustriesState(industryList.industry)"
+                    (change)="industriesChanged($event.checked,industryList.industry)">
+                    {{industryList.industry}}
+                </mat-checkbox>
+            </div>
+        </div>
+        <div class="multi-select-div-column">
+            <mat-label><span class="required-asterisk">*</span> Sector</mat-label>
+            <div *ngFor="let indSector of formOptions?.sector">
+                <mat-checkbox class="example-margin" required [checked]="getSectorState(indSector)"
+                    (change)="sectorChange($event.checked,indSector)">
+                    {{indSector}}
+                </mat-checkbox>
+            </div>
+        </div>
+    </div>
+    <div class="form-error">
+        <mat-error *ngIf="clientForm.submitted && (!formData.industry?.length
+                                                    ||!formData.sector?.length)">
+            Industry and sector is required.
+        </mat-error>
+    </div>
+    <div class="form-error" *ngIf="clientForm.submitted && formData.industry?.length && formData.sector?.length">
+        <mat-error *ngIf="!(industrySectorCombination())">
+            For some of the selected Industries , sector is not selected.
+        </mat-error>
+    </div>
+    <!--
+    <div>
+        <mat-label><span class="required-asterisk">*</span> Industry</mat-label>
+        <mat-form-field appearance="outline" floatLabel="never">
+            <mat-select 
+                required
+                multiple
+                [(ngModel)]="formData.industry"
+                name="industry"
+                #industry="ngModel"
+            >
+              <mat-option 
+                *ngFor="let industry of formOptions?.industrySector" 
+                (click)="onIndustryChanged(industry.industry)"
+                [value]="industry.industry">{{industry.industry}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="clientForm.submitted && industry?.errors?.required">
+                Industry is required.
+            </mat-error>
+          </mat-form-field>
+    </div>
+
+    <div>
+        <mat-label><span class="required-asterisk">*</span> Sector</mat-label>
+        <mat-form-field appearance="outline" floatLabel="never">
+            <mat-select
+                required
+                multiple
+                [(ngModel)]="formData.sector"
+                name="sector"
+                #sector="ngModel"
+            >
+              <mat-option 
+                *ngFor="let sector of formOptions?.sector" 
+                [value]="sector">{{sector}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="clientForm.submitted && sector?.errors?.required">
+                Sector is required.
+            </mat-error>
+          </mat-form-field>
+    </div>
+    -->
+    <div class="action-button-wrapper">
+        <button class="btn-secondary" type="button" (click)="goBack()"> Cancel </button>
+        <button class="btn-primary" type="submit"> Next </button>
+    </div>
+</form>

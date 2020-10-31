@@ -1,0 +1,29 @@
+<div class="page-logo">My Projects</div>
+<div class="left-bg"></div>
+<div class="right-bg"></div>
+<div style="margin-top: 3em;position: absolute;left: 4%;">
+    <div class="left-train">
+        <div class="icon-class" *ngFor="let phase of phaseData,let i=index"
+            [ngClass]="{'active':currentPhase==phase.name}">
+            <div class="circle1-label">
+                {{phase.name}}
+            </div>
+            <div class="circle1">
+                <span>{{ i+1 }}</span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="right-scope-body">
+        <div class="right-scope-wrapper">
+            <app-project-form #form1></app-project-form>
+        </div>  
+        <div class="right-stpper-nav">
+            <div class="right-stepper-action">                
+                <button class="btn-prev" *ngIf = "form1?.step != 0" (click)="prev(form1)"> Prev </button>
+                <button class="btn-next" *ngIf = "form1?.step < 2" (click)="next(form1)"> Next </button>
+                <button class="btn-next" *ngIf = "form1?.step == 2" (click)="submit(form1)"> Submit </button>
+            </div>
+        </div>  
+    </div>
+</div>

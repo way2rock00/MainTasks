@@ -1,0 +1,64 @@
+@import "src/assets/styles/_colors.scss";
+@import "src/assets/styles/_common.scss";
+
+.amplifier-container {
+    width: 100%;
+    height: $container-height-1;
+    display: flex;
+    // color: white;
+}
+.amplifier-left {
+    width: 17%;
+    background-color: $palette-black-primary;
+    overflow: auto;
+
+    .amplifier-filters {
+        padding: 38.4% 11.2% 23.7%;
+    }
+
+    .title {
+        font-size: 16px;
+        font-weight: bold;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 2.5;
+        letter-spacing: normal;
+        color: #d4cece;
+    }
+}
+.amplifier-right {
+    margin-top: 4%;
+    margin-left: 2.2%;
+    width: 83%;
+    // overflow: auto;
+}
+
+.filter-value {
+
+    font-size: 12px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.88;
+    letter-spacing: normal;
+    color: #d4cece;
+    display: block;
+
+    ::ng-deep .mat-checkbox-frame{
+        border-color: #979797 !important;
+        border-width: 1px !important;
+        border-radius: 0px !important;
+    }
+
+    ::ng-deep .mat-checkbox-inner-container{
+        width: 9px !important;
+        height: 9px !important;
+    }
+    // ::ng-deep .mat-checkbox-layout {
+    //     white-space: normal !important;
+    // }
+}
+
+::ng-deep .filter-value.mat-checkbox-disabled .mat-checkbox-label{
+    color: #d4cece !important;
+}

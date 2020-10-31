@@ -1,0 +1,60 @@
+<mat-toolbar color="primary">
+  <!-- <span class="title-center">{{title}}</span> -->
+  <div class="logo-align">
+    <img src="../../../assets/images/logos.png" style="cursor: pointer;" (click)="goToHome()" width="200px"
+      height="22px" />
+    <!-- <div class="ascend-text">
+      Ascend
+    </div> -->
+    <!-- <sub>TM</sub> -->
+  </div>
+
+  <!-- <mat-icon class="icon"> -->
+  <app-nav-search *ngIf="router.url!='/welcome'"></app-nav-search>
+  <!-- </mat-icon> -->
+
+  <span class="spacer"></span>
+
+  <div class="icon">
+    <div style="background-color: #141313">
+      <!-- <button style="float: right; background-color: transparent; border: none;"
+        [disabled]="view == 'EXPLORE'"> -->
+      <!-- <mat-icon *ngIf="view!='EXPLORE'" matBadge={{docsCountTemp}} matBadgeColor="warn" matBadgeSize="small"> -->
+      <!-- <img style="cursor: pointer;" src="../../../assets/Icon_Workspace.svg " width="20px" height="20px" /> -->
+      <button mat-button (click)="navigateToSummary('-1','CREATE','a')"
+        *ngIf="view!='EXPLORE' && router.url!='/welcome' && sharedService.filterSelected && this.router?.url?.split('/')[2]?.toUpperCase()!='PSG'"
+        class="workspace-btn">
+        Summary
+      </button>
+      <!-- <a href="assets/CloudSQL Setup.exe" target="_blank">Hello</a> -->
+      <!-- </mat-icon> -->
+      <!-- <img *ngIf="view=='EXPLORE'" style="opacity: 0.5; cursor: text;" src="../../../assets/Icon_Workspace.svg "
+        width="20px" height="20px" /> -->
+      <button [disabled]="true" mat-button class="workspace-btn" style="border: solid 1px grey; color:grey"
+        *ngIf="router.url!='/welcome' && ( view=='EXPLORE' || (!sharedService.filterSelected && view != 'EXPLORE') || this.router?.url?.split('/')[2]?.toUpperCase()=='PSG') ">
+        Summary
+      </button>
+    </div>
+  </div>
+
+  <!-- <mat-icon class="icon"
+    ><img
+      src="../../../assets/Icon_Search.svg"
+      width="80%"
+      height="80%"
+      style="margin-bottom: 10%;"
+      (click)="searchClicked()"
+  /></mat-icon> -->
+  <div class="icon">
+    {{userData?.userName}}
+  </div>
+
+  <div class="icon" *ngIf="router.url!='/welcome'" [matMenuTriggerFor]="x.megaMenu">
+    <!-- <img src="../../../assets/avatar.png" width="90%" height="90%" /> -->
+    <!-- <i class="fas fa-bars" style="cursor:pointer; font-size: large;"></i> -->
+    <img class="hamburger" width="20px" src="../../../../assets/Hamburger_icon.svg@3x.png" />
+  </div>
+
+  <app-mega-menu #x="megaMenuComponent"></app-mega-menu>
+</mat-toolbar>
+<!-- <img class="rectangle" src="../../assets/bottom_color.png" /> -->

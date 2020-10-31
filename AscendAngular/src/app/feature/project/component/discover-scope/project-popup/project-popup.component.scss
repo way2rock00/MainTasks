@@ -1,0 +1,62 @@
+.common-padding {
+    padding: 0.5rem;
+}
+
+.project-popup {
+    background: #a7a6a6;
+    .close {
+        float: right;
+        padding: 10px;
+        cursor: pointer;
+        // background: #ffffff;
+        // border-radius: 50%;
+        // width: 20px;
+        // height: 20px;
+        // font-size: xx-small;
+
+        img {
+            width: 35px;
+        }
+    }
+
+    .popup-title {
+        @extend .common-padding;
+        font-weight: bold;
+        font-size: 24px;
+        margin: 0 1rem 1rem;
+        padding-top: 1rem;
+    }
+
+    // .popup-subtitle {
+    //     @extend .common-padding;
+    //     display: flex;
+    //     font-weight: bold;
+    //     font-size: 18px;
+    //     div:last-child {
+    //         float: left;
+    //         margin-left: auto;
+    //     }
+    // }
+
+    .popup-image {
+        height: 350px;
+        width: 100%;
+        border-radius: 15px;
+    }
+
+    .popup-body {
+        @extend .common-padding;
+        background-color: #1a0404;
+        color: #fff;
+        text-align: center;
+        font-weight: bold;
+        font-size: 12px;
+        line-height: 22px;
+        margin-top: -5px;
+        border-radius: 15px;
+        cursor: pointer;
+        div {
+            @extend .common-padding;
+        }
+    }
+}

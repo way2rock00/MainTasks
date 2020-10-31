@@ -1,0 +1,4 @@
+<app-filter-list top (parentEmitter)="emitFilter($event)" [filters]="filters" filterBarHead="Filters"
+    [filterBarHeadColor]="colorScheme" [tabName]="tabObj?.displayName" [filterLoaded] = "filterLoaded"></app-filter-list>
+
+<app-tab-details [getTabURL] = "getContentAPI" [postTabURL] = "postContentAPI" [tabName]="tabObj?.displayName" [tabCode] = "tabObj?.code"></app-tab-details>    

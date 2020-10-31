@@ -1,0 +1,188 @@
+<form #scopeForm="ngForm" (submit)="onSubmit(scopeForm)" class="project-add-edit-form-wrapper">
+
+    <!--<div>
+        <mat-label><span class="required-asterisk">*</span> Business processes</mat-label>
+        <mat-form-field appearance="outline" floatLabel="never">
+            <mat-select 
+                multiple
+                [(ngModel)]="formData.businessProcess"
+                name="businessProcess"
+                #businessProcess="ngModel"
+                required
+            >
+              <mat-option 
+                *ngFor="let busProc of formOptions?.businessProcesses" 
+                [value]="busProc">{{busProc}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="scopeForm.submitted && businessProcess?.errors?.required">
+              Business processes is required.
+            </mat-error>
+          </mat-form-field>
+    </div>-->
+    <div class="multi-select-div client-checkbox-font"
+    [ngClass]="{
+        'multi-select-error-div': (scopeForm.submitted && (!formData.businessProcess?.length||!formData.businessProcessl2?.length)||
+        scopeForm.submitted && formData.businessProcess?.length && formData.businessProcessl2?.length && !(businessProcessL1L2Combination())
+        )
+      }"    
+    >
+        <div class="multi-select-div-column">
+            <mat-label><span class="required-asterisk">*</span> Business Process L1</mat-label>
+            <div *ngFor="let businessProcess of formOptions?.businessprocessL1L2" >
+                <mat-checkbox class="example-margin" 
+                required
+                [checked]="getBusinessProcessL1State(businessProcess.processareal1)"
+                (change)="businessProcessL1Changed($event.checked,businessProcess.processareal1)"
+                >
+                {{businessProcess.processareal1}}
+                </mat-checkbox>
+            </div>
+        </div>
+        <div class="multi-select-div-column">
+                <mat-label><span class="required-asterisk">*</span> Business Process L2</mat-label>
+            <div *ngFor="let processl2 of formOptions?.businessProcessl2" >
+                <mat-checkbox class="example-margin" 
+                required
+                [checked]="getBusinessProcessL2State(processl2)"
+                (change)="businessProcessL2Changed($event.checked,processl2)"
+                >
+                {{processl2}}
+                </mat-checkbox>
+            </div>
+        </div>
+    </div>
+    <div class="form-error">
+        <mat-error *ngIf="scopeForm.submitted && (!formData.businessProcess?.length
+                                                    ||!formData.businessProcessl2?.length)">
+                Business Process L1 and L2 is required.
+        </mat-error>  
+    </div>   
+    <div class="form-error" *ngIf="scopeForm.submitted && formData.businessProcess?.length && formData.businessProcessl2?.length">
+            <mat-error *ngIf="!(businessProcessL1L2Combination())">
+                    For some of the selected Business Process L1 , L2 is not selected.
+            </mat-error>  
+    </div>      
+
+
+    <div>
+        <mat-label><span class="required-asterisk">*</span> Number of users</mat-label>
+        <mat-form-field class="mat-number-type" appearance="outline" floatLabel="never">
+            <input 
+              matInput 
+              type="number"  
+              min="0" max="999"
+              [(ngModel)]="formData.userscount"
+              name="userscount"
+              #userscount="ngModel"
+              required
+            >
+            <mat-error *ngIf="scopeForm.submitted && userscount?.errors?.required">
+              Number of users is required.
+            </mat-error>
+        </mat-form-field>
+    </div>
+
+    <div>
+        <mat-label><span class="required-asterisk">*</span> Geography/Region</mat-label>
+        <mat-form-field appearance="outline" floatLabel="never">
+            <mat-select
+              [(ngModel)]="formData.region"
+              name="region"
+              #geoRegion="ngModel"
+              required
+              multiple
+            >
+              <mat-option 
+                *ngFor="let region of formOptions?.region" 
+                [value]="region">{{region}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="scopeForm.submitted && geoRegion?.errors?.required">
+              Geography/region is required.
+            </mat-error>
+          </mat-form-field>
+    </div>
+
+    <div>
+        <mat-label><span class="required-asterisk">*</span> Country</mat-label>
+        <mat-form-field appearance="outline" floatLabel="never">  
+          <mat-select
+            [(ngModel)]="formData.scopeCountry"
+            name="scopeCountry"
+            #scopeCountry="ngModel"
+            required
+            multiple
+          >
+            <mat-option 
+              *ngFor="let country of formOptions?.country" 
+              [value]="country">{{country}}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="scopeForm.submitted && scopeCountry?.errors?.required">
+            Country is required.
+          </mat-error>
+        </mat-form-field>
+    </div>
+
+    <div>
+        <mat-label><span class="required-asterisk">*</span> Integration platform</mat-label>
+        <mat-form-field appearance="outline" floatLabel="never">
+            <mat-select
+              [(ngModel)]="formData.integrationPlatform"
+              name="integrationPlatform"
+              #integrationPlatform="ngModel"
+              required
+              multiple
+            >
+              <mat-option 
+                  *ngFor="let integPltfrm of formOptions?.integrationPlatform" 
+                  [value]="integPltfrm">{{integPltfrm}}</mat-option>
+            </mat-select >
+            <mat-error *ngIf="scopeForm.submitted && integrationPlatform?.errors?.required">
+              Integration platform is required.
+            </mat-error>
+          </mat-form-field>
+    </div>
+
+    <div>
+        <mat-label> Paas</mat-label>
+        <mat-form-field appearance="outline" floatLabel="never">
+            <mat-select
+              [(ngModel)]="formData.paas"
+              name="scopePaas"
+              #scopePaas="ngModel"
+              multiple
+            >
+              <mat-option 
+                  *ngFor="let paas of formOptions?.paas" 
+                  [value]="paas">{{paas}}</mat-option>
+            </mat-select>
+           <!-- <mat-error *ngIf="scopeForm.submitted && scopePaas?.errors?.required">
+              Paas is required.
+            </mat-error>-->
+          </mat-form-field>
+    </div>
+
+    <div>
+        <mat-label><span class="required-asterisk">*</span> Scope of service</mat-label>
+        <mat-form-field appearance="outline" floatLabel="never">
+            <mat-select
+              [(ngModel)]="formData.scopeservice"
+              name="scopeservice"
+              #scopeservice="ngModel"
+              required
+              multiple
+            >
+              <mat-option 
+                  *ngFor="let scpSrvs of formOptions?.scopeOfServices" 
+                  [value]="scpSrvs">{{scpSrvs}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="scopeForm.submitted && scopeservice?.errors?.required">
+              Scope of service is required.
+            </mat-error>
+          </mat-form-field>
+    </div>
+
+    <div class="action-button-wrapper">
+      <button class="btn-secondary" type="button" (click)="goBack()"> Cancel </button>
+      <button class="btn-primary" type="submit" [disabled]="isSubmitted"> Submit </button>
+    </div>
+</form>

@@ -1,0 +1,48 @@
+<div class="about-container">
+  <div class="sub-container about-left">
+    <div class="globe">
+      <!-- globe image -->
+    </div>
+  </div>
+  <div class="sub-container about-right">
+    <div class="text-block">
+   About Ascend
+    </div>
+    <div class="desc-block">
+      To thrive in today’s hyper competitive marketplace and digital age, company’s need to innovate beyond just
+      migration
+      to the Cloud, they need to embrace a digital mindset and enable continuous innovation throughout their operations.
+      <br /><br />
+      Deloitte Ascend™ for Oracle is a digitally integrated platform that was launched at OOW 2019 to help clients
+      assess
+      their current digital capabilities, map their digital journey, and enable the delivery of their digital ambitions.
+      Deloitte Ascend™ enables the full life cycle of our proprietary Momentum Methodology through the use of digital
+      and
+      collaboration technologies, facilitates Design Thinking by embedding leading practices (digital and industry),
+      incorporating the breadth of Deloitte (i.e. Tax, Security and Controls, Human Capital, Financial Advisory), and
+      automating delivery through the use of digital technology.
+      <br /><br />
+      <a href='/home' (click)="enterExploreMode()" class="link"><strong>Explore Ascend</strong></a> to reimagine your
+      Oracle Cloud journey.
+      <br /><br /><br />
+
+      <div class="about-links">
+        <a *ngFor="let link of links" (click)="goto(link.route, link.newWindow)">
+          <img [src]="link.imageURL" />
+          <div class="img-caption">{{link.imageCaption}}</div>
+        </a>
+      </div>
+
+    </div>
+    
+    <div class="terms">
+      <!-- <hr> -->
+      <a class="terms-link" target="_blank" href="https://er45.deloitteonline.com/dol/dol_DisplayContent.aspx?Type=4">Terms of Use</a>
+    </div>
+
+    <div class="privacy">
+    <a class="privacy-link" target="_blank" href="https://deloittenet.deloitte.com/system/Pages/DeloitteNet_Web_Privacy_statement.aspx">Privacy</a>
+    </div>
+
+  </div>
+</div>

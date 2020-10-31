@@ -1,0 +1,78 @@
+<div>
+  <div class="popup-header-top">
+    <div>
+      <p
+        [ngClass]="{'psg-header': data.selectedFunction.toUpperCase() == 'PSG', 'popup-header-title': data.selectedFunction.toUpperCase() != 'PSG'}">
+        {{ tabCodeValue }}</p>
+    </div>
+    <div class="close">
+      <img (click)="closePopup()" src="../../../../assets/cross-neg@3x.png" style="height: 28px;width: 28px;" />
+    </div>
+  </div>
+  <div>
+    <div
+      [ngClass]="{'psg-style': data.selectedFunction.toUpperCase() == 'PSG', 'popup-activity-title': data.selectedFunction.toUpperCase() != 'PSG'}">
+      <div *ngIf="data.selectedFunction.toUpperCase() != 'CYBER' && data.selectedFunction.toUpperCase() != 'PSG'">
+        <span>Choose an activity below</span>
+      </div>
+      <div *ngIf="data.selectedFunction.toUpperCase() == 'CYBER'">
+        <span>Choose a sub domain</span>
+      </div>
+      <div *ngIf="data.selectedFunction.toUpperCase() == 'PSG'">
+        <div>Download your NextGen extract in Microsoft Excel and Project scope in Word format below.</div>
+        <div class="title-padding">After you download your deliverables, click on the close icon to go to your project homepage.
+        </div>
+      </div>
+    </div>
+    <div class="popup-iidr-item" *ngIf="data.selectedFunction.toUpperCase() != 'PSG'">
+      <div class="insightslegend legendicon"></div>
+      <label class="legend">Insights</label>
+
+      <div class="imaginelegend legendicon"></div>
+      <label class="legend">Imagine</label>
+
+      <div class="deliverlegend legendicon"></div>
+      <label class="legend">Deliver</label>
+
+      <div class="runlegend legendicon"></div>
+      <label class="legend">Run</label>
+    </div>
+
+    <hr style="background: #18A6A7;width: 852px;height: 1px;">
+  </div>
+  <div class="popup-scroller">
+    <div *ngIf="data.selectedFunction.toUpperCase() != 'PSG'">
+      <div style="display: grid;" *ngFor="let entity of entityList; let i=index">
+        <div class="popup-content" (click)="navigateToStop(entity)">
+          <div
+            style="float: left; padding-left: 10px; padding-top: 20px; width: 85%; font-size: 16px; font-family: 'Open Sans Semibold'">
+            {{entity.stop}}</div>
+          <div style="float: left; padding: 20px 10px; padding-top:10px;width: 85%; font-size: 16px;">
+            {{entity.contentName}}
+          </div>
+          <!-- <img style="margin-right:5px" src="../../../../../assets/{{entity?.contentIcon}}"> -->
+          <div
+            style="line-height: 2.2; height:0;font-size: 18px; vertical-align: middle; float: right; margin-right: -40px;"
+            [ngClass]="{'blue-count': entity?.phase.toUpperCase()=='INSIGHTS', 'pastel-count': entity?.phase.toUpperCase()=='IMAGINE', 'yellow-count': entity?.phase.toUpperCase()=='DELIVER', 'green-count': entity?.phase.toUpperCase()=='RUN' }">
+            {{entity.tabArtifactCount}}</div>
+        </div>
+        <div *ngIf="i != entityList.length-1">
+          <mat-divider style="margin:0 auto;width: 92%;"></mat-divider>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="data.selectedFunction.toUpperCase() == 'PSG'" class="download-btns">
+      <div class="download-btn">
+        <button mat-button class="btn-style" (click)="goto('EXCEL')">Download NextGen</button>
+      </div>
+      <div class="download-btn">
+        <button mat-button class="btn-style" (click)="goto('WORD')">Download project scope</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="multicolor-band">
+  <img class="rectangle"
+    [ngClass]="{'psg-rectangle': data.selectedFunction.toUpperCase() == 'PSG', 'rectangle': data.selectedFunction.toUpperCase() != 'PSG'}"
+    src="../../assets/bottom_color.png" />
+</div>

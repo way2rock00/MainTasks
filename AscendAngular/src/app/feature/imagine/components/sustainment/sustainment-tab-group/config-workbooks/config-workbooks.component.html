@@ -1,0 +1,66 @@
+<div class="feature" *ngIf="sustainmentTabDataService.configWorkbooksContentsJson[0]?.tabContent?.length > 0">
+    <div class="tab-body">
+        <mat-accordion multi="true">
+            <mat-expansion-panel *ngFor="let j of sustainmentTabDataService.configWorkbooksContentsJson[0].tabContent">
+                <mat-expansion-panel-header class="center"
+                    [ngStyle]="{'color':j.L1enabledflag=='N' && view == 'PROJECT'?'grey':'black', 'background-color':j.L1enabledflag=='N' && view == 'PROJECT'?'whitesmoke':'white'}">
+                    <div class="header-1">
+                        {{ j.L1value }}
+                    </div>
+                    <div class="document-button">
+                        <button *ngIf="j.L1doclink" (click)="preview(j.L1doclink)" mat-flat-button class="tab-button">
+                            <img class="file-btn" src="../../../assets/File_DOC_POS.svg" />
+                        </button>
+                    </div>
+
+                    <div *ngIf="view == 'PROJECT'" class="add-cart-button">
+
+                        <button *ngIf="j.L1enabledflag == 'Y'" (click)="toggle(j, undefined, 'N')" mat-flat-button
+                            class="tab-button">
+                            <img src="../../../assets/Cross_POS.svg" />
+                            <strong> Remove all</strong>
+                        </button>
+
+                        <button *ngIf="j.L1enabledflag == 'N'" (click)="toggle(j,undefined, 'Y')" mat-flat-button
+                            class="tab-button">
+                            <img src="../../../assets/Plus_POS.svg" />
+                            <strong> Add all</strong>
+                        </button>
+                    </div>
+
+                </mat-expansion-panel-header>
+
+                <div *ngFor="let l of j.L2grp">
+                    <hr />
+                    <div class="heading-3"
+                        [ngStyle]="{'color':(j.L1enabledflag=='N' || l.L2enabledflag=='N' ) && view == 'PROJECT'?'grey':'black', 'background-color':(j.L1enabledflag=='N' || l.L2enabledflag=='N' ) && view == 'PROJECT'?'whitesmoke':'white'}">
+                        <!-- <div class="title">{{ l.userstoryname }}</div> -->
+                        <div class="description">{{ l.L2value }}</div>
+                        <div class="document-button">
+                            <button *ngIf="l.L2doclink" (click)="preview(l.L2doclink)" mat-flat-button
+                                class="tab-button">
+                                <img class="file-btn" src="../../../assets/File_DOC_POS.svg" />
+                            </button>
+                        </div>
+
+                        <div *ngIf="view == 'PROJECT'" class="add-cart-button">
+
+                            <button *ngIf="l.L2enabledflag == 'Y'" (click)="toggle(l, j, 'N')" mat-flat-button
+                                class="tab-button">
+                                <img src="../../../assets/Cross_POS.svg" />
+                                <strong> Remove</strong>
+                            </button>
+
+                            <button *ngIf="l.L2enabledflag == 'N'" (click)="toggle(l, j,'Y')" mat-flat-button
+                                class="tab-button">
+                                <img src="../../../assets/Plus_POS.svg" />
+                                <strong> Add</strong>
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+</div>

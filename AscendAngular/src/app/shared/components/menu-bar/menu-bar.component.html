@@ -1,0 +1,60 @@
+<div class="standard-menu-bar">
+  <button mat-button class="font-strength" (click)="goToHome()">
+    Home
+  </button>
+  <!-- <mat-menu #menu="matMenu"></mat-menu> -->
+  <!-- <button mat-button (click)="goToPage('home')">IIDR</button> -->
+  <!-- <button mat-button class="font-strength" [ngStyle]="{'border-bottom-color': insightsSelectedColor, 'border-bottom-style': insightsSolid}" (click)="goToPage('insights/create')">Insights</button>
+  <button mat-button class="font-strength" [ngStyle]="{'border-bottom-color': imagineSelectedColor, 'border-bottom-style': imagineSolid}" (click)="goToPage('imagine/launch')">Imagine</button>
+  <button mat-button class="font-strength" [ngStyle]="{'border-bottom-color': deliverSelectedColor, 'border-bottom-style': deliverSolid}" (click)="goToPage('deliver/activate')">Deliver</button>
+  <button mat-button class="font-strength" [ngStyle]="{'border-bottom-color': runSelectedColor, 'border-bottom-style': runSolid}" (click)="goToPage('run/stabilize')">Run</button> -->
+
+  <button mat-button class="font-strength" [matMenuTriggerFor]="insightsMenu"
+    [ngStyle]="{'border-bottom-color': insightsSelectedColor, 'border-bottom-style': insightsSolid}">Insights</button>
+  <mat-menu #insightsMenu="matMenu">
+    <div *ngFor='let menuItem of trainStops.insights'>
+      <button mat-menu-item class="menu-item" (click)="goToPage(menuItem)">{{menuItem.stopName}}</button>
+      <mat-divider style="margin: 0 auto; width: 200px;"></mat-divider>
+    </div>
+  </mat-menu>
+
+  <button mat-button class="font-strength" [matMenuTriggerFor]="imagineMenu"
+    [ngStyle]="{'border-bottom-color': imagineSelectedColor, 'border-bottom-style': imagineSolid}">Imagine</button>
+  <mat-menu #imagineMenu="matMenu">
+    <div *ngFor='let menuItem of trainStops.imagine'>
+      <button mat-menu-item class="menu-item" (click)="goToPage(menuItem)">{{menuItem.stopName}}</button>
+      <mat-divider style="margin: 0 auto; width: 200px;"></mat-divider>
+    </div>
+  </mat-menu>
+
+  <button mat-button class="font-strength" [matMenuTriggerFor]="deliverMenu"
+    [ngStyle]="{'border-bottom-color': deliverSelectedColor, 'border-bottom-style': deliverSolid}">Deliver</button>
+  <mat-menu #deliverMenu="matMenu">
+    <div *ngFor='let menuItem of trainStops.deliver'>
+      <button mat-menu-item class="menu-item" (click)="goToPage(menuItem)">{{menuItem.stopName}}</button>
+      <mat-divider style="margin: 0 auto; width: 200px;"></mat-divider>
+    </div>
+  </mat-menu>
+
+  <button mat-button class="font-strength" [matMenuTriggerFor]="runMenu"
+    [ngStyle]="{'border-bottom-color': runSelectedColor, 'border-bottom-style': runSolid}">Run</button>
+  <mat-menu #runMenu="matMenu">
+    <div *ngFor='let menuItem of trainStops.run'>
+      <button mat-menu-item class="menu-item" (click)="goToPage(menuItem)">{{menuItem.stopName}}</button>
+      <mat-divider style="margin: 0 auto; width: 200px;"></mat-divider>
+    </div>
+  </mat-menu>
+
+  <button *ngIf="view == 'PROJECT'" mat-button class="project-info" (click)="goToHome()">
+    <div class="type">Client name</div>
+    <div class="value">{{clientName}}</div>
+  </button>
+
+  <button *ngIf="view == 'PROJECT'" mat-button class="project-info" (click)="goToHome()">
+    <div class="type">Project name</div>
+    <div class="value">{{projectName}}</div>
+  </button>
+
+  <span *ngIf="view == 'PROJECT'" mat-button class="project-info"> | </span>
+
+</div>

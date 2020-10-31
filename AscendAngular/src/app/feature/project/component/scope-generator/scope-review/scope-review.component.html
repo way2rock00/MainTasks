@@ -1,0 +1,988 @@
+<div>
+  <mat-accordion class="example-headers-align">
+    <mat-expansion-panel class="expansion-panel-custom">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <!-- <mat-icon *ngIf="projectTypeFilled" style="margin-right: 10px; color: forestgreen"
+            (click)="goto('Engagement details')">check_circle
+          </mat-icon> -->
+          <!-- <mat-icon style="margin-right: 10px;" (click)="goto('Engagement details')">edit
+        </mat-icon> -->
+          Engagement details
+        </mat-panel-title>
+        <img class="review-edit-img" src="../../../../../../assets/images/Edit_psg.svg"
+          (click)="goto('Engagement details')">
+      </mat-expansion-panel-header>
+      <div style="padding-bottom: 10px;">
+        <div style="display:flex;padding: 10px; font-weight: bold; padding-left: 24px;">
+          <div style="padding-right: 10px;">
+            <mat-label style="font-weight: bold;color: #007680;">Client description
+            </mat-label>
+          </div>
+          <div style="flex:1; margin-top: 10px;">
+            <mat-divider></mat-divider>
+          </div>
+        </div>
+        <div style="display: flex;">
+          <div style="flex:1; text-align: right; padding: 5px;">
+            <mat-label style="font-weight: bold;">Name of the client</mat-label>
+          </div>
+          <div style="flex:1; padding: 5px;">
+            <mat-label>{{allPsgSavedData?.projectType[0]?.clientName}}</mat-label>
+          </div>
+        </div>
+        <div style="display: flex;">
+          <div style="flex:1; text-align: right; padding: 5px;">
+            <mat-label style="font-weight: bold;">Size of the client</mat-label>
+          </div>
+          <div style="flex:1; padding: 5px;">
+            <mat-label>{{allPsgSavedData?.projectType[0]?.revenue}}</mat-label>
+          </div>
+        </div>
+        <div style="display: flex;">
+          <div style="flex:1; text-align: right; padding: 5px;">
+            <mat-label style="font-weight: bold;">Client group</mat-label>
+          </div>
+          <div style="flex:1; padding: 5px;">
+            <mat-label>{{allPsgSavedData?.projectType[0]?.clientGroup}}</mat-label>
+          </div>
+        </div>
+        <div style="display: flex;">
+          <div style="flex:1; text-align: right; padding: 5px;">
+            <mat-label style="font-weight: bold;">Industry</mat-label>
+          </div>
+          <div style="flex:1; padding: 5px;">
+            <mat-label>{{allPsgSavedData?.projectType[0]?.industry}}</mat-label>
+          </div>
+        </div>
+        <div style="display: flex;">
+          <div style="flex:1; text-align: right; padding: 5px;">
+            <mat-label style="font-weight: bold;">Sector</mat-label>
+          </div>
+          <div style="flex:1; padding: 5px;">
+            <mat-label>{{allPsgSavedData?.projectType[0]?.sector}}</mat-label>
+          </div>
+        </div>
+      </div>
+
+      <div style="padding-bottom: 10px;">
+        <div style="display:flex;padding: 10px; font-weight: bold; padding-left: 24px;">
+          <div style="padding-right: 10px;">
+            <mat-label style="font-weight: bold;color: #007680;">Project description
+            </mat-label>
+          </div>
+          <div style="flex:1; margin-top: 10px;">
+            <mat-divider></mat-divider>
+          </div>
+        </div>
+        <div style="display: flex;">
+          <div style="flex:1; text-align: right; padding: 5px;">
+            <mat-label style="font-weight: bold;">Name of the project</mat-label>
+          </div>
+          <div style="flex:1; padding: 5px;">
+            <mat-label>{{allPsgSavedData?.projectType[0]?.projectName}}</mat-label>
+          </div>
+        </div>
+        <div style="display: flex;">
+          <div style="flex:1; text-align: right; padding: 5px;">
+            <mat-label style="font-weight: bold;">Type of the project</mat-label>
+          </div>
+          <div style="flex:1; padding: 5px;">
+            <mat-label *ngFor="let i of allPsgSavedData?.projectType[0]?.projectTypeDetails[0]?.typeDetails">{{i}}
+            </mat-label>
+          </div>
+        </div>
+        <div style="display: flex;">
+          <div style="flex:1; text-align: right; padding: 5px;">
+            <mat-label style="font-weight: bold;">Project description</mat-label>
+          </div>
+          <div style="flex:1; padding: 5px;">
+            <mat-label>{{allPsgSavedData?.projectType[0]?.projectDescription}}
+            </mat-label>
+          </div>
+        </div>
+        <div style="display: flex;">
+          <div style="flex:1; text-align: right; padding: 5px;">
+            <mat-label style="font-weight: bold;">Primary member firm</mat-label>
+          </div>
+          <div style="flex:1; padding: 5px;">
+            <mat-label>{{allPsgSavedData?.projectType[0]?.primaryMemberFirm}}
+            </mat-label>
+          </div>
+        </div>
+        <div style="display: flex;">
+          <div style="flex:1; text-align: right; padding: 5px;">
+            <mat-label style="font-weight: bold;">Secondary member firm</mat-label>
+          </div>
+          <div style="flex:1; padding: 5px;">
+            <mat-label>
+              {{allPsgSavedData?.projectType[0]?.secondaryMemberFirm ? allPsgSavedData?.projectType[0]?.secondaryMemberFirm : 'Not applicable'}}
+            </mat-label>
+          </div>
+        </div>
+        <div style="display: flex;">
+          <div style="flex:1; text-align: right; padding: 5px;">
+            <mat-label style="font-weight: bold;">Onsite project manager</mat-label>
+          </div>
+          <div style="flex:1; padding: 5px;">
+            <mat-label>{{allPsgSavedData?.projectType[0]?.projectManager}}
+            </mat-label>
+          </div>
+        </div>
+        <div style="display: flex;">
+          <div style="flex:1; text-align: right; padding: 5px;">
+            <mat-label style="font-weight: bold;">Onsite PPMD</mat-label>
+          </div>
+          <div style="flex:1; padding: 5px;">
+            <mat-label>{{allPsgSavedData?.projectType[0]?.leadPD}}
+            </mat-label>
+          </div>
+        </div>
+        <div style="display: flex;">
+          <div style="flex:1; text-align: right; padding: 5px;">
+            <mat-label style="font-weight: bold;">USI EMD</mat-label>
+          </div>
+          <div style="flex:1; padding: 5px;">
+            <mat-label>{{allPsgSavedData?.projectType[0]?.usiEmd}}
+            </mat-label>
+          </div>
+        </div>
+        <div style="display: flex;">
+          <div style="flex:1; text-align: right; padding: 5px;">
+            <mat-label style="font-weight: bold;">USI GDM</mat-label>
+          </div>
+          <div style="flex:1; padding: 5px;">
+            <mat-label>{{allPsgSavedData?.projectType[0]?.usiGdm}}
+            </mat-label>
+          </div>
+        </div>
+        <div style="display: flex;">
+          <div style="flex:1; text-align: right; padding: 5px;">
+            <mat-label style="font-weight: bold;">Primary offering portfolio</mat-label>
+          </div>
+          <div style="flex:1; padding: 5px;">
+            <mat-label>{{allPsgSavedData?.projectType[0]?.portfolio}}
+            </mat-label>
+          </div>
+        </div>
+        <div style="display: flex;">
+          <div style="flex:1; text-align: right; padding: 5px;">
+            <mat-label style="font-weight: bold;">Primary offering</mat-label>
+          </div>
+          <div style="flex:1; padding: 5px;">
+            <mat-label>{{allPsgSavedData?.projectType[0]?.offering}}
+            </mat-label>
+          </div>
+        </div>
+        <div style="display: flex;">
+          <div style="flex:1; text-align: right; padding: 5px;">
+            <mat-label style="font-weight: bold;">Secondary offering portfolio</mat-label>
+          </div>
+          <div style="flex:1; padding: 5px;">
+            <mat-label>{{allPsgSavedData?.projectType[0]?.secondaryPortfolio}}
+            </mat-label>
+          </div>
+        </div>
+        <div style="display: flex;">
+          <div style="flex:1; text-align: right; padding: 5px;">
+            <mat-label style="font-weight: bold;">Secondary offering</mat-label>
+          </div>
+          <div style="flex:1; padding: 5px;">
+            <mat-label>{{allPsgSavedData?.projectType[0]?.secondaryOffering}}
+            </mat-label>
+          </div>
+        </div>
+        <div style="display: flex;">
+          <div style="flex:1; text-align: right; padding: 5px;">
+            <mat-label style="font-weight: bold;">USI QA reviewer</mat-label>
+          </div>
+          <div style="flex:1; padding: 5px;">
+            <mat-label>{{allPsgSavedData?.projectType[0]?.usiQaReviewer}}
+            </mat-label>
+          </div>
+        </div>
+        <div style="display: flex;">
+          <div style="flex:1; text-align: right; padding: 5px;">
+            <mat-label style="font-weight: bold;">Lead QA partner</mat-label>
+          </div>
+          <div style="flex:1; padding: 5px;">
+            <mat-label>{{allPsgSavedData?.projectType[0]?.leadQaPartner}}
+            </mat-label>
+          </div>
+        </div>
+      </div>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel class="expansion-panel-custom">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <!-- <mat-icon *ngIf="scopesFilled" style="margin-right: 10px; color: forestgreen"
+            (click)="goto('Engagement details')">
+            check_circle
+          </mat-icon> -->
+          Scope
+          <!-- <mat-icon *ngIf="projectTypeFilled" style="margin-right: 10px;" (click)="goto('Scope')">edit
+          </mat-icon> -->
+        </mat-panel-title>
+        <img class="review-edit-img" src="../../../../../../assets/images/Edit_psg.svg" (click)="goto('Scope')">
+      </mat-expansion-panel-header>
+
+
+      <div style="padding-bottom: 10px;">
+        <!-- <div style="display:flex;padding: 10px; font-weight: bold; padding-left: 35px;">
+          <div style="padding-right: 10px;">
+            <mat-label style="font-weight: bold;">Geography
+            </mat-label>
+          </div>
+          <div style="flex:1; margin-top: 10px;">
+            <mat-divider></mat-divider>
+          </div>
+        </div> -->
+        <div style="display:flex;padding: 10px; font-weight: bold; padding-left: 24px;">
+          <div style="padding-right: 10px;">
+            <mat-label style="font-weight: bold;color: #007680;">Service
+            </mat-label>
+          </div>
+          <div style="flex:1; margin-top: 10px;">
+            <mat-divider></mat-divider>
+          </div>
+        </div>
+        <div>
+          <!-- <div style="text-align: left; padding: 5px;line-height: 3.5;">
+            <mat-label style="font-weight: bold;">Service</mat-label>
+          </div> -->
+          <div class="project-add-edit-form-wrapper technology-scope phase-items-div">
+            <table class="phase-items-table" style="width: 85%;">
+              <tr>
+                <th style="width: 35%">Service Scope</th>
+                <th style="width: 25%">Deloitte Scope</th>
+                <th style="width: 25%">Client Scope</th>
+                <th style="width: 25%">Complexity</th>
+              </tr>
+              <tbody class="scroll-table">
+                <ng-container *ngFor="let data of allPsgSavedData?.scopes[0]?.serviceScope">
+                  <tr>
+                    <td style="width:35%;font-weight: bold;display: table;">
+                      {{ data.name }}
+                    </td>
+                    <td style="width: 25%">
+                      {{data.deloitteScope}}
+                    </td>
+                    <td style="width: 25%">
+                      {{data.clientScope}}
+                    </td>
+                    <td style="width: 25%">
+                      {{data.complexity}}
+                    </td>
+                  </tr>
+                </ng-container>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div style="display:flex;padding: 10px; font-weight: bold; padding-left: 24px;">
+          <div style="padding-right: 10px;">
+            <mat-label style="font-weight: bold;color: #007680;">Geography
+            </mat-label>
+          </div>
+          <div style="flex:1; margin-top: 10px;">
+            <mat-divider></mat-divider>
+          </div>
+        </div>
+
+        <div style="display: flex;width: 90%;"
+          *ngFor="let element of allPsgSavedData?.scopes[0]?.geographicalScope[0]?.regionCountry">
+          <div style="flex:1; text-align: right; padding: 5px;">
+            <mat-label style="font-weight: bold;">{{element.item}}</mat-label>
+          </div>
+          <div style="flex:1; padding: 5px;">
+            <ul class="review-screen-list">
+              <li *ngFor="let l1Obj of element?.children">
+                <mat-label>{{l1Obj.item}}</mat-label>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- <div style="display: flex;">
+          <div style="flex:1; text-align: right; padding: 5px;line-height: 3.5;">
+            <mat-label style="font-weight: bold;">Geography</mat-label>
+          </div>
+          <div style="flex:1; padding: 5px;">
+            <mat-tree [dataSource]="geoScopeDataSource" [treeControl]="treeControl" class="example-tree">
+              <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
+                <li class="mat-tree-node">
+                  <mat-icon style="font-size: 10px;line-height: 2.5">lens</mat-icon>
+                  {{node.item}}
+                </li>
+              </mat-tree-node>
+              <mat-nested-tree-node *matTreeNodeDef="let node; when: hasChild">
+                <li>
+                  <div class="mat-tree-node">
+                    <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'Toggle ' + node.item">
+                      <mat-icon class="mat-icon-rtl-mirror">
+                        {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+                      </mat-icon>
+                    </button>
+                    {{node.item}}
+                  </div>
+                  <ul [class.example-tree-invisible]="!treeControl.isExpanded(node)">
+                    <ng-container matTreeNodeOutlet></ng-container>
+                  </ul>
+                </li>
+              </mat-nested-tree-node>
+            </mat-tree>
+          </div>
+        </div> -->
+
+        <div style="display:flex;padding: 10px; font-weight: bold; padding-left: 24px;">
+          <div style="padding-right: 10px;">
+            <mat-label style="font-weight: bold;color: #007680;">Business process
+            </mat-label>
+          </div>
+          <div style="flex:1; margin-top: 10px;">
+            <mat-divider></mat-divider>
+          </div>
+        </div>
+
+        <div style="display: flex;width: 90%;"
+          *ngFor="let element of allPsgSavedData?.scopes[0]?.processScope[0]?.coreBusinessProcess">
+          <div style="flex:1; text-align: right; padding: 5px;">
+            <mat-label style="font-weight: bold;">{{element.item}}</mat-label>
+          </div>
+          <div style="flex:1; padding: 5px;">
+            <ul class="review-screen-list">
+              <ng-container *ngFor="let l1Obj of element?.children">
+                <li>
+                  <mat-label>{{l1Obj.item}}</mat-label>
+                </li>
+                <li *ngFor="let l2Obj of l1Obj?.children">
+                  <mat-label>{{l2Obj.item}}</mat-label>
+                </li>
+                <br />
+              </ng-container>
+            </ul>
+          </div>
+        </div>
+
+
+        <!-- <div style="display: flex;">
+          <div style="flex:1; text-align: right; padding: 5px;line-height: 3.5;">
+            <mat-label style="font-weight: bold;">Business process</mat-label>
+          </div>
+          <div style="flex:1; padding: 5px;">
+            <mat-tree [dataSource]="processScopeDataSource" [treeControl]="treeControl" class="example-tree">
+              <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
+                <li class="mat-tree-node">
+                  <mat-icon style="font-size: 10px;line-height: 2.5">lens</mat-icon>
+                  {{node.item}}
+                </li>
+              </mat-tree-node>
+              <mat-nested-tree-node *matTreeNodeDef="let node; when: hasChild">
+                <li>
+                  <div class="mat-tree-node">
+                    <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'Toggle ' + node.item">
+                      <mat-icon class="mat-icon-rtl-mirror">
+                        {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+                      </mat-icon>
+                    </button>
+                    {{node.item}}
+                  </div>
+                  <ul [class.example-tree-invisible]="!treeControl.isExpanded(node)">
+                    <ng-container matTreeNodeOutlet></ng-container>
+                  </ul>
+                </li>
+              </mat-nested-tree-node>
+            </mat-tree>
+          </div>
+        </div> -->
+
+        <div style="display:flex;padding: 10px; font-weight: bold; padding-left: 24px;">
+          <div style="padding-right: 10px;">
+            <mat-label style="font-weight: bold;color: #007680;">Systems
+            </mat-label>
+          </div>
+          <div style="flex:1; margin-top: 10px;">
+            <mat-divider></mat-divider>
+          </div>
+        </div>
+
+        <div style="padding-bottom: 10px; width: 90%;">
+          <div style="display: flex;">
+            <div style="flex:1; text-align: right; padding: 5px;">
+              <mat-label style="font-weight: bold;">ERP package</mat-label>
+            </div>
+            <div style="flex:1; padding: 5px;">
+              <mat-label>{{allPsgSavedData?.scopes[0]?.systemScope[0]?.erpPackage}}</mat-label>
+            </div>
+          </div>
+          <!-- <div style="display: flex;">
+            <div style="flex:1; text-align: right; padding: 5px;">
+              <mat-label style="font-weight: bold;">Additional ERP package</mat-label>
+            </div>
+            <div style="flex:1; padding: 5px;">
+              <mat-label>{{allPsgSavedData?.scopes[0]?.systemScope[0]?.additionalErpPackage}}</mat-label>
+            </div>
+          </div> -->
+          <div style="display: flex;">
+            <div style="flex:1; text-align: right; padding: 5px;">
+              <mat-label style="font-weight: bold;">Integration platform</mat-label>
+            </div>
+            <div style="flex:1; padding: 5px;display: grid;">
+              <mat-label *ngFor="let i of allPsgSavedData?.scopes[0]?.systemScope[0]?.integrationPlatform">{{i}}
+              </mat-label>
+            </div>
+          </div>
+          <div style="display: flex;">
+            <div style="flex:1; text-align: right; padding: 5px;">
+              <mat-label style="font-weight: bold;">Extensions</mat-label>
+            </div>
+            <div style="flex:1; padding: 5px;display: grid;">
+              <mat-label *ngFor="let i of allPsgSavedData?.scopes[0]?.systemScope[0]?.extensions">{{i}}</mat-label>
+            </div>
+          </div>
+        </div>
+
+        <div style="display: flex;width: 90%;">
+          <div style="flex:1; text-align: right; padding: 5px;">
+            <mat-label style="font-weight: bold;">Systems</mat-label>
+          </div>
+          <div style="flex:1; padding: 5px;">
+            <ul class="review-screen-list">
+              <ng-container *ngFor="let element of allPsgSavedData?.scopes[0]?.systemScope[0]?.system">
+                <li>
+                  <mat-label>{{element?.item}}</mat-label>
+                </li>
+              </ng-container>
+            </ul>
+          </div>
+        </div>
+
+        <!-- <div style="display: flex;">
+          <div style="flex:1; text-align: right; padding: 5px;line-height: 3.5;">
+            <mat-label style="font-weight: bold;">Systems</mat-label>
+          </div>
+          <div style="flex:1; padding: 5px;">
+            <mat-tree [dataSource]="systemsDataSource" [treeControl]="treeControl" class="example-tree">
+              <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
+                <li class="mat-tree-node">
+                  <mat-icon style="font-size: 10px;line-height: 2.5">lens</mat-icon>
+                  {{node.item}}
+                </li>
+              </mat-tree-node>
+              <mat-nested-tree-node *matTreeNodeDef="let node; when: hasChild">
+                <li>
+                  <div class="mat-tree-node">
+                    <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'Toggle ' + node.item">
+                      <mat-icon class="mat-icon-rtl-mirror">
+                        {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+                      </mat-icon>
+                    </button>
+                    {{node.item}}
+                  </div>
+                  <ul [class.example-tree-invisible]="!treeControl.isExpanded(node)">
+                    <ng-container matTreeNodeOutlet></ng-container>
+                  </ul>
+                </li>
+              </mat-nested-tree-node>
+            </mat-tree>
+          </div>
+        </div> -->
+      </div>
+    </mat-expansion-panel>
+
+
+    <mat-expansion-panel class="expansion-panel-custom">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <!-- <mat-icon *ngIf="implApprFilled" style="margin-right: 10px; color: forestgreen"
+            (click)="goto('Engagement details')">
+            check_circle
+          </mat-icon> -->
+          Implementation approach
+          <!-- <mat-icon *ngIf="scopesFilled && projectTypeFilled" style="margin-right: 10px;"
+            (click)="goto('Implementation approach')">edit
+          </mat-icon> -->
+        </mat-panel-title>
+        <img class="review-edit-img" src="../../../../../../assets/images/Edit_psg.svg"
+          (click)="goto('Implementation approach')">
+      </mat-expansion-panel-header>
+      <div style="display: flex;">
+        <div style="flex:1; text-align: right; padding: 5px;">
+          <mat-label style="font-weight: bold;">Implementation approach</mat-label>
+        </div>
+        <div style="flex:1; padding: 5px;">
+          <mat-label>{{allPsgSavedData?.implementationApproach[0]?.implementationApproach}}</mat-label>
+        </div>
+      </div>
+      <div style="display: flex;">
+        <div style="flex:1; text-align: right; padding: 5px;">
+          <mat-label style="font-weight: bold;">Number of phases</mat-label>
+        </div>
+        <div style="flex:1; padding: 5px;">
+          <mat-label>{{allPsgSavedData?.implementationApproach[0]?.phaseCount}}</mat-label>
+        </div>
+      </div>
+      <div style="padding-bottom: 10px;"
+        *ngFor="let i of allPsgSavedData?.implementationApproach[0]?.phaseDetails;let k=index">
+        <div style="display:flex;padding: 10px; font-weight: bold; padding-left: 24px;">
+          <div style="padding-right: 10px;">
+            <mat-label style="font-weight: bold;color: #007680;">Phase {{k+1}}</mat-label>
+          </div>
+          <div style="flex:1; margin-top: 10px;">
+            <mat-divider></mat-divider>
+          </div>
+        </div>
+        <div style="display: flex;">
+          <div style="flex:1; text-align: right; padding: 5px;">
+            <mat-label style="font-weight: bold;">Phase name</mat-label>
+          </div>
+          <div style="flex:1; padding: 5px;">
+            <mat-label>{{i.phaseName}}</mat-label>
+          </div>
+        </div>
+        <div style="display: flex;">
+          <div style="flex:1; text-align: right; padding: 5px;">
+            <mat-label style="font-weight: bold;">Start date</mat-label>
+          </div>
+          <div style="flex:1; padding: 5px;">
+            <mat-label>{{i.startDate}}</mat-label>
+          </div>
+        </div>
+        <div style="display: flex;">
+          <div style="flex:1; text-align: right; padding: 5px;">
+            <mat-label style="font-weight: bold;">End date</mat-label>
+          </div>
+          <div style="flex:1; padding: 5px;">
+            <mat-label>{{i.endDate}}</mat-label>
+          </div>
+        </div>
+      </div>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel class="expansion-panel-custom">
+      <mat-expansion-panel-header>
+        <mat-panel-title>Phase planning</mat-panel-title>
+        <img class="review-edit-img" src="../../../../../../assets/images/Edit_psg.svg"
+          (click)="goto('Phase planning')">
+      </mat-expansion-panel-header>
+      <div style="padding-bottom: 10px;">
+        <div class="project-add-edit-form-wrapper planning-tab" style="margin-left: 1.5%;">
+          <mat-tab-group>
+            <mat-tab *ngFor="let element of allPsgSavedData?.phasePlanning;let i=index" [label]="element.phaseName">
+              <ng-template matTabContent>
+                <div style="padding: 1em 0; width: 90%;">
+                  <div style="display: flex;">
+                    <div style="flex:1; text-align: right; padding: 5px;">
+                      <mat-label style="font-weight: bold;">Country</mat-label>
+                    </div>
+                    <div style="flex:1; padding: 5px;">
+                      <mat-label *ngFor="let item of element?.countries; let i=index">
+                        {{item}}<span *ngIf="i !=element?.countries.length-1">, </span>
+                      </mat-label>
+                    </div>
+                  </div>
+
+                  <div style="display: flex;">
+                    <div style="flex:1; text-align: right; padding: 5px;">
+                      <mat-label style="font-weight: bold;">Start date</mat-label>
+                    </div>
+                    <div style="flex:1; padding: 5px;">
+                      <mat-label>{{element?.startDate}}</mat-label>
+                    </div>
+                  </div>
+
+                  <div style="display: flex;">
+                    <div style="flex:1; text-align: right; padding: 5px;">
+                      <mat-label style="font-weight: bold;">End date</mat-label>
+                    </div>
+                    <div style="flex:1; padding: 5px;">
+                      <mat-label>{{element?.endDate}}</mat-label>
+                    </div>
+                  </div>
+                </div>
+
+                <div *ngFor="let table of element?.tableDetails;let k=index" class="table-planning-wrapper">
+                  <span>
+                    <mat-label style="font-weight: bold;">Phase {{element.phaseName}} - Selected Country: </mat-label>
+                    <mat-label *ngFor="let item of table?.tablecountries; let i=index">
+                      {{item}}<span *ngIf="i !=element?.countries.length-1">, </span>
+                    </mat-label>
+                  </span>
+
+                  <div class="planning-form-actions">
+                    <img class="img-control" src="../../../../../../assets/images/maximize.png"
+                      (click)="changeView(maximize,minimize)" #maximize>
+                    <img class="img-control visible" src="../../../../../../assets/images/minimize.png"
+                      (click)="changeView(maximize,minimize)" #minimize>
+                  </div>
+
+                  <div class="phase-items-div">
+                    <table *ngIf="minimize?.classList?.contains('visible')" class="phase-items-table">
+                      <tr>
+                        <th style="width: 15%">
+                          Business Process L1
+                        </th>
+                        <th style="width: 30%">
+                          Business Process L2
+                        </th>
+                        <th style="width: 30%">
+                          Business Process L3
+                        </th>
+                        <th style="width: 30%" *ngFor="let package of packageList">
+                          <mat-label>{{package}}</mat-label>
+                        </th>
+                      </tr>
+                      <tbody class="scroll-table">
+                        <ng-container *ngFor="let tabRow of table?.tableRowEntries">
+                          <ng-container>
+                            <tr *ngFor="let level of tabRow.l1Group">
+                              <td>{{tabRow.l1Value}}</td>
+                              <td>{{level.l2Value}}</td>
+                              <td>{{level.l3Value}}</td>
+                              <td *ngFor="let package of level?.packageDetails">
+                                <mat-label *ngFor="let module of package.modules">{{module}}</mat-label>
+                              </td>
+                            </tr>
+                          </ng-container>
+                        </ng-container>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </ng-template>
+            </mat-tab>
+          </mat-tab-group>
+        </div>
+      </div>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel class="expansion-panel-custom">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Technical scope
+        </mat-panel-title>
+        <img class="review-edit-img" src="../../../../../../assets/images/Edit_psg.svg"
+          (click)="goto('Technical scope')">
+      </mat-expansion-panel-header>
+
+      <div style="padding-bottom: 10px;">
+        <div class="project-add-edit-form-wrapper planning-tab"
+          *ngIf="allPsgSavedData?.technicalScope[0]?.conversion?.length > 0" style="margin-left: 1.5%;">
+
+          <div style="padding-bottom: 10px;">
+            <div style="display:flex;padding: 10px; font-weight: bold; padding-left: 24px;">
+              <div style="padding-right: 10px;">
+                <mat-label style="font-weight: bold;color: #007680;">Conversion
+                </mat-label>
+              </div>
+              <div style="flex:1; margin-top: 10px;">
+                <mat-divider></mat-divider>
+              </div>
+            </div>
+
+            <div *ngFor="let table of allPsgSavedData?.technicalScope[0]?.conversion;let k=index"
+              class="table-planning-wrapper">
+              <span>
+                <mat-label style="font-weight: bold;">{{table.item}}</mat-label>
+              </span>
+
+              <div class="planning-form-actions">
+                <img class="img-control" src="../../../../../../assets/images/maximize.png"
+                  (click)="changeView(maximize,minimize)" #maximize>
+                <img class="img-control visible" src="../../../../../../assets/images/minimize.png"
+                  (click)="changeView(maximize,minimize)" #minimize>
+              </div>
+
+              <div class="phase-items-div">
+                <table *ngIf="minimize?.classList?.contains('visible')" class="phase-items-table">
+                  <tr>
+                    <th style="width: 15%">
+                      Module
+                    </th>
+                    <th style="width: 30%">
+                      Conversion name
+                    </th>
+                    <th style="width: 15%">
+                      Systems
+                    </th>
+                    <th style="width: 20%">
+                      Volume
+                    </th>
+                    <th style="width: 15%">
+                      Complexity
+                    </th>
+                  </tr>
+                  <tbody class="scroll-table">
+                    <ng-container *ngFor="let tabRow of table?.children">
+                      <ng-container>
+                        <tr *ngFor="let level of tabRow.children">
+                          <td>{{tabRow.item}}</td>
+                          <td>{{level.item}}</td>
+                          <td>
+                            <div *ngFor="let k of level.system">
+                              {{k}}
+                            </div>
+                          </td>
+                          <td>{{level.volume}}</td>
+                          <td>{{level.complexity}}</td>
+                        </tr>
+                      </ng-container>
+                    </ng-container>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="padding-bottom: 10px;" *ngIf="allPsgSavedData?.technicalScope[0]?.reports?.length > 0">
+          <div class="project-add-edit-form-wrapper planning-tab" style="margin-left: 1.5%;">
+            <div style="display:flex;padding: 10px; font-weight: bold; padding-left: 24px;">
+              <div style="padding-right: 10px;">
+                <mat-label style="font-weight: bold;color: #007680;">Report
+                </mat-label>
+              </div>
+              <div style="flex:1; margin-top: 10px;">
+                <mat-divider></mat-divider>
+              </div>
+            </div>
+
+            <div *ngFor="let table of allPsgSavedData?.technicalScope[0].reports;let k=index"
+              class="table-planning-wrapper">
+              <span>
+                <mat-label style="font-weight: bold;">{{table.item}}</mat-label>
+              </span>
+
+              <div class="planning-form-actions">
+                <img class="img-control" src="../../../../../../assets/images/maximize.png"
+                  (click)="changeView(maximize,minimize)" #maximize>
+                <img class="img-control visible" src="../../../../../../assets/images/minimize.png"
+                  (click)="changeView(maximize,minimize)" #minimize>
+              </div>
+
+              <div class="phase-items-div">
+                <table *ngIf="minimize?.classList?.contains('visible')" class="phase-items-table">
+                  <tr>
+                    <th style="width: 15%">
+                      Module
+                    </th>
+                    <th style="width: 30%">
+                      Report name
+                    </th>
+                    <th style="width: 15%">
+                      Type
+                    </th>
+                    <th style="width: 15%">
+                      Complexity
+                    </th>
+                  </tr>
+                  <tbody class="scroll-table">
+                    <ng-container *ngFor="let tabRow of table?.children">
+                      <ng-container>
+                        <tr *ngFor="let level of tabRow.children">
+                          <td>{{tabRow.item}}</td>
+                          <td>{{level.item}}</td>
+                          <td>{{level.type}}</td>
+                          <td>{{level.complexity}}</td>
+                        </tr>
+                      </ng-container>
+                    </ng-container>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="padding-bottom: 10px;" *ngIf="allPsgSavedData?.technicalScope[0]?.interfaces?.length > 0">
+          <div class="project-add-edit-form-wrapper planning-tab" style="margin-left: 1.5%;">
+            <div style="display:flex;padding: 10px; font-weight: bold; padding-left: 24px;">
+              <div style="padding-right: 10px;">
+                <mat-label style="font-weight: bold;color: #007680;">Interface
+                </mat-label>
+              </div>
+              <div style="flex:1; margin-top: 10px;">
+                <mat-divider></mat-divider>
+              </div>
+            </div>
+
+            <div *ngFor="let table of allPsgSavedData?.technicalScope[0].interfaces;let k=index"
+              class="table-planning-wrapper">
+              <span>
+                <mat-label style="font-weight: bold;">{{table.item}}</mat-label>
+              </span>
+
+              <div class="planning-form-actions">
+                <img class="img-control" src="../../../../../../assets/images/maximize.png"
+                  (click)="changeView(maximize,minimize)" #maximize>
+                <img class="img-control visible" src="../../../../../../assets/images/minimize.png"
+                  (click)="changeView(maximize,minimize)" #minimize>
+              </div>
+
+              <div class="phase-items-div">
+                <table *ngIf="minimize?.classList?.contains('visible')" class="phase-items-table">
+                  <tr>
+                    <th style="width: 15%">
+                      Module
+                    </th>
+                    <th style="width: 30%">
+                      Interface name
+                    </th>
+                    <th style="width: 20%">
+                      Systems
+                    </th>
+                    <th style="width: 15%">
+                      Type
+                    </th>
+                    <th style="width: 15%">
+                      Complexity
+                    </th>
+                  </tr>
+                  <tbody class="scroll-table">
+                    <ng-container *ngFor="let tabRow of table?.children">
+                      <ng-container>
+                        <tr *ngFor="let level of tabRow.children">
+                          <td>{{tabRow.item}}</td>
+                          <td>{{level.item}}</td>
+                          <td>
+                            <div *ngFor="let k of level.system">
+                              {{k}}
+                            </div>
+                          </td>
+                          <td>{{level.type}}</td>
+                          <td>{{level.complexity}}</td>
+                        </tr>
+                      </ng-container>
+                    </ng-container>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="padding-bottom: 10px;" *ngIf="allPsgSavedData?.technicalScope[0]?.extensions?.length > 0">
+          <div class="project-add-edit-form-wrapper planning-tab" style="margin-left: 1.5%;">
+            <div style="display:flex;padding: 10px; font-weight: bold; padding-left: 24px;">
+              <div style="padding-right: 10px;">
+                <mat-label style="font-weight: bold;color: #007680;">Extensions
+                </mat-label>
+              </div>
+              <div style="flex:1; margin-top: 10px;">
+                <mat-divider></mat-divider>
+              </div>
+            </div>
+
+            <div *ngFor="let table of allPsgSavedData?.technicalScope[0].extensions;let k=index"
+              class="table-planning-wrapper">
+              <span>
+                <mat-label style="font-weight: bold;">{{table.item}}</mat-label>
+              </span>
+
+              <div class="planning-form-actions">
+                <img class="img-control" src="../../../../../../assets/images/maximize.png"
+                  (click)="changeView(maximize,minimize)" #maximize>
+                <img class="img-control visible" src="../../../../../../assets/images/minimize.png"
+                  (click)="changeView(maximize,minimize)" #minimize>
+              </div>
+
+              <div class="phase-items-div">
+                <table *ngIf="minimize?.classList?.contains('visible')" class="phase-items-table">
+                  <tr>
+                    <th style="width: 15%">
+                      Module
+                    </th>
+                    <th style="width: 30%">
+                      Extensions name
+                    </th>
+                    <th style="width: 15%">
+                      Type
+                    </th>
+                    <th style="width: 15%">
+                      Complexity
+                    </th>
+                  </tr>
+                  <tbody class="scroll-table">
+                    <ng-container *ngFor="let tabRow of table?.children">
+                      <ng-container>
+                        <tr *ngFor="let level of tabRow.children">
+                          <td>{{tabRow.item}}</td>
+                          <td>{{level.item}}</td>
+                          <td>{{level.type}}</td>
+                          <td>{{level.complexity}}</td>
+                        </tr>
+                      </ng-container>
+                    </ng-container>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-expansion-panel>
+
+
+    <mat-expansion-panel class="expansion-panel-custom">
+      <mat-expansion-panel-header>
+        <mat-panel-title>Assumptions</mat-panel-title>
+        <img class="review-edit-img" src="../../../../../../assets/images/Edit_psg.svg" (click)="goto('Assumptions')">
+      </mat-expansion-panel-header>
+
+      <div style="padding-bottom: 1em;padding-right: 3em;">
+        <div style="display: flex;width: 90%;">
+          <div style="flex:1; text-align: right; padding: 5px;">
+            <mat-label style="font-weight: bold;">Applicable assumptions</mat-label>
+          </div>
+          <div style="flex:1; padding: 5px;">
+            <ul class="review-screen-list">
+              <ng-container *ngFor="let element of allPsgSavedData?.assumptions[0]?.assumption">
+                <li>
+                  <mat-label>{{element.item}}</mat-label>
+                </li>
+                <li *ngFor="let l1Obj of element?.children">
+                  <mat-label>{{l1Obj?.item}}</mat-label>
+                </li>
+                <br />
+              </ng-container>
+            </ul>
+          </div>
+        </div>
+        <!-- <div style="display: flex;">
+                <div style="flex:1; text-align: right; padding: 5px;line-height: 3.5;">
+                  <mat-label style="font-weight: bold;">Assumptions</mat-label>
+                </div>
+                <div style="flex:1; padding: 5px;">
+                  <mat-tree [dataSource]="assumptionsDataSource" [treeControl]="treeControl" class="example-tree">
+                    <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
+                      <li class="mat-tree-node">
+                        <mat-icon style="font-size: 10px;line-height: 2.5">lens</mat-icon>
+                        {{node.item}}
+                      </li>
+                    </mat-tree-node>
+
+                    <mat-nested-tree-node *matTreeNodeDef="let node; when: hasChild">
+                      <li>
+                        <div class="mat-tree-node">
+                          <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'Toggle ' + node.item">
+                            <mat-icon class="mat-icon-rtl-mirror">
+                              {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+                            </mat-icon>
+                          </button>
+                          {{node.item}}
+                        </div>
+                        <ul [class.example-tree-invisible]="!treeControl.isExpanded(node)">
+                          <ng-container matTreeNodeOutlet></ng-container>
+                        </ul>
+                      </li>
+                    </mat-nested-tree-node>
+                  </mat-tree>
+                </div>
+              </div> -->
+      </div>
+    </mat-expansion-panel>
+
+
+  </mat-accordion>
+</div>

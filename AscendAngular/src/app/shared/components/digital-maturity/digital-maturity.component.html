@@ -1,0 +1,11 @@
+<div class="bottom-digital-maturity" [ngStyle]="{backgroundColor: bodyColor}">
+    <div class="heading" [ngStyle]="{backgroundColor: headColor}">
+        {{title}}
+    </div>
+    <ul>
+        <li class="body" *ngFor="let element of array">
+            <span>{{element}}</span>
+        </li>
+    </ul>
+    
+</div>

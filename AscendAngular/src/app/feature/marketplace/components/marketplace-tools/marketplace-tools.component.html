@@ -1,0 +1,40 @@
+<div>
+  <!-- <div style="padding-top: 5px; padding-right: 5px; padding-left: 5px; cursor: pointer;"> -->
+  <img *ngIf="router.url!='/marketplace'" onClick="javascript:history.back()" src="../../../../../assets/right.png"
+    style="padding-bottom: 15px; cursor: pointer;" />
+  <!-- </div> -->
+  <img src="../../../../../assets/images/amplifiers/group-19.png" class="title">
+  <input class="search-box" type="text" placeholder="Search for amplifiers" [formControl]="myControl">
+</div>
+
+<div class="amplifier-desc">
+  {{description}}
+</div>
+
+<div class="content">
+  <mat-grid-list cols="4" rowHeight="370px">
+    <mat-grid-tile *ngFor="let tool of filtererdTools">
+      <div class="tool" (click)="openToolsbarPopup(tool)">
+        <div class="tool-icon">
+          <img *ngIf="tool.toolIcon" src="{{'../../../../../assets/images/amplifiers/' + tool.toolIcon}}">
+        </div>
+        <div class="tool-title">
+          {{tool.toolName}}
+        </div>
+
+        <div class="tool-description">
+          {{tool.toolDescription}}
+        </div>
+        <span class="more">show more...</span>
+        <div class="tool-button">
+          <button [disabled]="projectGlobalInfo.viewMode == 'EXPLORE'" *ngIf="tool.launchApplicable == 'Y'"
+            [ngClass]="{'disabled':projectGlobalInfo.viewMode == 'EXPLORE', 'enabled':projectGlobalInfo.viewMode == 'PROJECT'}"
+            mat-button (click)="openLink(tool.launchURL)">Launch</button>
+          <button [disabled]="projectGlobalInfo.viewMode == 'EXPLORE'" *ngIf="tool.DownloadApplicable == 'Y'"
+            [ngClass]="{'disabled':projectGlobalInfo.viewMode == 'EXPLORE', 'enabled':projectGlobalInfo.viewMode == 'PROJECT'}"
+            mat-button (click)="openLink(tool.DownloadURL)">Download</button>
+        </div>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

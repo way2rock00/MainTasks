@@ -1,0 +1,288 @@
+<form #projectForm="ngForm" (ngSubmit)="onNext(projectType)" class="project-add-edit-form-wrapper">
+
+  <!-- <div class="form-scroller"> -->
+  <div style="width: 97%">
+    <div class="field-wrapper">
+      <div class="field">
+        <mat-label><span class="required-asterisk">*</span> Name of the project
+        </mat-label>
+        <mat-form-field class="custom-width" appearance="outline" floatLabel="never">
+          <input matInput required name="projectName" [disabled]="isEditable" #projectName='ngModel'
+            [(ngModel)]="formData.projectName">
+        </mat-form-field>
+        <mat-error *ngIf="showError && projectName?.errors?.required">
+          Project name is required.
+        </mat-error>
+      </div>
+      <div class="field">
+        <mat-label><span class="required-asterisk">*</span> Type of the project
+        </mat-label>
+        <div>
+          <mat-form-field class="custom-width" appearance="outline" floatLabel="never">
+            <mat-select required multiple name="projectType" [(ngModel)]="formData.projectTypeDetails[0].typeDetails"
+              #projectType='ngModel'>
+              <mat-optgroup [label]="group?.projectType" *ngFor="let group of formOptions?.projectTypeDetails"
+              class="project-description-label">
+                <mat-option *ngIf="group?.typeDetails?.length == 0" [value]="group?.projectType"
+                  (click)="projectTypeChanged(group, subType)">
+                  {{group?.projectType}}</mat-option>
+                <mat-option *ngFor="let subType of group.typeDetails" [value]="subType"
+                  (click)="projectTypeChanged(group, subType)">
+                  {{subType}}
+                </mat-option>
+              </mat-optgroup>
+            </mat-select>
+
+          </mat-form-field>
+          <mat-error *ngIf="showError && projectType?.errors?.required">
+            Engagement details is required.
+          </mat-error>
+        </div>
+      </div>
+    </div>
+
+    <div style="width: 98%; margin-left: 1%;padding-bottom: 1.34375em;">
+      <mat-label><span class="required-asterisk">*</span> Project description
+      </mat-label>
+      <mat-form-field class="custom-height" appearance="outline" floatLabel="never">
+        <textarea matInput rows="6" required name="projectDesc" #projectDesc='ngModel'
+          [(ngModel)]="formData.projectDescription"></textarea>
+      </mat-form-field>
+      <mat-error *ngIf="showError && projectDesc?.errors?.required">
+        Project description is required.
+      </mat-error>
+    </div>
+
+    <div class="field-wrapper">
+      <div class="field">
+        <mat-label><span class="required-asterisk">*</span> Primary member firm
+        </mat-label>
+        <mat-form-field class="custom-width" appearance="outline" floatLabel="never">
+          <mat-select required name="primaryMemberFirm" [(ngModel)]="formData.primaryMemberFirm" 
+            #primaryMemberFirm='ngModel' >
+            <mat-option class="project-mat-option-text" *ngFor="let primaryMemberFirm of formOptions?.primaryMemberFirm" [value]="primaryMemberFirm">
+              {{primaryMemberFirm}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-error *ngIf="showError && primaryMemberFirm?.errors?.required">
+          Primary member firm is required.
+        </mat-error>
+      </div>
+
+      <div class="field">
+        <mat-label><span class="required-asterisk"></span>Secondary member firm
+        </mat-label>
+        <mat-form-field class="custom-width" appearance="outline" floatLabel="never">
+          <mat-select name="secondaryMemberFirm" [(ngModel)]="formData.secondaryMemberFirm"
+            #secondaryMemberFirm='ngModel'>
+            <mat-option class="project-mat-option-text" *ngFor="let secondaryMemberFirm of formOptions?.secondaryMemberFirm"
+              [value]="secondaryMemberFirm">
+              {{secondaryMemberFirm}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="field-wrapper">
+      <div class="field">
+        <mat-label><span class="required-asterisk">*</span> Onsite project manager
+        </mat-label>
+        <mat-form-field class="custom-width" appearance="outline" floatLabel="never">
+          <input matInput required name="projectManager" #projectManager='ngModel'
+            [(ngModel)]="formData.projectManager">
+        </mat-form-field>
+        <mat-error *ngIf="showError && projectManager?.errors?.required">
+          Project manager is required.
+        </mat-error>
+      </div>
+      <div class="field">
+        <mat-label><span class="required-asterisk">*</span> Onsite PPMD
+        </mat-label>
+        <mat-form-field class="custom-width" appearance="outline" floatLabel="never">
+          <input matInput required name="leadPD" #leadPD='ngModel' [(ngModel)]="formData.leadPD">
+        </mat-form-field>
+        <mat-error *ngIf="showError && leadPD?.errors?.required">
+          Lead partner is required.
+        </mat-error>
+      </div>
+    </div>
+    <div class="field-wrapper">
+      <div class="field">
+        <mat-label><span class="required-asterisk">*</span> USI EMD</mat-label>
+        <mat-form-field class="custom-width" appearance="outline" floatLabel="never">
+          <input matInput required placeholder="Enter email address" aria-label="State"
+            pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,4}$" type="email" name="usiEmd" [matAutocomplete]="auto2"
+            [formControl]="searchUsiEmd">
+          <mat-autocomplete #auto2="matAutocomplete">
+            <mat-option *ngIf="isLoading" class="is-loading">Loading...</mat-option>
+            <ng-container *ngIf="!isLoading">
+              <mat-option *ngFor="let user of filteredUsiEmd" (click)="setSelectedUsiEmd(user)" [value]="user.userId">
+                {{user.userName}}({{user.userId}})
+              </mat-option>
+            </ng-container>
+          </mat-autocomplete>
+        </mat-form-field>
+        <mat-error *ngIf="showError && searchUsiEmd?.invalid && searchUsiEmd?.errors?.required">
+          USI EMD is required.
+        </mat-error>
+        <mat-error *ngIf="showError && searchUsiEmd?.invalid && searchUsiEmd?.errors?.pattern">
+          Invalid format for email address
+        </mat-error>
+      </div>
+      <div class="field">
+        <mat-label><span class="required-asterisk">*</span> USI GDM</mat-label>
+        <mat-form-field class="custom-width" appearance="outline" floatLabel="never">
+          <input matInput required placeholder="Enter email address" aria-label="State"
+            pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,4}$" type="email" name="usiGdm" [matAutocomplete]="auto3"
+            [formControl]="searchUsiGdm">
+          <mat-autocomplete #auto3="matAutocomplete">
+            <mat-option *ngIf="isLoading" class="is-loading">Loading...</mat-option>
+            <ng-container *ngIf="!isLoading">
+              <mat-option *ngFor="let user of filteredUsiGdm" (click)="setSelectedUsiGdm(user)" [value]="user.userId">
+                {{user.userName}}({{user.userId}})
+              </mat-option>
+            </ng-container>
+          </mat-autocomplete>
+        </mat-form-field>
+        <mat-error *ngIf="showError && searchUsiGdm?.invalid && searchUsiGdm?.errors?.required">
+          USI GDM is required.
+        </mat-error>
+        <mat-error *ngIf="showError && searchUsiGdm?.invalid && searchUsiGdm?.errors?.pattern">
+          Invalid format for email address
+        </mat-error>
+      </div>
+    </div>
+    <div class="field-wrapper">
+      <div class="field depedent-dd">
+        <mat-label><span class="required-asterisk">*</span> Primary offering portfolio
+        </mat-label>
+      </div>
+      <div class="field depedent-dd">
+        <mat-label><span class="required-asterisk">*</span> Primary offering
+        </mat-label>
+      </div>
+    </div>
+    <div class="multi-select-div-wrapper">
+      <div class="multi-select-div" [ngClass]="{
+              'multi-select-error-div': (
+                  (!formData.primaryPortfolioOfferings?.length||!formData.primaryOffering?.length)||
+                  formData.primaryPortfolioOfferings?.length && formData.primaryOffering?.length && !(primaryPortfolioOfferingsCombination())
+              )
+            }">
+        <div class="multi-select-div-column">
+          <!-- <mat-label><span class="required-asterisk">*</span> Primary offering portfolio</mat-label> -->
+          <div *ngFor="let pfOff of formOptions?.primaryPortfolioOfferings">
+            <mat-checkbox class="example-margin" required [checked]="getPrimaryPortfolioOfferingsState(pfOff.portfolioName)"
+              (change)="primaryPortfolioOfferingsChanged($event.checked,pfOff.portfolioName)">
+              {{pfOff.portfolioName}}
+            </mat-checkbox>
+          </div>
+        </div>
+        <div class="multi-select-div-column">
+          <!-- <mat-label><span class="required-asterisk">*</span> Primary offering</mat-label> -->
+          <div *ngFor="let offering of formOptions?.primaryOfferings">
+            <mat-checkbox class="example-margin" required [checked]="getPrimaryOfferingsState(offering)"
+              (change)="primaryOfferingChange($event.checked,offering)">
+              {{offering}}
+            </mat-checkbox>
+          </div>
+        </div>
+      </div>
+      
+      <div class="form-error">
+        <mat-error *ngIf="showError && (!formData.primaryPortfolioOfferings?.length || !formData.primaryOffering?.length)">
+          Offering portfolio and offering is required.
+        </mat-error>
+      </div>
+      <div class="form-error"
+        *ngIf="showError && formData.primaryPortfolioOfferings?.length && formData.primaryOffering?.length">
+        <mat-error *ngIf="!(primaryPortfolioOfferingsCombination())">
+          For some of the selected offering portfolio , offering is not selected.
+        </mat-error>
+      </div>
+    </div>
+
+    <div class="field-wrapper">
+      <div class="field depedent-dd">
+        <mat-label><span class="required-asterisk"></span> Secondary offering portfolio
+        </mat-label>
+      </div>
+      <div class="field depedent-dd">
+        <mat-label><span class="required-asterisk"></span> Secondary offering
+        </mat-label>
+      </div>
+    </div>
+    <div class="multi-select-div-wrapper">
+      <div class="multi-select-div">
+        <div class="multi-select-div-column">
+          <!-- <mat-label> Secondary offering portfolio</mat-label> -->
+          <div *ngFor="let pfOff of formOptions?.secondaryPortfolioOfferings">
+            <mat-checkbox class="example-margin" [checked]="getSecondaryPortfolioOfferingsState(pfOff?.portfolioName)"
+              (change)="secondaryPortfolioOfferingsChanged($event.checked,pfOff.portfolioName)">
+              {{pfOff.portfolioName}}
+            </mat-checkbox>
+          </div>
+        </div>
+        <div class="multi-select-div-column">
+          <!-- <mat-label>Secondary offering</mat-label> -->
+          <div *ngFor="let offering of formOptions?.secondaryOfferings">
+            <mat-checkbox class="example-margin" [checked]="getSecondaryOfferingsState(offering)"
+              (change)="secondaryOfferingChange($event.checked,offering)">
+              {{offering}}
+            </mat-checkbox>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="field-wrapper">
+      <div class="field">
+        <mat-label><span class="required-asterisk">*</span> USI QA reviewer</mat-label>
+        <mat-form-field class="custom-width" appearance="outline" floatLabel="never">
+          <input matInput required placeholder="Enter email address" aria-label="State"
+            pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,4}$" type="email" name="usiQaReviewer"
+            [matAutocomplete]="auto4" [formControl]="searchUsiQaReviewer">
+          <mat-autocomplete #auto4="matAutocomplete">
+            <mat-option *ngIf="isLoading" class="is-loading">Loading...</mat-option>
+            <ng-container *ngIf="!isLoading">
+              <mat-option *ngFor="let user of filteredUsiQaReviewer" (click)="setSelectedUsiQaReviewer(user)"
+                [value]="user.userId">
+                {{user.userName}}({{user.userId}})
+              </mat-option>
+            </ng-container>
+          </mat-autocomplete>
+        </mat-form-field>
+        <mat-error *ngIf="showError && searchUsiQaReviewer?.invalid && searchUsiQaReviewer?.errors?.required">
+          USI QA reviewer is required.
+        </mat-error>
+        <mat-error *ngIf="showError && searchUsiQaReviewer?.invalid && searchUsiQaReviewer?.errors?.pattern">
+          Invalid format for email Address
+        </mat-error>
+      </div>
+      <div class="field">
+        <mat-label><span class="required-asterisk">*</span> Lead QA partner</mat-label>
+        <mat-form-field class="custom-width" appearance="outline" floatLabel="never">
+          <input matInput required placeholder="Enter email address" aria-label="State"
+            pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,4}$" type="email" name="leadQaPartner"
+            [matAutocomplete]="auto5" [formControl]="searchLeadQaPartner">
+          <mat-autocomplete #auto5="matAutocomplete">
+            <mat-option *ngIf="isLoading" class="is-loading">Loading...</mat-option>
+            <ng-container *ngIf="!isLoading">
+              <mat-option *ngFor="let user of filteredLeadQaPartner" (click)="setSelectedLeadQaPartner(user)"
+                [value]="user.userId">
+                {{user.userName}}({{user.userId}})
+              </mat-option>
+            </ng-container>
+          </mat-autocomplete>
+        </mat-form-field>
+        <mat-error *ngIf="showError && searchLeadQaPartner?.invalid && searchLeadQaPartner?.errors?.required">
+          Lead QA partner is required.
+        </mat-error>
+        <mat-error *ngIf="showError && searchLeadQaPartner?.invalid && searchLeadQaPartner?.errors?.pattern">
+          Invalid format for email address
+        </mat-error>
+      </div>
+    </div>    
+  </div>
+  <!-- </div> -->
+</form>

@@ -1,0 +1,64 @@
+.admin-header {
+    display: flex;
+    align-items: center;
+
+    .admin-filter {
+        margin-left: auto;
+    }
+}
+
+label {
+    font-size: 0.9rem;
+    line-height: 1rem;
+}
+
+input {
+    font-size: 0.9rem;
+    line-height: 1rem;
+}
+
+.new-admin-input-form {
+    display: flex;
+    align-items: center;
+    width: 100%;
+
+    mat-form-field {
+        flex-basis: 50%;
+    }
+
+    .action-button-wrapper {
+        margin-left: auto;
+    }
+}
+
+mat-toolbar-row {
+    height: auto;
+
+    .form-error {
+        margin-top: 0;
+
+        mat-error {
+            font-size: 0.9rem;
+        }
+    }
+}
+
+.admin-list {
+    width: 100%;
+}
+
+.add-admin {
+    font-size: 1.25rem;
+}
+
+.cancelButton{
+  margin-left: 72%;
+}
+.confirmStyle{
+    text-align: center;
+    color: black;
+    width: 80%;
+    margin: 0 auto;
+    padding: 10px;
+
+}

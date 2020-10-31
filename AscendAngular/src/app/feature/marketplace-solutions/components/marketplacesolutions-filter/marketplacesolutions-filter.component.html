@@ -1,0 +1,15 @@
+<div [ngClass]="{'bot-margin':!filter.parent_id}">
+    <div (click)="clicked()" style="cursor: pointer;">
+      <span class="level-title"
+        [ngClass]="{'level-sub': filter.parent_id,'collapsed-font': !expanded}">{{filter.filter_category}}</span>
+      <span class="level-arrow">
+        <img *ngIf="expanded" src="../../../../../assets/images/right-copy-7.png" />
+        <img *ngIf="!expanded" src="../../../../../assets/images/collapsed.png" />
+      </span>
+    </div>
+  
+    <ng-content *ngIf="expanded" filters select="[filters]">
+  
+    </ng-content>
+  </div>
+  

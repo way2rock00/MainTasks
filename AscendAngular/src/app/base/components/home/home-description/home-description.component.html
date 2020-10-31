@@ -1,0 +1,52 @@
+<div class="explore" *ngIf="view == 'EXPLORE'">
+  <div class="text-block">
+    Welcome to Ascend!
+  </div>
+  <div class="desc-block">
+    Elevate, Accelerate and Amplify your Digital Ambitions and Journey
+  </div>
+</div>
+<!-- <mat-card class="project-info-card" *ngIf="view == 'PROJECT'">
+  <div class="container">
+    <!-- <img [src]="clientLogoURL | secureImage" width="200px" height="100px" /> -->
+<!--   <img [src]="getSafeURL(clientLogoURL)" width="200px" height="100px" />
+    <div class="sub-container">
+      <div class="header-font">
+        Project name
+      </div>
+      <div class="description-font">
+        {{ projectName }}
+      </div>
+    </div>
+    <div class="sub-container">
+      <div class="header-font">
+        Client name
+      </div>
+      <div class="description-font">
+        {{clientName}}
+      </div>
+    </div>
+  </div>
+
+</mat-card> -->
+<div class="project" *ngIf="view == 'PROJECT'">
+  <div class="container">
+    <img [src]="getSafeURL(clientLogoURL)" width="200px" height="100px" style="padding:10px; padding-left: 5%;" />
+    <div class="sub-container">
+      <div class="header-font">
+        Project name
+      </div>
+      <div class="description-font">
+        {{ projectName }}
+      </div>
+    </div>
+    <div class="sub-container">
+      <div class="header-font">
+        Client name
+      </div>
+      <div class="description-font">
+        {{clientName}}
+      </div>
+    </div>
+  </div>
+</div>

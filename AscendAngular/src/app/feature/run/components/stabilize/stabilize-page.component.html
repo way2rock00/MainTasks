@@ -1,0 +1,10 @@
+<app-standard-layout
+  [layout]="LAYOUT"
+  [layoutSubCat]="SUB_NAV"
+  [filters]="filters"
+  >
+
+  <app-stabilize-tab-group [layoutConfig] = "layoutConfig" [phaseName]="LAYOUT"
+  [stopName]="layoutConfig.right.title" (tabChanged) ="tabChanged($event)" bottom></app-stabilize-tab-group>
+
+</app-standard-layout>

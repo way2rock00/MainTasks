@@ -1,0 +1,13 @@
+<app-standard-layout
+  [layout]="LAYOUT"
+  [layoutSubCat]="SUB_NAV"
+  [filters]="filters"
+>
+
+  <app-construct-tab-group 
+    [layoutConfig] = "layoutConfig" 
+    [phaseName]="LAYOUT"
+    [stopName]="layoutConfig.right.title"
+    (tabChanged) ="tabChanged($event)" bottom></app-construct-tab-group>
+
+</app-standard-layout>

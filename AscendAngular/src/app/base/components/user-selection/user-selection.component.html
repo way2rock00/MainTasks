@@ -1,0 +1,32 @@
+<div class="text-block">
+  Welcome to Ascend!
+</div>
+<div class="desc-block">
+  Elevate, Accelerate and Amplify your Digital Ambitions and Journey.
+
+  <p style="font-size: 0.8rem;">
+    This is local authentication screen, won't be visible in servers.
+    <br>
+    You can also change default user by changing below property in environment.ts file.
+    <br>
+    <br>
+    LOCAL_AUTH
+    <br>
+    &nbsp;userId - &lt;{{defaultUserId}}&gt;
+    <br>
+    &nbsp;username - &lt;{{defaultUserName}}&gt; 
+  </p>
+</div>
+
+<div class="dropdown-block">
+  <mat-form-field>
+    <mat-label>Please select user</mat-label>
+
+    <mat-select [(ngModel)]="user" name="user">
+      <mat-option *ngFor="let userInfo of userDetails" [value]="userInfo">
+        {{userInfo.userName}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <button mat-raised-button (click)="next()">Next</button>
+</div>

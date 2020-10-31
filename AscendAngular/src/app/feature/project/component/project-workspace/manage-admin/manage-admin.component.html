@@ -1,0 +1,86 @@
+<div class="confirmStyle" *ngIf="showAddConfirmation">
+User Added Successfully!
+</div>
+<div class="confirmStyle" *ngIf="showDeleteConfirmation">
+    User Removed Successfully!
+    </div>
+<div mat-dialog-title class="admin-header project-add-edit-form-wrapper">
+    <div>Manage Admin</div>
+    <button mat-raised-button class="cancelButton" (click)="cancel()" id="2">X</button>
+    <div class="admin-filter">
+        <!-- <mat-form-field floatLabel="never">
+            <input matInput (keyup)="filterUser($event.target.value)" placeholder="Search Admin">
+        </mat-form-field> -->
+    </div>
+</div>
+
+<div mat-dialog-content>
+
+    <mat-toolbar class="project-add-edit-form-wrapper">
+        <mat-toolbar-row>
+            <form #newAdminForm="ngForm" class="new-admin-input-form">
+                <mat-form-field floatLabel="never">
+                    <!--<input matInput required name="email" type="email" #newAdminEmail
+                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" ngModel autocomplete="off"
+                        placeholder="New admin email">-->
+
+                    <input matInput required placeholder="Enter email address" aria-label="State"
+                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" type="email" name="email"
+                        [matAutocomplete]="auto" [formControl]="adminEmail">
+
+                    <mat-autocomplete #auto="matAutocomplete">
+                        <mat-option *ngIf="isLoading" class="is-loading">Loading...</mat-option>
+                        <ng-container *ngIf="!isLoading">
+                            <mat-option *ngFor="let user of filteredUser"
+                                [value]="user.userId">
+                                {{user.userName}}({{user.userId}})
+                            </mat-option>
+                        </ng-container>
+                    </mat-autocomplete>
+                </mat-form-field>
+
+                <div class="action-button-wrapper">
+                    <button mat-button (click)="addAdmin(newAdminForm)" class="add-admin">+</button>
+                    <!-- <button class="btn-primary"
+                            (click)="addAdmin(newAdminForm)">Add Admin</button> -->
+                </div>
+            </form>
+        </mat-toolbar-row>
+        <mat-toolbar-row *ngIf="existingAdminError">
+            <div class="form-error">
+                <mat-error>{{existingAdminError}}</mat-error>
+            </div>
+        </mat-toolbar-row>
+
+    </mat-toolbar>
+
+    <table class="admin-list" mat-table [dataSource]="currentAdminList" matSort>
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear> Name </th>
+            <td mat-cell *matCellDef="let element"> {{element?.name}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="userId">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear> Email </th>
+            <td mat-cell *matCellDef="let element"> {{element?.userId}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef> Action </th>
+            <td mat-cell *matCellDef="let element">
+                <button mat-raised-button (click)="deleteAdmin(element?.userId)">Remove</button>
+                <!-- <button mat-icon-button matTooltip="Click to Delete" (click)="deleteAdmin(element)" class="iconbutton" color="warn">
+                    <mat-icon aria-label="Delete">delete</mat-icon>
+                </button> -->
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+</div>
+
+<div mat-dialog-actions>
+
+</div>

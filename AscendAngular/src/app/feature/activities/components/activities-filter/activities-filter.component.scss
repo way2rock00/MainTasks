@@ -1,0 +1,23 @@
+.tree-invisible {
+  display: none;
+}
+
+.tree ul,
+.tree li {
+  margin-top: 0;
+  margin-bottom: 0;
+  list-style-type: none;
+}
+.tree-node {
+  display: block;
+}
+
+button {
+  color: white;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  padding-left: 15%;
+  height: 30px;
+  line-height: 0;
+}

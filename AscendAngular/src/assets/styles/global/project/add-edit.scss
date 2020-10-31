@@ -1,0 +1,205 @@
+.project-add-edit-form-wrapper {
+    mat-label {
+        font-size: 14px;
+        font-weight: 500;
+    }
+
+    .mat-form-field {
+        display: block;
+
+        .mat-form-field-label-wrapper {
+            padding: 0;
+            top: 0;
+
+            label {
+                font-size: 0.9rem;
+                line-height: 0.9rem;
+            }
+        }
+
+        .mat-form-field-wrapper {
+            .mat-form-field-flex {
+                .mat-form-field-outline {
+                    div{
+                        background: #fafafa;
+                    }                    
+
+                    &:hover {
+                        background: #fff;
+                    }
+                }
+
+                .mat-form-field-infix {
+                    border: none;
+                    padding: 0.5em 0;
+
+                    input {
+                        font-size: 14px;
+                    }
+
+                    textarea {
+                        resize: none;
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+
+        &.mat-number-type {
+            width: 11%;
+        }
+
+        .mat-focused {
+            .mat-form-field-outline {
+                background: #fff;
+            }
+        }
+    }
+
+    mat-checkbox {
+        &.checkbox-seperator {
+            padding-right: 2em;
+        }
+
+        .mat-checkbox-label {
+            font-size: 14px;
+        }
+    }
+
+    .vertical-spacing {
+        margin-bottom: 1.5em;
+    }
+
+    mat-select {
+        .mat-select-value-text {
+            font-size: 14px !important;
+        }
+
+        .mat-option-text {
+            font-size: 14px !important;
+        }
+
+        .mat-select-arrow-wrapper {
+            transform: translateY(20%) !important;
+        }
+    }
+}
+
+.action-button-wrapper {
+    display: flex;
+    justify-content: space-between;    
+
+    .btn-secondary {
+        padding: 10px;
+        background: white;
+        color: black;
+        width: 100px;
+        // border: 1px solid black;
+        // font-weight: bold;
+        cursor: pointer;
+        border: 1px solid #c4c4c4;
+        box-sizing: border-box;
+        border-radius: 0px;
+    }
+
+    .btn-primary {
+        // border: 1px solid black;
+        padding: 10px;
+        // background: black;
+        color: white;
+        width: 100px;
+        // font-weight: bold;
+        cursor: pointer;
+        background: #007CB0;
+        box-sizing: border-box;
+        border-radius: 0px;
+    }
+}
+
+.file-upload-wrapper {
+    .file-upload-label {
+        position: relative;
+        font-size: 12px;
+        line-height: 20px;
+        cursor: pointer;
+        font-weight: 600;
+        text-decoration: underline;
+
+        &:hover {
+            outline-style: dotted;
+            outline-width: 0.5px;
+        }
+
+        &::before {
+            content: "";
+            background: url(/assets/upload_icon.PNG);
+            background-size: 100%;
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            vertical-align: top;
+        }
+    }
+
+    .uploaded-file-name {
+        font-size: 0.8em;
+        font-style: italic;
+        padding-left: 2em;
+        word-break: break-all;
+    }
+}
+
+.form-error {
+    margin-top: 0.5em;
+    padding-left: 0.8em;
+    mat-error {
+        font-size: 0.8em;
+        animation-name: slide-down;
+        animation-duration: 0.3s;
+    }
+}
+
+@keyframes slide-down {
+    from {
+        opacity: 0;
+        transform: translateY(-100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.multi-select-div {
+    display: flex;
+    max-height: 10rem;
+    overflow-y: auto;
+    margin: 0.9rem 0 2rem 0;
+    padding: 0 1rem;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    background: #fafafa;
+
+    &:hover {
+        border: 2px solid rgba(0, 0, 0, 1);
+    }
+
+    &.multi-select-error-div {
+        border: 2px solid #f44336;
+    }
+}
+
+.multi-select-div-column {
+    flex-basis: 50%;
+    margin-right: 1rem;
+}
+
+.mat-primary .mat-pseudo-checkbox-checked,
+.mat-primary .mat-pseudo-checkbox-indeterminate {
+    background: #0097a9;
+}
+
+.mat-checkbox-checked.mat-accent .mat-checkbox-background,
+.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+    background: #0097a9;
+}

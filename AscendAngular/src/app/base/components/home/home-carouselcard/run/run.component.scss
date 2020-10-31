@@ -1,0 +1,34 @@
+#stabilize_off:hover{
+    display:none;
+}
+#stabilize_off:hover + #stabilize_on{
+    display:block;
+}
+#stabilize_on:hover{
+  display:block;
+  cursor: pointer;
+}
+#optimize_off:hover{
+    display:none;
+}
+#optimize_off:hover + #optimize_on{
+    display:block;
+}
+#optimize_on:hover{
+  display:block;
+  cursor: pointer;
+}
+#innovate_off:hover{
+    display:none;
+}
+#innovate_off:hover + #innovate_on{
+    display:block;
+}
+#innovate_on:hover{
+  display:block;
+  cursor: pointer;
+}
+svg{
+    padding-top: 5rem;
+    padding-left: 15px;
+}

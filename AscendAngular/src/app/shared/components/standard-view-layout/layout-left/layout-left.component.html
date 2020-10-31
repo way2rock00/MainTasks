@@ -1,0 +1,78 @@
+<div class="left-layout-wrapper">
+
+ <!-- Commentd [ngStyle]="{'backgroundColor': !enlarged && layoutConfig?.left?.showLeftContent ? layoutConfig?.right?.textColorScheme : ''}"  -->
+ <!-- Expand Collapse Button -->
+    <div class="left-size-toggle-action{{enlarged? '-expanded': ''}}" >
+        <img
+            [src]="enlarged ?
+                '../../../../assets/Icon_collapse.svg' :
+                '../../../../assets/Icon_expand.svg'"
+            (click)="changeSize()"
+            width="48" height="48" style="cursor: pointer;"/>
+    </div>
+    <!-- <div class="client-details" [ngClass]="{'expanded': enlarged}" *ngIf="globalProjectInfo.viewMode == 'PROJECT'">
+        <img src="../../../assets/GoogleLogo.png" width="200px" height="100px" />
+    </div> -->
+    <!-- Feature Description, available only in expanded view -->
+    <div class="feature-description" [@enterAnimation] *ngIf="enlarged">
+        <div class="caption-large">
+            {{ layoutConfig?.left?.title }}
+        </div>
+        <div class="caption-tag-line">
+            {{ layoutConfig?.left?.subTitle }}
+        </div>
+        <hr class="{{layout}}-underline"/>
+    </div>
+
+
+    <!-- Feature image small, available only in smaller view -->
+    <ng-container [@enterAnimation] *ngIf="!enlarged">
+        <div class="feature-image">
+            <img src="../../../../assets/{{ layoutConfig?.left?.image?.normal }}"
+                (click)="changeSize()"
+                width="{{ layoutConfig?.left?.image?.normalDimension?.width }}"
+                height="{{ layoutConfig?.left?.image?.normalDimension?.height }}"
+                [ngStyle]="{
+                    'padding-left': layoutConfig?.left?.image?.normalDimension?.left,
+                    'width': layoutConfig?.left?.image?.normalDimension?.width,
+                    'height': layoutConfig?.left?.image?.normalDimension?.height
+                }"
+            />
+        </div>
+
+        <div class="caption-small">
+            {{ layoutConfig?.left?.title }}
+        </div>
+    </ng-container>
+
+
+    <!-- <ng-container [@enterAnimation] *ngIf="!enlarged && layoutConfig?.left?.showLeftContent">
+        <div class="left-container" >
+            <div class="left-heading"
+                [ngStyle]="{'backgroundColor':  layoutConfig?.right?.textColorScheme }">
+                <div class="heading">
+                    Activities
+                </div>
+                <div class="subheading">
+                   for {{  layoutConfig?.right?.title }}
+                </div>
+            </div>
+
+            <div class="left-body">
+                <div *ngFor="let item of layoutConfig?.left?.leftBody;let i=index" class="caption">
+                    <span class="caption-num">{{i+1}}</span>
+                    <span>{{item.content}}</span>
+                </div>
+            </div>
+        </div>
+    </ng-container> -->
+
+    <div class="feature-image-expanded" [@enterAnimation] *ngIf="enlarged">
+
+            <app-left-nav-insights [layoutSubCat]="layoutSubCat" *ngIf="layout=='insights'"></app-left-nav-insights>
+            <app-left-nav-deliver  [layoutSubCat]="layoutSubCat" *ngIf="layout=='deliver'"></app-left-nav-deliver>
+            <app-left-nav-imagine  [layoutSubCat]="layoutSubCat" *ngIf="layout=='imagine'"></app-left-nav-imagine>
+            <app-left-nav-run  [layoutSubCat]="layoutSubCat" *ngIf="layout=='run'"></app-left-nav-run>
+
+    <div>
+</div>

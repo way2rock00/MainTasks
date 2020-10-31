@@ -1,0 +1,8 @@
+<div style="font-weight: bold; display: block; margin: 0 auto; width: 14%; border-bottom: 1px solid black; text-align: center">
+  Select process scope
+</div>
+<app-scope-generator-tree [savedData]="savedProcessScope?.businessProcess" [allData]="processScope?.businessProcess"
+  #treeForm></app-scope-generator-tree>
+<mat-error *ngIf="showError">
+  *Business process is required
+</mat-error>

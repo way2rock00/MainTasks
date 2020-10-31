@@ -1,0 +1,74 @@
+.project-details-scroller {
+    max-height: 64vh;
+    overflow-y: auto;
+    margin-bottom: 1.5em;
+    padding: 1em 3em;
+    background: #fffeff;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
+
+    .form-info {
+        font-size: 10px;
+        font-weight: normal;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 2em;
+        letter-spacing: normal;
+        color: #000000;
+        margin-bottom: 1.5em;
+    }
+}
+.upload-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5em;
+    flex-basis: 25%;
+
+    .file-upload-wrapper {
+        flex-basis: 25%;
+    }
+
+    .action-button-wrapper {
+        
+        button {
+            font-size: 12px;
+            font-weight: 400;
+           
+        }
+       
+    }
+}
+.btn-secondary-project-create{
+    padding: 10px;
+    background: #FFFFFF;
+    color: #53565A;
+    width: 100px;
+    // border: 1px solid black;
+    // font-weight: bold;
+    cursor: pointer;
+    border: 1px solid #53565A;
+    box-sizing: border-box;
+    border-radius: 0px;
+}
+.btn-primary-project-create{
+    padding: 10px;
+    // background: black;
+    color: #FFFFFF;
+    width: 100px;
+    // font-weight: bold;
+    cursor: pointer;
+    background: #0D8390;
+    box-sizing: border-box;
+    border-radius: 0px;
+}
+
+mat-checkbox {
+    &.checkbox-seperator {
+        padding-right: 2em;
+    }
+
+    .mat-checkbox-label {
+        font-size: 14px;
+        font-weight: 500;
+    }
+}

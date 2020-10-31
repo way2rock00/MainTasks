@@ -1,0 +1,87 @@
+<mat-card>
+    <mat-card-content>
+        <div class="filter-head">
+            <div class="filter-title">{{filterOverlayRef.data.title.main}}</div>
+            <div class = "reset-underline" (click)="resetFilter()">Reset all</div>
+        </div>
+        <!-- Search Field -->
+        <!-- <div class="filter-wrap">
+            <mat-form-field>
+                <i class="fas fa-search"></i>
+
+                <input id="searchIndustry" class="filter-input" (value)="searchText" (input)="onTextChange($event)"
+                    matInput #searchIndustry>
+                <span class="filter-clear" *ngIf="searchText.length>0" (click)="clearFilter()" style="float: right;"> X
+                </span>
+            </mat-form-field>
+        </div> -->
+            <div class="filter-body">
+                <div id="checkboxes-lo" class="levels">
+                    <div class="filter-subtitle" *ngIf="(filterData.length != 0 )">{{filterOverlayRef.data.title.levels[0]}}</div>
+                    <section class="example-section medium-font" *ngIf="!searchText">
+
+                        <mat-checkbox [name]="selectAll" class="example-section" (change)="l0ChangedEvent($event)" 
+                            [value]="selectAll" [checked]="setL0Checked(All)" [disabled]="disabled">
+                            {{selectAll}}
+                        </mat-checkbox>
+
+                    </section>
+
+                    <section class="example-section medium-font" *ngFor="let chk of (filterData | searchIndustry: searchText); let i=index ">
+
+                        <mat-checkbox name="chk.L0" class="example-section" (change)="l0ChangedEvent($event)" 
+                            value={{chk.L0}} [checked]="chk.checked" *ngIf="chk.L0!='COMMON'" [disabled]="disabled">
+                            {{chk.L0}}
+                        </mat-checkbox>
+
+                    </section>
+
+                </div>
+
+                <div id="checkboxes-l1" class="levels" *ngIf="filterOverlayRef.data.levels>1">
+                    <div class="filter-subtitle" *ngIf="(l1filterData.length != 0 )">{{filterOverlayRef.data.title.levels[1]}}</div>
+                    <section class="example-section medium-font" *ngIf="(!searchText) && (l1filterData.length!=0)">
+
+                        <mat-checkbox [name]="selectAll" class="example-section" (change)="l1ChangedEvent($event)" 
+                            [value]="selectAll" [checked]="setL1Checked(All)" [disabled]="disabled">
+                            {{selectAll}}
+                        </mat-checkbox>
+
+                    </section>
+
+                    <section class="example-section medium-font" *ngFor="let chk of l1filterData; let i=index ">
+
+                        <mat-checkbox name="chk.L1" class="example-section" (change)="l1ChangedEvent($event)"
+                             value={{chk.L1}} [checked]="setL1Checked(chk.L1)" *ngIf="chk.L1!='COMMON'" [disabled]="disabled">
+                            {{chk.L1}}
+                        </mat-checkbox>
+
+                    </section>
+
+                </div>
+                <div id="checkboxes-l2" class="levels" *ngIf="filterOverlayRef.data.levels>2">
+                    <div class="filter-subtitle" *ngIf="(l2filterData.length != 0 )">{{filterOverlayRef.data.title.levels[2]}}</div>
+                    <section class="example-section medium-font" *ngIf="(!searchText)&&(l2filterData.length != 0 )">
+                        <mat-checkbox [name]="selectAll" class="example-section" (change)="l2ChangedEvent($event)" 
+                            [value]="selectAll" [checked]="setL2Checked(All)" [disabled]="disabled">
+                            {{selectAll}}
+                        </mat-checkbox>
+
+                    </section>
+
+                    <section class="example-section medium-font" *ngFor="let chk of l2filterData; let i=index ">
+
+                        <mat-checkbox name="chk.L2" class="example-section" (change)="l2ChangedEvent($event)"
+                            value={{chk.L2}} [checked]="setL2Checked(chk.L2)" *ngIf="chk.L2!='COMMON'" [disabled]="disabled">
+                            {{chk.L2}}
+                        </mat-checkbox>
+                    </section>
+                </div>
+            </div>
+    </mat-card-content>
+    <hr />
+    <div class="filter-buttons">
+        <button mat-raised-button class="white" (click)="cancel()" id="2" >Cancel</button>
+        <button mat-raised-button class="black" (click)="close()" id="3">Apply</button>
+    </div>
+</mat-card>

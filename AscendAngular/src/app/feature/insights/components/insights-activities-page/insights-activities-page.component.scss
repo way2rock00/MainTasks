@@ -1,0 +1,19 @@
+app-menu-bar {
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
+  display: block;
+  position: relative;
+  z-index: 2;
+  flex-basis: 100%;
+}
+
+.activities{
+  display: flex;
+  padding: 1em;
+  justify-content: space-between;
+
+  .activity-sub{
+      flex:1;
+      margin-left: 1em;
+  }
+
+}

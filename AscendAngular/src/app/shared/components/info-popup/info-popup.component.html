@@ -1,0 +1,117 @@
+<div class=head-band [ngStyle]="{'background-color': headbandColor}">
+  <span class="header">
+    {{data.phaseName | titlecase}}: {{data.stopName}}
+  </span>
+
+  <img class="cancel" (click)='close()' src="../../../../assets/X@2x.png" width="4%" />
+</div>
+<div style="padding-bottom: 90px;"></div>
+<div class="info-popup-legend">
+  <span class="legend-item">
+    <span class="legend-color black-color"></span>
+    <span class="legend-label">Core</span>
+  </span>
+  <span class="legend-item">
+    <span class="legend-color" [ngStyle]="{'background-color': headbandColor}"></span>
+    <span class="legend-label">OCM</span>
+  </span>
+</div>
+<div class="container">
+  <!-- OCM changes -->
+  <div class="divider"></div>
+  <!-- <div class="sub-container">
+    <app-info-imagine-wheel *ngIf="data.phaseName == 'imagine'" [layoutSubCat]="data.layoutSubCat">
+    </app-info-imagine-wheel>
+    <app-info-insights-wheel *ngIf="data.phaseName == 'insights'" [layoutSubCat]="data.layoutSubCat">
+    </app-info-insights-wheel>
+    <app-info-deliver-wheel *ngIf="data.phaseName == 'deliver'" [layoutSubCat]="data.layoutSubCat">
+    </app-info-deliver-wheel>
+    <app-info-run-wheel *ngIf="data.phaseName == 'run'" [layoutSubCat]="data.layoutSubCat">
+    </app-info-run-wheel>
+    <div class="header">
+      <img *ngIf="data.phaseName == 'insights'" class="header-icon"
+        src="../../../../../assets/images/Objective_Insights.png" width="50px" height="50px" />
+      <img *ngIf="data.phaseName == 'imagine'" class="header-icon"
+        src="../../../../../assets/images/Objective_Imagine.png" width="50px" height="50px" />
+      <img *ngIf="data.phaseName == 'deliver'" class="header-icon"
+        src="../../../../../assets/images/Objective_Deliver.png" width="50px" height="50px" />
+      <img *ngIf="data.phaseName == 'run'" class="header-icon" src="../../../../../assets/images/Objective_Run.png"
+        width="50px" height="50px" />
+      <span class="header-text">Objectives</span>
+    </div>
+    <div class="body" *ngFor="let elements of popupData">
+      <ul>
+        <li *ngFor="let element of elements.objectives">
+          <span>{{element}}</span>
+        </li>
+      </ul>
+    </div>
+  </div> -->
+  <div class="sub-container">
+    <div class="header">
+      <img *ngIf="data.phaseName == 'insights'" class="header-icon"
+        src="../../../../../assets/images/Activity_Insights.png" width="50px" height="50px" />
+      <img *ngIf="data.phaseName == 'imagine'" class="header-icon"
+        src="../../../../../assets/images/Activity_Imagine.png" width="50px" height="50px" />
+      <img *ngIf="data.phaseName == 'deliver'" class="header-icon"
+        src="../../../../../assets/images/Activity_Deliver.png" width="50px" height="50px" />
+      <img *ngIf="data.phaseName == 'run'" class="header-icon" src="../../../../../assets/images/Activity_Run.png"
+        width="50px" height="50px" />
+      <span class="header-text">Activities</span>
+    </div>
+    <div class="body" *ngFor="let elements of popupData">
+      <ul>
+        <li *ngFor="let element of elements.activities">
+          <span>{{element}}</span>
+        </li>
+      </ul>
+
+      <ul>
+        <li *ngFor="let element of elements.ocm_activities" [ngStyle]="{'color': headbandColor}">
+          <span>{{element}}</span>
+        </li>
+      </ul>
+
+    </div>
+    <!-- OCM changes -->
+    <!-- <div class="header">
+      <img *ngIf="data.phaseName == 'insights'" class="header-icon"
+        src="../../../../../assets/images/Outcome_Insights.png" width="50px" height="50px" />
+      <img *ngIf="data.phaseName == 'imagine'" class="header-icon"
+        src="../../../../../assets/images/Outcome_Imagine.png" width="50px" height="50px" />
+      <img *ngIf="data.phaseName == 'deliver'" class="header-icon"
+        src="../../../../../assets/images/Outcome_Deliver.png" width="50px" height="50px" />
+      <img *ngIf="data.phaseName == 'run'" class="header-icon" src="../../../../../assets/images/Outcome_Run.png"
+        width="50px" height="50px" />
+      <span class="header-text">Outcomes</span>
+    </div>
+    <div class="body" *ngFor="let elements of popupData">
+      <ul>
+        <li *ngFor="let element of elements.outcomes">
+          <span>{{element}}</span>
+        </li>
+      </ul>
+    </div> -->
+  </div>
+  <!-- OCM changes -->
+  <div class="sub-container">
+    <div class="header">
+      <img *ngIf="data.phaseName == 'insights'" class="header-icon"
+        src="../../../../../assets/images/Outcome_Insights.png" width="50px" height="50px" />
+      <img *ngIf="data.phaseName == 'imagine'" class="header-icon"
+        src="../../../../../assets/images/Outcome_Imagine.png" width="50px" height="50px" />
+      <img *ngIf="data.phaseName == 'deliver'" class="header-icon"
+        src="../../../../../assets/images/Outcome_Deliver.png" width="50px" height="50px" />
+      <img *ngIf="data.phaseName == 'run'" class="header-icon" src="../../../../../assets/images/Outcome_Run.png"
+        width="50px" height="50px" />
+      <span class="header-text">Outcomes</span>
+    </div>
+    <div class="body" *ngFor="let elements of popupData">
+      <ul>
+        <li *ngFor="let element of elements.outcomes">
+          <span>{{element}}</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,376 @@
+<form #projectForm="ngForm" (submit)="onSubmit()" class="project-add-edit-form-wrapper">    
+    <div class="process-scope-form-2">
+        <!-- <h2 style="text-align: center;">Modify Project Details</h2> -->
+        <mat-accordion>
+            <!-- Client description -->
+            <mat-expansion-panel [expanded]="step == 0" (opened) = "step = 0">
+                <mat-expansion-panel-header>
+                    <mat-panel-title class="form2-title">
+                        Client Description
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+
+                <div class="form-2-body">
+                    <div class="form-2-field">
+                        <mat-label>Name of the client</mat-label>
+                        <mat-form-field appearance="outline" floatLabel="never">
+                            <input matInput required name="clientName" [disabled]="true" #clientName='ngModel'
+                                [(ngModel)]="formData.clientName">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-2-field">
+                        <mat-label>Size of the client</mat-label>
+
+                        <mat-form-field appearance="outline" floatLabel="never">
+                            <mat-select required name="revenue" [(ngModel)]="formData.revenue" #revenue='ngModel'
+                                disabled=true>
+                                <mat-option *ngFor="let revenue of formOptions?.companyRevenue" [value]="revenue">
+                                    {{revenue}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <!-- <div class="multi-select-div client-checkbox-font">
+                        <div class="multi-select-div-column">
+                            <mat-label><span class="required-asterisk">*</span> Industry</mat-label>
+                            <div *ngFor="let industryList of formOptions?.industrySector">
+                                <mat-checkbox class="example-margin" required
+                                    [checked]="formData?.industry?.indexOf(industryList?.industry) >= 0" disabled=true>
+                                    {{industryList.industry}}
+                                </mat-checkbox>
+                            </div>
+                        </div>
+                        <div class="multi-select-div-column">
+                            <mat-label><span class="required-asterisk">*</span> Sector</mat-label>
+                            <ng-container *ngFor="let industryItem of formOptions?.industrySector">
+                                <ng-container *ngIf="formData?.industry?.indexOf(industryItem.industry) >= 0">
+                                    <div *ngFor="let sectorItem of industryItem?.sector">
+                                        <mat-checkbox class="example-margin" required
+                                            [checked]="formData?.sector?.indexOf(sectorItem) >= 0" disabled=true>
+                                            {{sectorItem}}
+                                        </mat-checkbox>
+                                    </div>
+                                </ng-container>
+                            </ng-container>
+                        </div>
+                    </div> -->
+
+                    <div class="form-2-field">
+                        <mat-label>Industry</mat-label>
+                        <mat-form-field appearance="outline" floatLabel="never">
+                            <mat-select required multiple name="industry" [(ngModel)]="formData.industry"
+                                #industry='ngModel'>
+                                <mat-option *ngFor="let industryItem of formOptions?.industrySector"
+                                    [value]="industryItem.industry" disabled="true">
+                                    {{industryItem.industry}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-2-field">
+                        <mat-label>Sector</mat-label>
+                        <mat-form-field appearance="outline" floatLabel="never">
+                            <mat-select multiple name="sector" [(ngModel)]="formData.sector" #sector='ngModel'>
+                                <ng-container *ngFor="let industryItem of formOptions?.industrySector">
+                                    <ng-container *ngIf="formData?.industry?.indexOf(industryItem.industry) >= 0">
+                                        <mat-option *ngFor="let sectorItem of industryItem?.sector" [value]="sectorItem"
+                                            disabled="true">
+                                            {{sectorItem}}</mat-option>
+                                    </ng-container>
+                                </ng-container>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>                    
+                </div>
+            </mat-expansion-panel>
+
+            <!-- Project description -->
+            <mat-expansion-panel [expanded] = "step == 1" (opened) = "step = 1">
+                <mat-expansion-panel-header>
+                    <mat-panel-title class="form2-title">
+                        Project Description
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+
+                <div class="form-2-body">
+                    <div class="form-2-field">
+                        <mat-label>Name of the project</mat-label>
+                        <mat-form-field appearance="outline" floatLabel="never">
+                            <input matInput required name="projectName" [disabled]="true" #projectName='ngModel'
+                                [(ngModel)]="formData.projectName">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-2-field">
+                        <mat-label>Project Description</mat-label>
+                        <mat-form-field appearance="outline" floatLabel="never">
+                            <input matInput required name="projectDescription" [disabled]="true"
+                                #projectDescription='ngModel' [(ngModel)]="formData.projectDescription">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-2-field">
+                        <mat-label>Type of the Project</mat-label>
+                        <mat-form-field appearance="outline" floatLabel="never">
+                            <mat-select required multiple name="projectType" [(ngModel)]="formData.projectType"
+                                #projectType='ngModel'>
+                                <mat-option *ngFor="let projectIndType of formOptions?.projectType"
+                                    [value]="projectIndType" disabled="true">
+                                    {{projectIndType}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <br />
+
+                    <div class="form-2-field">
+                        <mat-label>Primary Member Firm</mat-label>
+                        <mat-form-field appearance="outline" floatLabel="never">
+                            <mat-select name="primaryMemberFirm" [(ngModel)]="formData.primaryMemberFirm"
+                                #primaryMemberFirm='ngModel'>
+                                <mat-option *ngFor="let primaryMemberFirmItem of formOptions?.primaryMemberFirm"
+                                    [value]="primaryMemberFirmItem">{{primaryMemberFirmItem}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-2-field">
+                        <mat-label>Secondary Member Firm</mat-label>
+                        <mat-form-field appearance="outline" floatLabel="never">
+                            <mat-select name="secondaryMemberFirm" [(ngModel)]="formData.secondaryMemberFirm"
+                                #secondaryMemberFirm='ngModel'>
+                                <mat-option *ngFor="let secondaryMemberFirmItem of formOptions?.secondaryMemberFirm"
+                                    [value]="secondaryMemberFirmItem">{{secondaryMemberFirmItem}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-2-field">
+                        <mat-label>Primary Portfolio</mat-label>
+                        <mat-form-field appearance="outline" floatLabel="never">
+                            <mat-select multiple required name="portfolio" [(ngModel)]="formData.portfolio"
+                                #portfolio='ngModel'>
+                                <mat-option
+                                    *ngFor="let primaryPortfolioOfferingsItem of formOptions?.primaryPortfolioOfferings"
+                                    [value]="primaryPortfolioOfferingsItem.portfolioName" disabled="true">
+                                    {{primaryPortfolioOfferingsItem.portfolioName}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-2-field" *ngIf="formData.portfolio">
+                        <mat-label>Primary Offering</mat-label>
+                        <mat-form-field appearance="outline" floatLabel="never">
+                            <mat-select multiple name="offering" [(ngModel)]="formData.offering" #offering='ngModel'>
+                                <ng-container *ngFor="let primaryPortfolio of formOptions?.primaryPortfolioOfferings">
+                                    <ng-container
+                                        *ngIf="formData?.portfolio?.indexOf(primaryPortfolio.portfolioName) >= 0">
+                                        <mat-option *ngFor="let offeringName of primaryPortfolio?.offeringName"
+                                            [value]="offeringName" disabled="true">
+                                            {{offeringName}}</mat-option>
+                                    </ng-container>
+                                </ng-container>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <br />
+
+                    <div class="form-2-field">
+                        <mat-label>Secondary Portfolio</mat-label>
+                        <mat-form-field appearance="outline" floatLabel="never">
+                            <mat-select multiple name="secondaryPortfolio" [(ngModel)]="formData.secondaryPortfolio"
+                                #secondaryPortfolio='ngModel'>
+                                <mat-option
+                                    *ngFor="let secondaryPortfolioOfferingsItem of formOptions?.secondaryPortfolioOfferings"
+                                    [value]="secondaryPortfolioOfferingsItem.portfolioName">
+                                    {{secondaryPortfolioOfferingsItem.portfolioName}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-2-field" *ngIf="formData?.secondaryPortfolio?.length > 0">
+                        <mat-label>Secondary Offering</mat-label>
+                        <mat-form-field appearance="outline" floatLabel="never">
+                            <mat-select multiple name="secondaryOffering" [(ngModel)]="formData.secondaryOffering"
+                                #secondaryOffering='ngModel'>
+                                <ng-container
+                                    *ngFor="let secondaryPortfolio of formOptions?.secondaryPortfolioOfferings">
+                                    <ng-container
+                                        *ngIf="formData?.secondaryPortfolio?.indexOf(secondaryPortfolio.portfolioName) >= 0">
+                                        <mat-option *ngFor="let offeringName of secondaryPortfolio?.offeringName"
+                                            [value]="offeringName">
+                                            {{offeringName}}</mat-option>
+                                    </ng-container>
+                                </ng-container>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <br />
+
+                    <div class="form-2-field">
+                        <mat-label>Lead Partner</mat-label>
+                        <mat-form-field appearance="outline" floatLabel="never">
+                            <input matInput required name="leadPD" [disabled]="true" #leadPD='ngModel'
+                                [(ngModel)]="formData.leadPD">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-2-field">
+                        <mat-label>Project Manager</mat-label>
+                        <mat-form-field appearance="outline" floatLabel="never">
+                            <input matInput required name="projectManager" [disabled]="true" #projectManager='ngModel'
+                                [(ngModel)]="formData.projectManager">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-2-field">
+                        <mat-label>USI EMD</mat-label>
+                        <mat-form-field appearance="outline" floatLabel="never">
+                            <input matInput name="usiEmd" placeholder="Enter email address" type="email"
+                                [matAutocomplete]="auto" [formControl]="searchUsiEmd">
+
+                            <mat-autocomplete #auto="matAutocomplete">
+                                <mat-option *ngIf="isLoading" class="is-loading">Loading...</mat-option>
+                                <ng-container *ngIf="!isLoading">
+                                    <mat-option *ngFor="let user of filteredUser"
+                                        (click)="setSelectedManager(user, 'usiEmd')" [value]="user.userId">
+                                        {{user.userName}}({{user.userId}})
+                                    </mat-option>
+                                </ng-container>
+                            </mat-autocomplete>
+                            <mat-error
+                                *ngIf="projectForm.submitted && searchUsiEmd?.invalid && searchUsiEmd?.errors?.pattern">
+                                Invalid format for email Address
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-2-field">
+                        <mat-label>USI GDM</mat-label>
+                        <mat-form-field appearance="outline" floatLabel="never">
+                            <input matInput name="usiGdm" placeholder="Enter email address" type="email"
+                                [matAutocomplete]="auto1" [formControl]="searchUsiGdm">
+                            <mat-autocomplete #auto1="matAutocomplete">
+                                <mat-option *ngIf="isLoading" class="is-loading">Loading...</mat-option>
+                                <ng-container *ngIf="!isLoading">
+                                    <mat-option *ngFor="let user of filteredUserGdm"
+                                        (click)="setSelectedManager(user, 'usiGdm')" [value]="user.userId">
+                                        {{user.userName}}({{user.userId}})
+                                    </mat-option>
+                                </ng-container>
+                            </mat-autocomplete>
+                            <mat-error
+                                *ngIf="projectForm.submitted && searchUsiGdm?.invalid && searchUsiGdm?.errors?.pattern">
+                                Invalid format for email Address
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-2-field">
+                        <mat-label>Lead QA Partner</mat-label>
+                        <mat-form-field appearance="outline" floatLabel="never">
+                            <input matInput name="leadQaPartner" placeholder="Enter email address" type="email"
+                                [matAutocomplete]="auto2" [formControl]="searchLeadQA">
+                            <mat-autocomplete #auto2="matAutocomplete">
+                                <mat-option *ngIf="isLoading" class="is-loading">Loading...</mat-option>
+                                <ng-container *ngIf="!isLoading">
+                                    <mat-option *ngFor="let user of filteredUserLeadQA"
+                                        (click)="setSelectedManager(user, 'leadQaPartner')" [value]="user.userId">
+                                        {{user.userName}}({{user.userId}})
+                                    </mat-option>
+                                </ng-container>
+                            </mat-autocomplete>
+                            <mat-error
+                                *ngIf="projectForm.submitted && searchLeadQA?.invalid && searchLeadQA?.errors?.pattern">
+                                Invalid format for email Address
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-2-field">
+                        <mat-label>USI QA Reviewer</mat-label>
+                        <mat-form-field appearance="outline" floatLabel="never">
+                            <input matInput name="usiQaReviewer" placeholder="Enter email address" type="email"
+                                [matAutocomplete]="auto3" [formControl]="searchQAReviewer">
+                            <mat-autocomplete #auto3="matAutocomplete">
+                                <mat-option *ngIf="isLoading" class="is-loading">Loading...</mat-option>
+                                <ng-container *ngIf="!isLoading">
+                                    <mat-option *ngFor="let user of filteredUserQAReviewer"
+                                        (click)="setSelectedManager(user, 'usiQaReviewer')" [value]="user.userId">
+                                        {{user.userName}}({{user.userId}})
+                                    </mat-option>
+                                </ng-container>
+                            </mat-autocomplete>
+                            <mat-error
+                                *ngIf="projectForm.submitted && searchQAReviewer?.invalid && searchQAReviewer?.errors?.pattern">
+                                Invalid format for email Address
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+            </mat-expansion-panel>
+
+            <!-- Package/Platform -->
+            <mat-expansion-panel [expanded] = "step == 2" (opened) = "step = 2">
+                <mat-expansion-panel-header>
+                    <mat-panel-title class="form2-title">
+                        Package/Platform Scope
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+
+                <div class="form-2-body">
+                    <div class="form-2-field">
+                        <mat-label>Primary Package</mat-label>
+                        <mat-form-field appearance="outline" floatLabel="never">
+                            <mat-select name="erpPackage" [(ngModel)]="formData.erpPackage" #erpPackage='ngModel'>
+                                <mat-option *ngFor="let erpPackageItem of formOptions?.erpPackage" disabled="true"
+                                    [value]="erpPackageItem">
+                                    {{erpPackageItem}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-2-field">
+                        <mat-label>Additional Package</mat-label>
+                        <mat-form-field appearance="outline" floatLabel="never">
+                            <mat-select name="additionalErpPackage" [(ngModel)]="formData.additionalErpPackage"
+                                #additionalErpPackage='ngModel'>
+                                <mat-option *ngFor="let erpPackageItem of formOptions?.additionalErpPackage"
+                                    [value]="erpPackageItem">
+                                    {{erpPackageItem}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-2-field">
+                        <mat-label>Integration Platform</mat-label>
+                        <mat-form-field appearance="outline" floatLabel="never">
+                            <mat-select name="integrationPlatform" multiple [(ngModel)]="formData.integrationPlatform"
+                                #integrationPlatform='ngModel'>
+                                <mat-option *ngFor="let integrationPlatformItem of formOptions?.integrationPlatform"
+                                    disabled="true" [value]="integrationPlatformItem">
+                                    {{integrationPlatformItem}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-2-field">
+                        <mat-label>Extension Platform</mat-label>
+                        <mat-form-field appearance="outline" floatLabel="never">
+                            <mat-select name="extensions" multiple [(ngModel)]="formData.extensions"
+                                #extensions='ngModel'>
+                                <mat-option *ngFor="let extensionsItem of formOptions?.extensions" disabled="true"
+                                    [value]="extensionsItem">
+                                    {{extensionsItem}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>        
+    </div>
+</form>

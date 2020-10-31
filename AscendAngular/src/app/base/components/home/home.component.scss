@@ -1,0 +1,59 @@
+@import "src/assets/styles/app.scss";
+.carousel {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  background: $palette-white-200;
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+owl-carousel-o {
+  width: 100% !important;
+}
+
+.project-info-card {
+  width: 100%;
+  height: 17%;
+}
+
+.iidr-filters{
+  margin-top: 1rem;
+}
+
+:host ::ng-deep .owl-carousel .owl-nav [class*="owl-"] {
+  padding: 10px;
+  width: 60px;
+  border-radius: 2px;
+  margin: 0%;
+}
+
+:host ::ng-deep .owl-carousel .owl-prev,
+:host ::ng-deep .owl-carousel .owl-next {
+  position: absolute;
+  top: 0%;
+  height: 97.3%;
+  line-height: 50;
+}
+
+:host ::ng-deep .owl-carousel .owl-prev {
+  left: 0%;
+  min-width: 10%;
+  background: linear-gradient(to right, rgba(245,245,245,1) , rgba(245,245,245,0)) !important;
+  text-align: left !important;
+}
+
+:host ::ng-deep .owl-carousel .owl-next {
+  right: 0%;
+  min-width: 10%;
+  background: linear-gradient(to right, rgba(245,245,245,0) , rgba(245,245,245,1)) !important;
+  text-align: right !important;
+}
+
+:host ::ng-deep .owl-theme .owl-nav .disabled{
+  display: none;
+}

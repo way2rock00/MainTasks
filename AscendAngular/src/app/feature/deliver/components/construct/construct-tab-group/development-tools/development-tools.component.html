@@ -1,0 +1,156 @@
+<div class="feature" *ngIf="constructTabDataService.developmentToolContentsJson[0]">
+  <div *ngIf="constructTabDataService.developmentToolContentsJson[0].tabContent.length > 0">
+    <!-- <app-advanced-filter (parentEmitter)="eventEmit($event)"></app-advanced-filter> -->
+    <!-- <app-filter-bar (parentEmitter)="eventEmit($event)" [filters]="filters" filterBarHead="Adv filters">
+    </app-filter-bar>
+    -->
+    <div class="tab-body">
+      <mat-accordion multi="true" class="sub-accordian">
+        <mat-expansion-panel *ngFor="let j of constructTabDataService.developmentToolContentsJson[0].tabContent">
+          <mat-expansion-panel-header class="center" [ngStyle]="{'color': j.L1enabledflag=='N' && view == 'PROJECT'?'grey':'black', 'background-color': j.L1enabledflag=='N' && view == 'PROJECT'?'whitesmoke':'white'}">
+            <div class="header-1">
+              {{ j.L1value }}
+            </div>
+            <div class="document-button">
+              <button
+                *ngIf="j.L1doclink"
+                (click)="preview(j.L1doclink)"
+                mat-flat-button
+                class="tab-button"
+              >
+                <img class="file-btn" src="../../../assets/File_DOC_POS.svg" />
+              </button>
+            </div>
+            <div *ngIf="view == 'PROJECT'" class="add-cart-button">
+              <!-- <button *ngIf="view == 'PROJECT'" (click)="drop(undefined, 'Development Tools', j)" mat-stroked-button>
+                <img src="../../../assets/Plus_POS.svg" />
+                <strong> Add All</strong>
+              </button> -->
+              <button
+                *ngIf="j.L1enabledflag == 'Y'"
+                (click)="toggle(j, undefined)"
+                mat-flat-button
+                class="tab-button"
+              >
+                <img src="../../../assets/Cross_POS.svg" />
+                <strong> Remove all</strong>
+              </button>
+
+              <button
+                *ngIf="j.L1enabledflag == 'N'"
+                (click)="toggle(j, undefined)"
+                mat-flat-button
+                class="tab-button"
+              >
+                <img src="../../../assets/Plus_POS.svg" />
+                <strong> Add all</strong>
+              </button>
+            </div>
+          </mat-expansion-panel-header>
+          <!--
+          <mat-accordion class="sub-accordian">
+            <mat-expansion-panel *ngFor="let comp of j.toolgrp">
+              <mat-expansion-panel-header class="center">
+        -->
+          <!-- <div class="header-2">{{ comp.toolname }}</div>
+                <div class="add-cart-button">
+                  <button (click)="preview(j.L1doclink)" mat-flat-button>
+                    <img class="file-btn" src="../../../assets/File_DOC_POS.svg" />
+                  </button>
+
+                  <button style="border-radius: 5em / 5em; height:40px;" *ngIf="
+                      view == 'PROJECT' &&
+                      !docAddedtoCart(
+                        comp.toolname,
+                        'Development Tools',
+                        j.L1value                          )"
+                      (click)="drop(comp, 'Development Tools', j.L1value)" mat-stroked-button>
+                    <img src="../../../assets/Plus_POS.svg" />
+
+                    <strong> Add</strong>
+                  </button>
+
+                  <button style="border-radius: 5em / 5em; height:40px;" *ngIf="
+                      view == 'PROJECT' &&
+                      docAddedtoCart(
+                        comp.toolname,
+                        'Development Tools',
+                        j.L1value
+                      )
+                    " (click)="remove(comp, 'Development Tools',j.L1value)" mat-stroked-button>
+                    <img src="../../../assets/Cross_POS.svg" />
+
+                    <strong> Remove</strong>
+                  </button>
+                </div>
+
+
+
+              <hr />
+
+              -->
+          <!-- <hr /> -->
+
+          <div *ngFor="let l of j.toolgrp" [ngStyle]="{'color':(j.L1enabledflag=='N' || l.toolenabledFlag=='N') && view == 'PROJECT'?'grey':'black','background-color':(j.L1enabledflag=='N' || l.toolenabledFlag=='N') && view == 'PROJECT'?'whitesmoke':'white'}">
+            <hr />
+            <div class="heading-3">
+              <div class="title">
+                {{ l.toolname }}
+              </div>
+              <div class="document-button">
+                <button
+                  *ngIf="l.tooldoclink"
+                  (click)="preview(l.tooldoclink)"
+                  mat-flat-button
+                  class="tab-button"
+                >
+                  <img
+                    class="file-btn"
+                    src="../../../assets/File_DOC_POS.svg"
+                  />
+                </button>
+              </div>
+              <div *ngIf="view == 'PROJECT'" class="add-cart-button">
+                <!-- <button *ngIf="view == 'PROJECT'"  (click)="drop(undefined, 'Development Tools',l)"
+                     mat-stroked-button>
+                  <img src="../../../assets/Plus_POS.svg" /> <strong> Add </strong>
+                </button> -->
+                <button
+                  *ngIf="l.toolenabledFlag == 'Y'"
+                  (click)="toggle(l, j)"
+                  mat-flat-button
+                  class="tab-button"
+                >
+                  <img src="../../../assets/Cross_POS.svg" />
+                  <strong> Remove </strong>
+                </button>
+
+                <button
+                  *ngIf="l.toolenabledFlag == 'N'"
+                  (click)="toggle(l, j)"
+                  mat-flat-button
+                  class="tab-button"
+                >
+                  <img src="../../../assets/Plus_POS.svg" />
+                  <strong> Add </strong>
+                </button>
+              </div>
+            </div>
+
+            <div
+              class="description justify-align"
+              [ngClass]="{
+                explore: view == 'EXPLORE',
+                project: view == 'PROJECT'
+              }"
+            >
+              {{ l.description }}
+            </div>
+            <!-- <hr /> -->
+            <br />
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </div>
+</div>

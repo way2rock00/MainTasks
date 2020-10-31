@@ -1,0 +1,32 @@
+<app-menu-bar [colorScheme] = "layoutConfig.right.textColorScheme"></app-menu-bar>
+<div class="activities">
+
+  <app-left-imagine-wheel class="activity-sub" [layoutSubCat]="SUB_NAV"></app-left-imagine-wheel>
+
+  <div class="activity-sub">
+    <app-activity-head [title]="layoutConfig?.left?.title" [subtitle]="layoutConfig?.right?.title"
+      [description]="layoutConfig?.left?.stopDescription" routeLink="/imagine/architect/Key Business Decisions">
+    </app-activity-head>
+
+    <app-amplifiers [headColor]="layoutConfig?.right?.textColorScheme"
+      [bodyColor]="layoutConfig?.right?.activitiesColorScheme" [array]="layoutConfig?.left?.amplifiers"
+      title="Amplifiers">
+    </app-amplifiers>
+    <app-digital-maturity [headColor]="layoutConfig?.right?.textColorScheme"
+      [bodyColor]="layoutConfig?.right?.activitiesColorScheme" [array]="layoutConfig?.left?.digitalMaturity"
+      title="Digital Maturity">
+    </app-digital-maturity>
+  </div>
+
+</div>
+
+<div class="activities">
+  <app-activity-deliverables class="activity-sub" [headColor]="layoutConfig?.right?.textColorScheme"
+    [bodyColor]="layoutConfig?.right?.activitiesColorScheme" [array]="layoutConfig?.left?.activities"
+    title="Activities">
+  </app-activity-deliverables>
+  <app-activity-deliverables class="activity-sub" [headColor]="layoutConfig?.right?.textColorScheme"
+    [bodyColor]="layoutConfig?.right?.activitiesColorScheme" [array]="layoutConfig?.left?.deliverables"
+    title="Deliverables">
+  </app-activity-deliverables>
+</div>

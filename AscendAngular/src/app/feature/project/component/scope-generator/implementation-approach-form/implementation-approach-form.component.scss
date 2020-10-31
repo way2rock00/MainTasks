@@ -1,0 +1,94 @@
+.btn-primary {
+  padding: 5px;
+  width: 141px;
+  font-weight: bold;
+  border-radius: 5px;
+  font-size: 13px;
+  line-height: 18px;
+  cursor: pointer;
+  border: none;
+  color: #ffffff;
+  background-color: #000000;
+  float: right;
+}
+
+.phase-element-body {
+  margin-top: 1em;
+  margin-right: 1.5em;
+  border: 1px solid #dcc8c0;
+  background-color: #fffaf8;
+  border-radius: 5px;
+  // cursor: move;
+
+  .phase-form-head {
+    font-size: 16px;
+    font-weight: 600;
+    padding: 10px;
+
+    .phase-form-title {
+      display: inline;
+    }
+
+    .phase-form-actions {
+      margin-left: auto;
+      float: right;
+
+      img {
+        width: 25px;
+        cursor: pointer;
+        vertical-align: middle;
+        margin-left: 10px;
+
+        &.img-control {
+          display: none;
+          width: auto;
+
+          &.visible {
+            display: inline;
+          }
+        }
+      }
+
+    }
+  }
+
+  .phase-field {
+    display: inline-block;
+    width: 28%;
+    margin: 0 10px;
+
+    .mat-form-field {
+      display: block;
+    }
+
+  }
+}
+
+.required-asterisk {
+  font-size: 12px;
+}
+
+.phase-option{
+ 
+  ::ng-deep .mat-radio-button.mat-accent .mat-radio-inner-circle {
+    background-color: #007680!important;   /*inner circle color change*/
+  }
+  
+  ::ng-deep.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+   border-color:#007680!important; /*outer ring color change*/
+  }
+  
+}
+.form-info {
+  font-size: 10px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 2em;
+  letter-spacing: normal;
+  color: #000000;
+  margin-bottom: 1.5em;
+  margin-left: 1%;
+}
+
+

@@ -1,0 +1,46 @@
+<div id="overlay" (click)="off()"></div>
+<div class="bodydiv">
+  <div class="page-logo">
+    <div style="margin-left: 30px;">
+      <button mat-button class="top-bar-home-btn" (click)="goBack()">Home</button>
+      <button mat-button class="top-bar-home-btn"
+        (click)="goToAction({route:'activities/iidr/insights/Define journey'})">Define journey</button>
+      <span style="margin-left: -15%;">Process Scope Generator</span>
+      <!-- <button class="back-btn" mat-button (click)="goToAction({route:'activities/iidr/insights/Discover scope'})">
+        Discover scope
+      </button> -->
+    </div>
+  </div>
+  <div class="project-right">
+    <div class="searchFieldContainer">
+      <form autocomplete="off">
+        <div class="search-div">
+          <input type="text" name="search" placeholder="Search for project" [formControl]="myControl"
+            [matAutocomplete]="auto">
+        </div>
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="handleStaticResultSelected($event)">
+          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+            {{option.projectName}}
+          </mat-option>
+        </mat-autocomplete>
+      </form>
+    </div>
+
+    <div class="wrapper">
+      <div *ngFor="let projectinfo of filteredOptions | async" class="wrapper-body" (click)="openDialog(projectinfo)">
+        <!-- <img [src]="getSafeURL(projectinfo.clientLogoURL)" class="project-icon" /> -->
+        <img src="../../../../../assets/images/project-planning-header@2x.png" class="project-icon" />
+        <div class="wrapper-content">
+          <div class="title">{{projectinfo.projectName}}</div>
+          <div class="sub-title">{{projectinfo.mgrusername}}</div>
+        </div>
+        <img class="more-icon" src="../../../../../assets/images/menu_dots.png" (click)="changeColor()"
+          [matMenuTriggerFor]="menu" />
+        <mat-menu #menu="matMenu" (closed)="off()">
+          <button *ngFor="let menuItem of projectMenuItems" (click)="goToAction(menuItem)"
+            mat-menu-item>{{ menuItem.label }}</button>
+        </mat-menu>
+      </div>
+    </div>
+  </div>
+</div>

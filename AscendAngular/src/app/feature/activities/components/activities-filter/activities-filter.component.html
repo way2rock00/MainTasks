@@ -1,0 +1,29 @@
+<cdk-tree [dataSource]="dataSource" [treeControl]="treeControl">
+  <!-- This is the tree node template for leaf nodes -->
+  <cdk-nested-tree-node *cdkTreeNodeDef="let node" class="tree-node">
+    <!-- use a disabled button to provide padding for tree leaf -->
+    <div>
+      <button mat-button style="border-radius: 0;"
+        [ngStyle]="{'color':getSelectedState(node.entityName)?'#46a4ac':'white', 'font-size':getFontSize(node)?'12px':'15px', 'background-color': getSelectedState(node.entityName)?'rgba(255, 255, 255, 0.22)':'transparent', 'padding-left':getFontSize(node)?'15%':'11.2%'}"
+        (click)="getDetWrapper(node)">
+        {{node.entityName}}
+      </button>
+    </div>
+  </cdk-nested-tree-node>
+  <!-- This is the tree node template for expandable nodes -->
+  <cdk-nested-tree-node *cdkTreeNodeDef="let node; when: hasChild" class="tree-node">
+    <div>
+      <button mat-button style="border-radius: 0;" [attr.aria-label]="'toggle ' + node.entityName"
+        [ngStyle]="{'color':getSelectedState(node.entityName)?'#46a4ac':'white', 'font-size':getFontSize(node)?'12px':'15px', 'background-color': getSelectedState(node.entityName)?'rgba(255, 255, 255, 0.22)':'transparent', 'padding-left':getFontSize(node)?'15%':'11.2%'}"
+        (click)="getDetWrapper(node)" cdkTreeNodeToggle>
+        {{node.entityName}}
+        <mat-icon class="mat-icon-rtl-mirror">
+          {{node.expanded ? 'expand_more' : 'chevron_right'}}
+        </mat-icon>
+      </button>
+      <div [class.tree-invisible]="!node.expanded">
+        <ng-container cdkTreeNodeOutlet></ng-container>
+      </div>
+    </div>
+  </cdk-nested-tree-node>
+</cdk-tree>

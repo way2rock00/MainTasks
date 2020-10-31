@@ -1,0 +1,32 @@
+<app-menu-bar [colorScheme] = "layoutConfig.right.textColorScheme"></app-menu-bar>
+<div class="standard-layout-wrapper">
+
+  <app-left-layout [ngClass]="{'expanded': shrinkRight}"
+    [layoutConfig]="layoutConfig"
+    [layout]="layout"
+    [layoutSubCat]="layoutSubCat"
+    (expanded)="leftExpanded($event)"
+  >
+  </app-left-layout>
+
+  <app-right-layout
+    [ngClass]="{'shrinked': shrinkRight}"
+    [title]="layoutConfig.right.title"
+    [layout]="layout"
+    [layoutSubCat]="layoutSubCat"
+    [shrink]="shrinkRight"
+  >
+    <app-filter-bar
+      top
+      (parentEmitter)="filterChanged($event)"
+      [filters]="filters"
+      filterBarHead="Filters"
+      [filterBarHeadColor] = "layoutConfig.right.colorScheme"
+      isGlobal = "ture"
+    >
+    </app-filter-bar>
+
+    <ng-content bottom select="[bottom]"></ng-content>
+
+  </app-right-layout>
+</div>

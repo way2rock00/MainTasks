@@ -1,0 +1,55 @@
+.process-scope-form-2{
+    max-width: 75%;
+    margin: auto;
+    padding-top: 1.5em;
+
+    .action-button-wrapper{
+        margin-top: 1em;
+        margin-bottom: 1em;
+        .btn-primary{
+            width: 150px;
+            text-align: center;
+        }
+
+        .btn-secondary{
+            width: 150px;
+            text-align: center;
+        }
+    }
+
+    .form2-title{
+        font-weight: 700;
+        justify-content: center;
+    }
+
+    .form-2-body{
+        padding: 1rem;
+        padding-top: 0px;
+
+        .form-2-field{
+            width: 45%;
+            display: inline-block;
+            margin: 1rem;
+            margin-bottom: 0;
+        }
+
+        .multi-select-div{
+            margin: 1rem;
+            margin-bottom: 0;
+        }
+
+        mat-form-field{
+            display: block;
+
+            input{
+                padding: 0.4em !important;
+                // font-size: 14px;
+            }
+
+            .mat-select{
+                padding: 0.4em;
+                vertical-align: super;
+            }
+        }
+    }
+}

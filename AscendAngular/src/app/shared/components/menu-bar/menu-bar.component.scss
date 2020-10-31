@@ -1,0 +1,74 @@
+@import "../../../../assets/styles/colors";
+
+.standard-menu-bar {
+  background-color: white;
+  position: absolute;
+  width: 100%;
+  // margin-top: 7px;
+
+  .mat-button {
+    min-width: 150px;
+    height: 40px;
+    line-height: 20px;
+    vertical-align: middle;
+    font-size: 17px;
+    font-weight: 400;
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+  }
+
+  .project-info {
+    float: right;
+
+    .type {
+      display: block;
+      font-size: 10px;
+      font-weight: 600;
+    }
+
+    .value {
+      font-size: 14px;
+      color: $palette-grey-102;
+    }
+  }
+
+  span.project-info {
+    // margin-top: 5px;
+    font-size: 25px;
+    color: $palette-grey-102;
+  }
+
+  .font-strength {
+    font-weight: bold;
+    width: 12%;
+  }
+}
+
+.menu-item {
+  font-size: 14px;
+  font-family: "Open Sans";
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 2.64;
+  letter-spacing: normal;
+  color: rgb(0, 0, 0);
+}
+
+button.mat-menu-item {
+  width: 215px;
+  text-align: left;
+}
+
+.menu-item:hover {
+  font-weight: bold;
+}
+
+.mat-menu-content:not(:empty) {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.mat-menu-panel {
+  border-radius: 0;
+}

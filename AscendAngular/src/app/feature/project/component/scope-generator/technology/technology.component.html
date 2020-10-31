@@ -1,0 +1,376 @@
+<div *ngIf="treeLevel == '3'">
+  <div *ngFor="let tabRow of techScopeData;let counter=index" class="phase-element-body">
+    <div class="phase-form-head">
+      <div class="phase-form-title">
+        {{tabRow.item}}
+      </div>
+      <div class="phase-form-actions">
+        <img src="../../../../../../assets/psg_plus.svg" (click)="newRowIndex = counter"
+          style="height: 20px;width: 20px;">
+        <!-- <button mat-button (click)="newRowIndex = counter" class="button-add">
+          Add new row -->
+        <!-- <mat-icon>add_circle_outline</mat-icon> -->
+        <!-- </button> -->
+        <mat-icon class="img-control" (click)="changeView(maximize,minimize)" #maximize>keyboard_arrow_right</mat-icon>
+        <mat-icon class="img-control visible" (click)="changeView(maximize,minimize)" #minimize>keyboard_arrow_down
+        </mat-icon>
+        <!-- <img class="img-control" src="../../../../../../assets/images/maximize.png"
+          (click)="changeView(maximize,minimize)" #maximize>
+        <img class="img-control visible" src="../../../../../../assets/images/minimize.png"
+          (click)="changeView(maximize,minimize)" #minimize> -->
+      </div>
+    </div>
+    <ng-container *ngIf="minimize?._elementRef?.nativeElement?.classList?.contains('visible')">
+      <div *ngIf="newRowIndex == counter" class="project-add-edit-form-wrapper technology-scope">
+        <table>
+          <tr>
+            <th><span>Module</span></th>
+            <th><span>{{tabName}} Name</span></th>
+            <th *ngIf="showSystemsColumn"><span>System</span></th>
+            <th *ngIf="showTypeColumn"><span>Type</span></th>
+            <th *ngIf="showVolumeColumn"><span>Volume</span></th>
+            <th *ngIf="showComplexityColumn"><span>Complexity</span></th>
+            <th></th>
+          </tr>
+          <tr>
+
+
+            <td>
+              <mat-form-field class="custom-width" appearance="outline" floatLabel="never">
+                <mat-select [(value)]="newRow.module">
+                  <mat-option *ngFor="let module of tabRow?.children" [value]="module.item">{{module.item}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </td>
+
+            <td style="width:50px;">
+              <mat-form-field class="custom-width" appearance="outline" floatLabel="never">
+                <input matInput required name="item" #item='ngModel' [(ngModel)]="newRow.item">
+                <mat-error *ngIf=" showError && item?.errors?.required">
+                  Item is required.
+                </mat-error>
+              </mat-form-field>
+            </td>
+
+            <td style="width:50px;" *ngIf="showSystemsColumn">
+              <mat-form-field class="custom-width" appearance="outline" floatLabel="never">
+                <mat-select multiple [(value)]="newRow.system">
+                  <mat-option *ngFor="let system of allData[0].systems" [value]="system">{{system}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </td>
+
+            <td style="width:50px;" *ngIf="showTypeColumn">
+              <mat-form-field class="custom-width" appearance="outline" floatLabel="never">
+                <mat-select [(value)]="newRow.type">
+                  <mat-option *ngFor="let typeNode of allData[0].type" [value]="typeNode">{{typeNode}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </td>
+
+            <td style="width:50px;" *ngIf="showVolumeColumn">
+              <mat-form-field class="custom-width" appearance="outline" floatLabel="never">
+                <input matInput required name="volume" #volume='ngModel' [(ngModel)]="newRow.volume">
+                <mat-error *ngIf="showError && volume?.errors?.required">
+                  Volume is required.
+                </mat-error>
+              </mat-form-field>
+            </td>
+
+            <td style="width:50px;" *ngIf="showComplexityColumn">
+              <mat-form-field class="custom-width" appearance="outline" floatLabel="never">
+                <mat-select [(value)]="newRow.complexity">
+                  <mat-option *ngFor="let complexity of allData[0].complexity" [value]="complexity">{{complexity}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </td>
+            <td style="text-align: center;vertical-align: bottom;width: 100px;">
+              <div>
+                <img src="../../../../../../assets/psg_save.svg" (click)="saveRow(tabRow)"
+                  style="margin-right: 12px;cursor: pointer;">
+                <img src="../../../../../../assets/psg_bin.svg" (click)=clearRow() style="cursor: pointer;">
+              </div>
+              <!-- <mat-icon class="row-add-actions" (click)="saveRow(tabRow)">save</mat-icon>
+              <mat-icon class="row-add-actions" (click)=clearRow()>clear</mat-icon> -->
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <div *ngIf="enableTable(tabRow?.children)" class="project-add-edit-form-wrapper technology-scope">
+        <table>
+          <tr>
+            <th>
+              <mat-checkbox style="margin-left: 37%;" [checked]="tabRow.selected" (change)="toggleAll(tabRow)">
+              </mat-checkbox>
+            </th>
+            <th><span style="margin-left: 5px;">Module</span></th>
+            <th><span>{{tabName}} Name</span></th>
+            <th *ngIf="showSystemsColumn"><span style="margin-left: 5px;">System</span></th>
+            <th *ngIf="showTypeColumn"><span style="margin-left: 5px;">Type</span></th>
+            <th *ngIf="showVolumeColumn"><span style="margin-left: 5px;">Volume</span></th>
+            <th *ngIf="showComplexityColumn"><span style="margin-left: 5px;">Complexity</span></th>
+          </tr>
+          <tbody>
+            <ng-container *ngFor="let i of tabRow.children">
+              <tr *ngFor="let level of i.children; let j = index">
+                <td>
+                  <mat-checkbox style="margin-left: 37%;" [checked]="level.selected"
+                    (change)="todoLeafItemSelectionToggle(level)">
+                  </mat-checkbox>
+                </td>
+                <td>
+                  <div style="display: flex; width: 100%;">
+                    <div style="flex: 1; line-height: 2.5;">
+                      <span style="margin-left: 5px;">{{i.item}}</span>
+                    </div>
+                    <!-- <img class="table-img" *ngIf="!level.new && addNewElementAllowed"
+                      src="../../../../../../assets/images/Plus_POS.svg" (click)="addNewRow(i)">
+                    <img class="table-img" *ngIf="level.new && addNewElementAllowed"
+                      src="../../../../../../assets/ProjectDeleteLogo.png" (click)="removeRow(i, j)"> -->
+                  </div>
+                </td>
+                <td><span *ngIf="!level.new">{{level.item}}</span>
+                  <mat-form-field *ngIf="level.new" class="custom-width"
+                    style="padding-bottom: 0;margin-left: 5px;margin-right: 5px;" appearance="outline"
+                    floatLabel="never">
+                    <input matInput required name="item" #item='ngModel' [(ngModel)]="level.item"
+                      (input)="selectService(level)">
+                    <mat-error *ngIf=" showError && item?.errors?.required">
+                      Item is required.
+                    </mat-error>
+                  </mat-form-field>
+                </td>
+                <td *ngIf="showSystemsColumn">
+                  <mat-form-field class="custom-width" style="padding-bottom: 0;margin-left: 5px;margin-right: 5px;"
+                    appearance="outline" floatLabel="never">
+                    <!-- (selectionChange)="selectService(level)" -->
+                    <mat-select multiple [(value)]="level.system">
+                      <mat-option *ngFor="let system of allData[0].systems" [value]="system">{{system}}
+                      </mat-option>
+                    </mat-select>
+                    <!-- <input matInput [(value)]="level.system"> -->
+                  </mat-form-field>
+                </td>
+                <td *ngIf="showTypeColumn">
+                  <mat-form-field class="custom-width" style="padding-bottom: 0;margin-left: 5px;margin-right: 5px;"
+                    appearance="outline" floatLabel="never">
+                    <mat-select [(value)]="level.type">
+                      <mat-option *ngFor="let typeNode of allData[0].type" [value]="typeNode">{{typeNode}}
+                      </mat-option>
+                    </mat-select>
+                    <!-- <input matInput required name="projectName" #type='ngModel' [(ngModel)]="level.type">
+                    <mat-error *ngIf="showError && type?.errors?.required">
+                      Type is required.
+                    </mat-error>-->
+                  </mat-form-field>
+                </td>
+                <td *ngIf="showVolumeColumn">
+                  <mat-form-field class="custom-width" style="padding-bottom: 0;margin-left: 5px;margin-right: 5px;"
+                    appearance="outline" floatLabel="never">
+                    <!-- (input)="selectService(level)" -->
+                    <input matInput required name="volume" #volume='ngModel' [(ngModel)]="level.volume">
+                    <mat-error *ngIf="showError && volume?.errors?.required">
+                      Volume is required.
+                    </mat-error>
+                  </mat-form-field>
+                </td>
+                <td *ngIf="showComplexityColumn">
+                  <mat-form-field class="custom-width" style="padding-bottom: 0;margin-left: 5px;margin-right: 5px;"
+                    appearance="outline" floatLabel="never">
+                    <mat-select [(value)]="level.complexity">
+                      <mat-option *ngFor="let complexity of allData[0].complexity" [value]="complexity">{{complexity}}
+                      </mat-option>
+                    </mat-select>
+                    <!-- <input matInput [(value)]="level.system"> -->
+                  </mat-form-field>
+                </td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+      </div>
+    </ng-container>
+  </div>
+</div>
+<div *ngIf="treeLevel =='2' && tabName.toUpperCase() != 'SERVICE'"
+  [class.scope-error]="checklistSelection.selected.length == 0 && tabName.toUpperCase() == 'SYSTEM'">
+  <form *ngIf="tabName.toUpperCase() == 'SYSTEM'" #systemForm="ngForm" (submit)="onNext()"
+    class="project-add-edit-form-wrapper">
+    <div style="width: 97%">
+      <!-- <div class="field-wrapper">
+      </div> -->
+      <div class="field-wrapper">
+        <div class="field">
+          <mat-label><span class="required-asterisk">*</span> ERP package</mat-label>
+          <mat-form-field class="custom-width" appearance="outline" floatLabel="never">
+            <mat-select required name="erpPackage" [(ngModel)]="savedData.erpPackage" #erpPackage='ngModel'>
+              <mat-option *ngFor="let erpPackage of allData?.scopeDetails[0]?.erpPackage" [value]="erpPackage">
+                {{erpPackage}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-error *ngIf="showError && erpPackage?.errors?.required">
+            ERP package is required.
+          </mat-error>
+        </div>
+        <div class="field">
+          <mat-label>Integration platform</mat-label>
+          <mat-form-field class="custom-width" appearance="outline" floatLabel="never">
+            <mat-select [(ngModel)]="savedData.integrationPlatform" name="integrationPlatform"
+              #integrationPlatform="ngModel" multiple>
+              <mat-option *ngFor="let integPltfrm of allData?.scopeDetails[0]?.integrationPlatform"
+                [value]="integPltfrm">
+                {{integPltfrm}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-error *ngIf="showError && integrationPlatform?.errors?.required">
+            Integration platform is required.
+          </mat-error>
+        </div>
+        <div class="field">
+          <mat-label>Extensions</mat-label>
+          <mat-form-field class="custom-width" appearance="outline" floatLabel="never">
+            <mat-select [(ngModel)]="savedData.extensions" name="scopeExtentions" #extensions="ngModel" multiple>
+              <mat-option *ngFor="let extensions of allData?.scopeDetails[0]?.extensions" [value]="extensions">
+                {{extensions}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-error *ngIf="showError && extensions?.errors?.required">
+            Extensions is required.
+          </mat-error>
+        </div>
+      </div>
+    </div>
+  </form>
+  <mat-error style="padding-left: 1em; font-size: 12px;" *ngIf="showError && checklistSelection.selected.length == 0">
+    Choose atleast one value.</mat-error>
+
+  <div class="systems-head" *ngIf="tabName.toUpperCase() == 'SYSTEM'">
+    <div class="title">Systems</div>
+    <div class="search-div">
+      <input type="text" name="search" placeholder="Search for systems" matInput
+        (input)="filterChanged($event.target.value)">
+    </div>
+  </div>
+
+  <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+    <mat-tree-node *matTreeNodeDef="let node; when: hasNoContent" matTreeNodePadding class="assumption-mattree-node">
+      <button mat-icon-button disabled></button>
+      <mat-form-field class="assumption-formfield" style="width: 70%;margin-left: -16px;" floatLabel="never">
+        <!-- <mat-label>Enter new assumption</mat-label> -->
+        <input matInput #itemValue class="assumption-input" placeholder="Enter new assumption">
+      </mat-form-field>
+      <img src="../../../../../../assets/psg_save.svg" (click)="saveNode(node, itemValue.value)"
+        style="margin-left: 10px;margin-top: -6px;">
+      <!-- <button mat-button (click)="saveNode(node, itemValue.value)">Save</button> -->
+    </mat-tree-node>
+
+    <mat-tree-node
+      [ngClass]="{'scope-leaf-node' : tabName.toUpperCase() == 'SYSTEM' || tabName.toUpperCase() == 'GEOGRAPHY',
+      'proces-leafnode' : tabName.toUpperCase() == 'PROCESS','assumption-leaf-node' : tabName.toUpperCase() == 'ASSUMPTIONS'}"
+      [ngStyle]="{'padding-left': node.level == 0 ? '3em' : 'auto'}" *matTreeNodeDef="let node" matTreeNodeToggle
+      matTreeNodePadding>
+      <!-- <button mat-icon-button disabled></button> -->
+      <mat-checkbox class="checklist-leaf-node" [checked]="checklistSelection.isSelected(node)"
+        (change)="todoLeafItemSelectionToggle(node)">{{node.item}}</mat-checkbox>
+    </mat-tree-node>
+
+    <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding [ngClass]="{'scope-parent-node' : tabName.toUpperCase() == 'SYSTEM' || tabName.toUpperCase() == 'GEOGRAPHY', 'proces-parentnode' : tabName.toUpperCase() == 'PROCESS',
+      'assumption-parent-node' : tabName.toUpperCase() == 'ASSUMPTIONS'}">
+      <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'toggle ' + node.filename">
+        <mat-icon class="mat-icon-rtl-mirror">
+          {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+        </mat-icon>
+      </button>
+      <mat-checkbox [checked]="descendantsAllSelected(node)" [indeterminate]="descendantsPartiallySelected(node)"
+        (change)="todoItemSelectionToggle(node)" #scopeParentNode>{{node.item}}</mat-checkbox>
+      <button mat-icon-button (click)="addNewItem(node)" *ngIf="addNewElementAllowed">
+        <!-- <mat-icon>add</mat-icon> -->
+        <img src="../../../../../../assets/psg_plus.svg">
+      </button>
+
+      <ng-container *ngIf="tabName.toUpperCase() == 'GEOGRAPHY' && (!treeControl.isExpanded(node))">
+        <!-- <span style="padding-left: 0.5em;" *ngIf="scopeParentNode?.checked || scopeParentNode?.indeterminate"> </span> -->
+        <!-- [ngClass] = "{'geography-slected-node' : tabName.toUpperCase() == 'GEOGRAPHY'}" -->
+        <div class="geography-slected-node">
+          <!-- <br> -->
+          <ng-container *ngFor="let element of treeControl?.getDescendants(node)">
+            <mat-checkbox style="padding-left: 1em;" *ngIf="checklistSelection.isSelected(element)"
+              [checked]="checklistSelection.isSelected(element)" (change)="todoLeafItemSelectionToggle(element)">
+              {{element.item}}
+            </mat-checkbox>
+          </ng-container>
+        </div>
+      </ng-container>
+
+    </mat-tree-node>
+  </mat-tree>
+</div>
+
+<div *ngIf="treeLevel =='2' && tabName.toUpperCase() == 'SERVICE'">
+  <mat-error style="padding-left: 1em; font-size: 12px;" *ngIf="showError">
+    Choose atleast one value.
+  </mat-error>
+  <form #serviceForm="ngForm" (submit)="onNext()" class="project-add-edit-form-wrapper">
+    <div class="project-add-edit-form-wrapper technology-scope" style="max-height: 35vh;width: 98%;">
+      <table>
+        <tr>
+          <th></th>
+          <th><span style="margin-left: 5px;">Service Scope</span></th>
+          <th><span style="margin-left: 5px;">Deloitte Scope</span></th>
+          <th><span style="margin-left: 5px;">Client Scope</span></th>
+          <th><span style="margin-left: 5px;">Complexity</span></th>
+        </tr>
+        <tbody>
+          <ng-container *ngFor="let data of serviceScopeData">
+            <tr>
+              <td>
+                <mat-checkbox style="margin-left: 37%;" [checked]="data.selected" (change)="toggle(data)">
+                </mat-checkbox>
+              </td>
+              <td>
+                <div style="flex: 1; margin-left: 6px;line-height: 2.5;">
+                  <span style="margin-left: 6px;margin-right: 5px;">{{ data.name }}</span>
+                </div>
+              </td>
+              <td>
+                <mat-form-field class="custom-width" style="padding-bottom: 0;margin-left: 5px;margin-right: 5px;"
+                  appearance="outline" floatLabel="never">
+                  <mat-select [(value)]="data.deloitteScope" (selectionChange)="selectService(data)">
+                    <mat-option *ngFor="let dScope of allData?.deloitteAndClientScope" [value]="dScope">
+                      {{ dScope }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </td>
+              <td>
+                <mat-form-field class="custom-width" style="padding-bottom: 0;margin-left: 5px;margin-right: 5px;"
+                  appearance="outline" floatLabel="never">
+                  <mat-select [(value)]="data.clientScope" (selectionChange)="selectService(data)">
+                    <mat-option *ngFor="let cScope of allData?.deloitteAndClientScope" [value]="cScope">
+                      {{ cScope }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </td>
+              <td>
+                <mat-form-field class="custom-width" style="padding-bottom: 0;margin-left: 5px;margin-right: 5px;"
+                  appearance="outline" floatLabel="never">
+                  <mat-select [(value)]="data.complexity" (selectionChange)="selectService(data)">
+                    <mat-option *ngFor="let cValue of allData?.complexity" [value]="cValue">
+                      {{ cValue }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+  </form>
+</div>

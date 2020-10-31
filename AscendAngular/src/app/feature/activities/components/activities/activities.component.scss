@@ -1,0 +1,65 @@
+@import "src/assets/styles/_colors.scss";
+@import "src/assets/styles/_common.scss";
+
+.activities-container {
+  width: 100%;
+  height: $container-height-1;
+  display: flex;
+  // color: white;
+}
+.activities-left {
+  width: 17%;
+  background-color: $palette-black-primary;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  .activities-filters {
+    // padding: 38.4% 11.2% 23.7%;
+    padding-top: 38.4%;
+    .section {
+      padding-left: 8.2%;
+      font-size: 16px;
+      font-weight: bold;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: 2.5;
+      letter-spacing: normal;
+      color: #d4cece;
+    }
+
+    .header {
+      padding-left: 8.2%;
+      font-size: 16px;
+      font-weight: bold;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: 1.88;
+      letter-spacing: normal;
+      color: #0097a9;
+    }
+  }
+
+  .title {
+    font-size: 12px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 2.5;
+    letter-spacing: normal;
+    color: #d4cece;
+  }
+}
+.activities-right {
+  margin-top: 4%;
+  margin-left: 1.2%;
+  width: 83%;
+  overflow-y: auto;
+}
+
+app-menu-bar {
+  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.18);
+  display: block;
+  position: relative;
+  z-index: 1;
+  flex-basis: 100%;
+}

@@ -1,0 +1,36 @@
+export class ProjectScopeForm {
+    projectName: string;
+    projectDescription: string;
+    projectType: any;
+    projectManager: string;
+    leadPD: any;
+    portfolio: any;
+    secondaryPortfolio: any;
+    offering: any;
+    secondaryOffering: any;
+    erpPackage: any;
+    projectid: any;
+    ppdfirstname: string;
+    ppdlastname: string;
+    ppdusername: string;
+    ppdjobtitle: string;
+    mgrfirstname: string;
+    mgrlastname: string;
+    mgrusername: string;
+    mgrjobtitle: string;
+    clientName: string;
+    revenue: any;
+    industry: any;
+    sector: any;
+    clientid: any;
+    integrationPlatform: any;
+    extensions: any;
+    primaryMemberFirm: any;
+    secondaryMemberFirm: any;
+    additionalErpPackage: any;
+    usiEmd: any;
+    usiGdm: any;
+    leadQaPartner: any;
+    usiQaReviewer: any;
+    action: any;
+}

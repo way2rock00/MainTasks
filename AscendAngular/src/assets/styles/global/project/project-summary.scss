@@ -1,0 +1,262 @@
+@import "src/assets/styles/_common.scss";
+
+.labelkey {
+  font-weight: bold;
+}
+
+.projectPageText {
+  font-size: 9px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #424344;
+}
+
+label {
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.project-Details {
+  font-size: 26px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #000000;
+  cursor: default;
+}
+
+.font-Card {
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: 300px 300px 300px 300px; // earlier was 280px
+  margin: 0px;
+  padding: 0px;
+}
+
+.artifact-tile {
+  text-align: center;
+}
+
+.right {
+  overflow-y: auto;
+  // width: 1209px;
+  margin: 0;
+  width: calc(100% - 250px);
+  padding-left: 30px;
+}
+.left {
+  overflow-y: auto;
+  width: 17.2%;
+  box-shadow: 0 0 60px 0 rgba(0, 0, 0, 0.11);
+  background-color: $palette-black-primary;
+}
+.proj-summary-bg {
+  margin: 0px;
+  padding: 0px;
+  // width: 1440px;
+  // height: 878px;
+  width: 100%;
+  height: $container-height-1;
+  background-color: $primary-page-background;
+  display: flex;
+}
+
+.summary-disclaimer {
+  color: #343842;
+  margin-top: 20px;
+  margin-bottom: 0px;
+  font-size: 12px;
+  font-weight: normal;
+}
+
+.art-count {
+  @extend .font-Card;
+  width: 95px;
+  height: 75px;
+  font-size: 45px;
+  // font-size: 42px;
+  font-weight: 600;
+  vertical-align: middle;
+}
+
+.blue-count {
+  @extend .art-count;
+  color: $primary-themecolor-insights;
+}
+
+.green-count {
+  @extend .art-count;
+  color: $primary-themecolor-run;
+}
+
+.yellow-count {
+  @extend .art-count;
+  color: $primary-themecolor-deliver;
+}
+
+.pastel-count {
+  @extend .art-count;
+  color: $primary-themecolor-imagine;
+}
+
+.cardheader {
+  @extend .font-Card;
+  font-size: 17px;
+  font-weight: 600;
+  text-align: center;
+  color: #000000;
+}
+
+.cardheaderdiv {
+  padding-top: 22px;
+  width: 100%;
+}
+
+.cardcontentcenter {
+  margin: 20px;
+  position: absolute;
+  bottom: 10px;
+  width: 70%;
+  padding-bottom: 10px;
+  img {
+    vertical-align: middle;
+    margin-right: 5px;
+  }
+}
+
+.cardcontentdesc {
+  margin: 10px;
+}
+.extbtn {
+  height: 36px;
+  border-radius: 5px;
+  box-shadow: 0 2px 15px 8px rgba(0, 0, 0, 0.07);
+  background-color: $primary-font-color;
+  font-size: 16px;
+  line-height: 1.88;
+  text-align: center;
+  color: $tertiary-font-color;
+  cursor: pointer;
+  border: none;
+}
+.backbtn {
+  @extend .font-Card;
+  @extend .extbtn;
+  width: 20%;
+  margin: 5px;
+}
+.btn-align {
+  width: 22%;
+}
+
+.profile-img-wrapper {
+  margin-left: 20px;
+  // margin-top: 16px;
+}
+
+.uplodbtn {
+  @extend .font-Card;
+  @extend .extbtn;
+  width: 180px;
+  height: 27px;
+  background-color: #141313;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  color: #ffffff;
+  margin: 2px 0px 2px 2px;
+  img {
+    width: 170px;
+    vertical-align: bottom;
+  }
+}
+.Project-Admin {
+  @extend .font-Card;
+  width: 132px;
+  height: 30px;
+  // font-size: 18px;
+  // font-weight: 800;
+  // line-height: 1.67;
+  // color: $tertiary-font-color;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 30px;
+  color: #0097a9;
+}
+
+.projectAdmDiv {
+  margin-left: 0;
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+.adm-name {
+  @extend .font-Card;
+  width: 180px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 2.5;
+  letter-spacing: normal;
+  color: #d4cece;
+  margin-bottom: 0;
+}
+.adm-title {
+  @extend .font-Card;
+  width: 180px;
+  opacity: 0.6;
+  font-size: 10px;
+  font-weight: 500;
+  color: #ffffff;
+  margin-top: 0px;
+}
+
+.legend-row {
+  margin: 15px 16px 25px;
+  display: flex;
+  width: 1150px;
+  justify-content: flex-end;
+}
+
+.legendicon {
+  margin-top: 3px;
+  width: 11px;
+  height: 11px;
+}
+
+.insightslegend {
+  // margin-left: 710px;
+  background-color: $primary-themecolor-insights;
+}
+
+.imaginelegend {
+  background-color: $primary-themecolor-imagine;
+}
+
+.deliverlegend {
+  background-color: $primary-themecolor-deliver;
+}
+
+.runlegend {
+  background-color: $primary-themecolor-run;
+}
+
+.legend {
+  @extend .font-Card;
+  margin-left: 5px;
+  margin-right: 15px;
+  height: 11px;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1.6;
+  color: $primary-font-color;
+}

@@ -1,0 +1,131 @@
+.filter-body {
+  display: flex;
+  max-height: 170px;
+  overflow: auto;
+
+  .levels {
+    margin-right: 20px;
+    min-width: 80px;
+  }
+
+  .example-section {
+    margin-bottom: 2px;
+    font-size: 12px;
+    line-height: 27px;
+    // text-transform: uppercase;
+  }
+}
+.filter-normal-body {
+  max-height: 300px;
+  overflow: auto;
+}
+
+.filter-wrap {
+  i {
+    height: 17pt;
+    float: left;
+    margin-right: 10px;
+  }
+
+  input {
+    font-size: 12px;
+    font-weight: 500;
+    color: rgb(99, 102, 106);
+  }
+}
+
+:host ::ng-deep .mat-form-field-infix {
+  width: 300px;
+  display: flex;
+}
+
+:host ::ng-deep .mat-form-field-underline {
+  background-color: rgb(0, 0, 0);
+  height: 1.2px;
+}
+
+:host ::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background {
+  background-color: rgb(0, 0, 0);
+}
+
+:host ::ng-deep .mat-checkbox-frame {
+  border-color: rgb(221, 219, 218);
+  border-width: 1.4px;
+}
+
+:host ::ng-deep .mat-checkbox-layout .mat-checkbox-label {
+  max-width: 250px;
+  white-space: normal;
+  color: black;
+  font-size: 12px;
+  line-height: 26px;
+  font-weight: 500;
+}
+
+:host ::ng-deep .mat-checkbox-inner-container{
+  margin-top: 5px;
+}
+
+.filter-head {
+  display: flex;
+  color: #000000;
+  font-weight: 600;
+  line-height: 26px;
+
+  .filter-title {
+    // font-weight: 600;
+    font-size: 12px;
+    margin-bottom: 0;
+    margin-right: 15px;
+    color: black;
+  }
+}
+
+.reset-underline {
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.filter-subtitle {
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 24px;
+  margin: 16px 0px;
+  color: black;
+}
+
+.filter-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+
+  button {
+    // padding: 12px 47px;
+    border-radius: 2px;
+    font-size: 12px;
+    box-shadow: none;
+    // margin-right: 13px;
+    width: 129px;
+    height: 35px;
+    // left: 5px;
+    text-align: center;
+  }
+
+  button.white {
+    border: 1pt solid rgb(0, 0, 0);
+    color: rgb(0, 0, 0);
+    margin: 5px;
+  }
+
+  button.black {
+    //border: 1pt solid rgb(0, 151, 169);
+    background-color: black;
+    color: rgb(255, 255, 255);
+    margin: 5px;
+  }
+}
+
+.card-border-radius {
+  border-radius: 20px;
+}

@@ -1,0 +1,179 @@
+.planning-tab {
+    font-size: 12px;
+    .form-5-field {
+        width: 29%;
+        display: inline-block;
+        margin: 1em;
+
+        * {
+            display: inline-block;
+        }
+        mat-label {
+            margin-right: 0.5em;
+        }
+    }
+
+    th {
+        mat-label {
+            display: inline-block;
+            margin-right: 0.5em;
+        }
+
+        .mat-form-field {
+            display: inline-block;
+        }
+    }
+
+    .planning-form-actions {
+        margin-left: auto;
+        float: right;
+        img {
+            width: 25px;
+            cursor: pointer;
+            vertical-align: middle;
+            margin-left: 10px;
+
+            &.img-control {
+                display: none;
+                width: auto;
+
+                &.visible {
+                    display: inline;
+                }
+            }
+        }
+    }
+
+    .phase-planning-table {
+        //max-height: 290px;
+        //overflow: auto;
+        table {
+            width: 100%;
+            padding-top: 1%;
+            border-collapse: collapse;
+            margin-top: 1%;
+        }
+
+        th,
+        td {
+            max-width: 140px;
+            text-align: left;
+            vertical-align: baseline;
+            font-weight: normal;
+            border: none;
+
+            .row-add-actions {
+                cursor: pointer;
+            }
+        }
+
+        th {
+            position: sticky;
+            top: 0;
+            z-index: 1;
+            background-color: #007680;
+            color: #ffffff;
+            padding: 0.4em;
+
+            mat-label {
+                display: inline-block;
+                margin-right: 0.5em;
+            }
+
+            .mat-form-field {
+                display: inline-block;
+            }
+        }
+
+        th:nth-child(1),
+        td:nth-child(1) {
+            // Business process L2, L3 column width
+            max-width: 75px;
+        }
+
+        th:nth-child(2),
+        td:nth-child(2) {
+            // Business process L2, L3 column width
+            max-width: 150px;
+        }
+
+        th:nth-child(3),
+        td:nth-child(3) {
+            max-width: 200px;
+        }
+
+        mat-label {
+            font-size: 12px !important;
+        }
+
+        mat-select .mat-select-value-text {
+            font-size: 12px !important;
+        }
+
+        .mat-form-field-infix input {
+            font-size: 12px !important;
+        }
+    }
+
+    // .scroll-table{
+    //     height: 100px;
+    //     overflow: auto;
+    // }
+
+    // th,td{
+    //     border: 1px solid #000;
+    //     width: 100%;
+    //     min-width: 50px;
+    //     white-space: nowrap;
+    // }
+
+    .country-dd .mat-select {
+        padding-top: 0.4em;
+    }
+
+    .table-planning-wrapper {
+        // width: 96%;
+        // // overflow: auto;
+        // border: 1px solid #000000;
+        // padding: 1em;
+        // margin-bottom: 10px;
+        // min-height: 25px;
+        // // max-height: 320px;
+        // background-color: rgb(228, 228, 228);
+        // overflow-y: hidden;
+        margin-top: 1em;
+        margin-right: 1.5em;
+        border: 1px solid #007680;
+        /* background-color: #fffaf8; */
+        background-color: transparent;
+        border-radius: 5px;
+        padding: 0.5em;
+    }
+
+    mat-label {
+        font-size: 12px !important;
+    }
+    ::ng-deep {
+        .mat-form-field-wrapper {
+            padding-bottom: 0px !important;
+        }
+
+        .mat-form-field .mat-form-field-wrapper .mat-form-field-flex .mat-form-field-infix input {
+            font-size: 12px !important;
+        }
+        mat-select .mat-select-value-text {
+            font-size: 12px !important;
+        }
+        .mat-tab-group.mat-primary .mat-ink-bar {
+            background-color: #000000 !important;
+        }
+
+        .mat-tab-label {
+            opacity: 100% !important;
+            height: 30px;
+        }
+        .mat-tab-body-content{
+            overflow-y: hidden;
+        }
+    }
+}
