@@ -1,0 +1,262 @@
+select * from sys.mgw_jobs;
+
+BEGIN
+DBMS_MGWADM.REMOVE_JOB (job_name => 'XXPSO_PDHMQ2AQ_JOB', force => DBMS_MGWADM.FORCE);
+END;
+/
+
+BEGIN
+DBMS_MGWADM.REMOVE_JOB (job_name => 'XXPSO_PDHAQ2MQ_JOB', force => DBMS_MGWADM.FORCE);
+END;
+/
+
+SELECT name, link_name, provider_queue FROM MGW_FOREIGN_QUEUES;
+
+BEGIN
+DBMS_MGWADM.UNREGISTER_FOREIGN_QUEUE(name =>'XXPSO_PDH_MQ_IN', linkname=>'XXPSO_PDH_IN_LINK');--XXPSO_PDH_MQ_IN	XXPSO_PDH_IN_LINK
+END;
+/
+
+BEGIN
+DBMS_MGWADM.UNREGISTER_FOREIGN_QUEUE(name =>'XXPSO_CDH_MQ_OUT', linkname=>'XXPSO_CDH_OUT_LINK');
+END;
+/
+
+select link_name, link_type from MGW_LINKS;
+
+select link_name, queue_manager, channel, hostname from mgw_mqseries_links;
+
+BEGIN
+dbms_mgwadm.remove_msgsystem_link(linkname =>'XXPSO_PDH_IN_LINK');
+END;
+/
+
+BEGIN
+dbms_mgwadm.remove_msgsystem_link(linkname =>'XXPSO_PDH_OUT_LINK');
+END;
+/
+
+
+
+Link:
+
+declare
+   v_options sys.mgw_properties;
+   v_prop sys.mgw_mqseries_properties;
+begin
+   v_prop := sys.mgw_mqseries_properties.construct();
+   v_prop.max_connections := 1;
+      
+   v_prop.interface_type := DBMS_MGWADM.JMS_QUEUE_CONNECTION;
+   v_prop.username := null;
+   v_prop.password := null;
+   v_prop.hostname := 'simbmq.lo3dev.pearson.com';
+   v_prop.port     := 3430;
+   v_prop.channel  := 'DEV.WMBTK.SVRCONN';
+   v_prop.queue_manager := 'LO3DQM01'; 
+      
+   v_prop.outbound_log_queue := 'MDM.QUEUE.OUTBOUND.LOG';
+   v_prop.inbound_log_queue := 'MDM.QUEUE.INBOUND.LOG';
+       
+   dbms_mgwadm.create_msgsystem_link(
+      linkname => 'XXPSO_TEMP_QUEUE_LINK', properties => v_prop, options => v_options );
+end;
+
+Register as Foreign Queue:
+
+begin
+   dbms_mgwadm.register_foreign_queue(--XXPSO_TEMP_QUEUE_MQ
+   name => 'XXPSO_TEMP_QUEUE_MQ',
+   linkname => 'XXPSO_TEMP_QUEUE_LINK',
+   provider_queue => 'MDM.DATAHUB.PRODMGMT.OUTBOUND.1',--'MDM.DATAHUB.PRODMGMT.?IN?BOUND.1',
+   --rovider_queue => 'MDM.DATAHUB.CUSTMGMT.OUTBOUND.1',
+   domain => dbms_mgwadm.DOMAIN_QUEUE);
+end;
+/
+
+Job Creation:
+
+ 
+begin
+
+  dbms_mgwadm.create_job(
+      job_name    => 'XXPSO_TEMP_QUEUE_MQ_JOB',
+      propagation_type => dbms_mgwadm.outbound_propagation,
+      source => 'XXPSO.XX_TEMP_QUEUE',
+      destination      => 'XXPSO_TEMP_QUEUE_MQ@XXPSO_TEMP_QUEUE_LINK'
+--      source => 'XXPSO_PDH_MQ_IN@XXPSO_PDH_IN_LINK',--'XXPSO.XXPSO_PDH_QUEUE_OUT'--XXPSO_PDH_MQ_IN	XXPSO_PDH_IN_LINK
+--      destination      => 'XXPSO.XXPSO_PDH_QUEUE_IN'  -- registered non-Oracle queue
+      --source => 'XXPSO.XXPSO_CDH_QUEUE_OUT'
+      ); -- AQ queue
+      
+  DBMS_MGWADM.ENABLE_JOB ('XXPSO_TEMP_QUEUE_MQ_JOB');
+end;
+/
+
+exec dbms_mgwadm.STARTUP;
+
+select AGENT_STATUS,AGENT_PING,LAST_ERROR_MSG from MGW_GATEWAY;
+---------------------
+
+DECLARE
+v_destination_queue    VARCHAR2 (100) := 'XXPSO.XXPSO_CDH_QUEUE_OUT';
+--v_destination_queue    VARCHAR2 (100) := 'APPLSYS.ECX_OUTBOUND';
+l_message            sys.aq$_jms_text_message;
+v_enqueue_options      SYS.DBMS_AQ.ENQUEUE_OPTIONS_T;
+v_enqueue_properties   SYS.DBMS_AQ.MESSAGE_PROPERTIES_T;
+        v_enqueue_payload      SYSTEM.ecxmsg;
+x_enqueue_msgid        RAW (16);
+        v_protocol_add         VARCHAR2(100) :=      'https://XXAB.dev1.XXAB.com:4443/oa_servlets/oracle.apps.ecx.oxta.TransportAgentServer';
+
+         v_xml_message CLOB     := '<?xml version="1.0"?>
+<CustomerPartyList>
+<CustomerParty>
+  <PartyIdentification>
+    <ID sourcesystem="OneCRM">3</ID>
+ </PartyIdentification>
+  <Organization>
+    <OrganizationName>Biologyr3</OrganizationName>
+    <AbbreviatedName>KAr3</AbbreviatedName>
+    <RegisteredTradingName>KA2r2</RegisteredTradingName>
+    <MarketingName>BIOLOGYr2</MarketingName>
+  </Organization>
+</CustomerParty>
+</CustomerPartyList>';
+BEGIN
+dbms_output.put_line('1');
+l_message := sys.aq$_jms_text_message.construct;
+l_message.set_text(v_xml_message);
+          dbms_output.put_line('2');
+        sys.DBMS_AQ.enqueue (
+            queue_name           => v_destination_queue,
+            enqueue_options      => v_enqueue_options,
+            message_properties   => v_enqueue_properties,
+            payload              => l_message,
+            msgid                => x_enqueue_msgid
+         );       
+    dbms_output.put_line('3');
+ COMMIT;
+      
+       dbms_output.put_line(x_enqueue_msgid);
+       dbms_output.put_line('4');
+EXCEPTION
+WHEN OTHERS THEN
+dbms_output.put_line(sqlerrm);
+END;
+/
+
+select * from xxpso.xxpso_cdh_queue_tbl_out;
+
+
+BEGIN
+   DBMS_AQADM.DROP_QUEUE_TABLE(
+      queue_table        => 'XXPSO.XXPSO_PDH_QUEUE_TBL_IN');
+END;
+/
+
+BEGIN
+   DBMS_AQADM.DROP_QUEUE(
+      queue_name         => 'XXPSO.XXPSO_PDH_QUEUE_IN');
+END;
+/
+
+BEGIN
+   DBMS_AQADM.STOP_QUEUE(
+      queue_name        => 'XXPSO.XXPSO_PDH_QUEUE_IN');
+END;
+/
+BEGIN
+      DBMS_AQADM.create_queue_table
+                             (queue_table             => 'XXPSO.XXPSO_PDH_QUEUE_TBL_IN',
+                              multiple_consumers      => FALSE,
+                              queue_payload_type      => 'SYS.AQ$_JMS_TEXT_MESSAGE'--'SYS.AQ$_JMS_BYTES_MESSAGE'--_JMS_TEXT_MESSAG
+                             );
+END;
+/
+  
+  BEGIN
+        DBMS_AQADM.create_queue (queue_name       => 'XXPSO.XXPSO_PDH_QUEUE_IN',
+                               queue_table      => 'XXPSO.XXPSO_PDH_QUEUE_TBL_IN',
+                               max_retries      => 1000
+                              );                           
+END;
+/
+
+BEGIN
+DBMS_AQADM.start_queue (queue_name => 'XXPSO.XXPSO_PDH_QUEUE_IN');
+END;
+/
+
+
+select * from dba_queues where name like 'XX%';
+select * from dba_queue_tables where queue_table like 'XX%';
+
+select * from mgw_links;
+select * from mgw_mqseries_links;
+select * from mgw_foreign_queues;
+select propagated_msgs,a. * from mgw_jobs a; where propagation_type = 'INBOUND';
+select * from mgw_gateway;
+
+select * from XXPSO.XXPSO_PDH_QUEUE_TBL_IN order by enq_time desc;
+
+delete  from XXPSO.XXPSO_PDH_QUEUE_TBL_IN;
+select * from AQ$XXPSO.XXPSO_PDH_QUEUE_IN;
+
+
+select AGENT_STATUS,AGENT_PING,LAST_ERROR_MSG from MGW_GATEWAY;
+
+
+exec dbms_mgwadm.SHUTDOWN ;
+
+exec dbms_mgwadm.STARTUP;
+
+
+
+
+
+DECLARE
+v_destination_queue    VARCHAR2 (100) := 'XXPSO.XX_TEMP_QUEUE';
+--v_destination_queue    VARCHAR2 (100) := 'APPLSYS.ECX_OUTBOUND';
+l_message            sys.aq$_jms_text_message;
+v_enqueue_options      SYS.DBMS_AQ.ENQUEUE_OPTIONS_T;
+v_enqueue_properties   SYS.DBMS_AQ.MESSAGE_PROPERTIES_T;
+        v_enqueue_payload      SYSTEM.ecxmsg;
+x_enqueue_msgid        RAW (16);
+        v_protocol_add         VARCHAR2(100) :=      'https://XXAB.dev1.XXAB.com:4443/oa_servlets/oracle.apps.ecx.oxta.TransportAgentServer';
+
+         v_xml_message CLOB     := '<?xml version="1.0"?>
+<CustomerPartyList>
+<CustomerParty>
+  <PartyIdentification>
+    <ID sourcesystem="OneCRM">3</ID>
+ </PartyIdentification>
+  <Organization>
+    <OrganizationName>Biologyr3</OrganizationName>
+    <AbbreviatedName>KAr3</AbbreviatedName>
+    <RegisteredTradingName>KA2r2</RegisteredTradingName>
+    <MarketingName>BIOLOGYr2</MarketingName>
+  </Organization>
+</CustomerParty>
+</CustomerPartyList>';
+BEGIN
+dbms_output.put_line('1');
+l_message := sys.aq$_jms_text_message.construct;
+l_message.set_text(v_xml_message);
+          dbms_output.put_line('2');
+        sys.DBMS_AQ.enqueue (
+            queue_name           => v_destination_queue,
+            enqueue_options      => v_enqueue_options,
+            message_properties   => v_enqueue_properties,
+            payload              => l_message,
+            msgid                => x_enqueue_msgid
+         );       
+    dbms_output.put_line('3');
+ COMMIT;
+      
+       dbms_output.put_line(x_enqueue_msgid);
+       dbms_output.put_line('4');
+EXCEPTION
+WHEN OTHERS THEN
+dbms_output.put_line(sqlerrm);
+END;
+/
