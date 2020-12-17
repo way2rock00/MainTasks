@@ -1,8 +1,0 @@
-<div style="font-weight: bold; display: block; margin: 0 auto; width: 17%; border-bottom: 1px solid black; text-align: center">
-  <span>Select geographical scope</span>
-</div>
-<app-scope-generator-tree [savedData]="savedGeographicalScope?.regionCountry"
-  [allData]="geographicalScope?.regionCountry" #treeForm></app-scope-generator-tree>
-<mat-error *ngIf="showError">
-  *Region is required
-</mat-error>

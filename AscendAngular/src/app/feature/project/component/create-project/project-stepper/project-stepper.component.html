@@ -1,8 +1,0 @@
-<div class="project-stepper-wrapper">
-    <div *ngFor="let pit of pits" class="pit-wrapper" 
-        [ngClass]="{'crossed-pit': pit.crossed, 'on-pit': pit.active}"
-    >
-        <div class="stepper-pit" (click)="onPitClicked(pit)"></div>
-        <div class="stepper-pit-label" (click)="onPitClicked(pit)">{{pit.label}}</div>
-    </div>
-</div>

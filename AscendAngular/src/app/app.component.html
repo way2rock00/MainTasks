@@ -1,9 +1,0 @@
-<ng-container *ngIf="userData | async">
-    <img *ngIf="router.url!='/welcome'" class="rectangle-home" src="../../assets/bottom_color.png" />
-    <app-navigation-bar></app-navigation-bar>
-    <mat-progress-bar *ngIf="showLoader | async" mode="indeterminate"></mat-progress-bar>
-    
-    <div style="height: calc(100% - 48px);overflow: auto;">
-        <router-outlet></router-outlet> 
-    </div>     
-</ng-container>
